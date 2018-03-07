@@ -5,7 +5,7 @@
 	<groupId>club.gesjblog</groupId>
 	<!--当前项目的名称 -->
 	<artifactId>GsjBlog</artifactId>
-	<!-- web项目打包方式必须是war  -->
+	<!-- web项目打包方式必须是war -->
 	<packaging>war</packaging>
 	<!-- 当前项目的版本 -->
 	<version>0.0.1-SNAPSHOT</version>
@@ -201,13 +201,21 @@
 		</dependencies>
 	</dependencyManagement>
 
-	
-	
-	 <build>
-        <finalName>${project.artifactId}</finalName>
-        <!--插件  -->
-        <plugins>
-        	<!-- 资源文件拷贝插件 -->
+
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<!--插件 -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<!-- 资源文件拷贝插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -216,19 +224,19 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-        
-        <!--JDK1.8  -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <!--Tomcat 7   -->
-            <plugin>
+
+			<!--JDK1.8 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!--Tomcat 7 -->
+			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<configuration>
@@ -236,7 +244,7 @@
 					<path>/</path>
 				</configuration>
 			</plugin>
-        </plugins>
-    </build>
-	
+		</plugins>
+	</build>
+
 </project>
