@@ -8,11 +8,12 @@
 		<package name="club.gsjglob.domain" />
 	</typeAliases> -->
 	<!--pageHelper 就是一个拦截器  -->
-<!-- <plugins>
-    com.github.pagehelper为PageHelper类所在包名
+<plugins>
+   <!--  com.github.pagehelper为PageHelper类所在包名 -->
     <plugin interceptor="com.github.pagehelper.PageHelper">
-        设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库        
+      <!--   设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库         -->
         <property name="dialect" value="mysql"/>
+        <property name="reasonable" value="true"/>  
     </plugin>
-</plugins> -->
+</plugins>
 </configuration>

@@ -1,9 +1,8 @@
 package club.gsjglob.domain;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class GsjFolder implements Serializable{
+public class GsjFolder {
     private Integer id;
 
     private Integer parentId;
@@ -41,7 +40,7 @@ public class GsjFolder implements Serializable{
     private Integer createId;
 
     private String content;
-
+    
     //目录下的子集
     private List subsetlist;
     
@@ -54,7 +53,7 @@ public class GsjFolder implements Serializable{
 		this.subsetlist = subsetlist;
 	}
 
-	public Integer getId() {
+    public Integer getId() {
         return id;
     }
 

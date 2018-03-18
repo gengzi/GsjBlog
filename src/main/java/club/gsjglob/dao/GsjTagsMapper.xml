@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.gsjglob.dao.GsjTagsMapper" >
+  <resultMap id="BaseResultMap" type="club.gsjglob.domain.GsjTags" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="article_id" property="articleId" jdbcType="INTEGER" />
+    <result column="tagname" property="tagname" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="create_id" property="createId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    `id`, `article_id`, `tagname`, `create_time`, `create_id`
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="club.gsjglob.domain.GsjTagsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gsj_tags
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gsj_tags
+    where `id` = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gsj_tags
+    where `id` = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="club.gsjglob.domain.GsjTagsExample" >
+    delete from gsj_tags
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="club.gsjglob.domain.GsjTags" >
+    insert into gsj_tags (`id`, `article_id`, `tagname`, 
+      `create_time`, `create_id`)
+    values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{tagname,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="club.gsjglob.domain.GsjTags" >
+    insert into gsj_tags
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        `id`,
+      </if>
+      <if test="articleId != null" >
+        `article_id`,
+      </if>
+      <if test="tagname != null" >
+        `tagname`,
+      </if>
+      <if test="createTime != null" >
+        `create_time`,
+      </if>
+      <if test="createId != null" >
+        `create_id`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="tagname != null" >
+        #{tagname,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="club.gsjglob.domain.GsjTagsExample" resultType="java.lang.Integer" >
+    select count(*) from gsj_tags
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update gsj_tags
+    <set >
+      <if test="record.id != null" >
+        `id` = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleId != null" >
+        `article_id` = #{record.articleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagname != null" >
+        `tagname` = #{record.tagname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        `create_time` = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createId != null" >
+        `create_id` = #{record.createId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update gsj_tags
+    set `id` = #{record.id,jdbcType=INTEGER},
+      `article_id` = #{record.articleId,jdbcType=INTEGER},
+      `tagname` = #{record.tagname,jdbcType=VARCHAR},
+      `create_time` = #{record.createTime,jdbcType=VARCHAR},
+      `create_id` = #{record.createId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="club.gsjglob.domain.GsjTags" >
+    update gsj_tags
+    <set >
+      <if test="articleId != null" >
+        `article_id` = #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="tagname != null" >
+        `tagname` = #{tagname,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        `create_id` = #{createId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where `id` = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="club.gsjglob.domain.GsjTags" >
+    update gsj_tags
+    set `article_id` = #{articleId,jdbcType=INTEGER},
+      `tagname` = #{tagname,jdbcType=VARCHAR},
+      `create_time` = #{createTime,jdbcType=VARCHAR},
+      `create_id` = #{createId,jdbcType=INTEGER}
+    where `id` = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getArticleIdByTagname" parameterType="java.lang.String" resultType="java.lang.Integer">
+       select article_id from gsj_tags where tagname = #{labeltype} group by article_id
+  </select> 
+  
+</mapper>
