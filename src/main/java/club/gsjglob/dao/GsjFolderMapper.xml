@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.gsjglob.dao.GsjFolderMapper" >
+  <resultMap id="BaseResultMap" type="club.gsjglob.domain.GsjFolder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="jump_url" property="jumpUrl" jdbcType="VARCHAR" />
+    <result column="material_type" property="materialType" jdbcType="INTEGER" />
+    <result column="site_id" property="siteId" jdbcType="INTEGER" />
+    <result column="seo_title" property="seoTitle" jdbcType="VARCHAR" />
+    <result column="seo_keywords" property="seoKeywords" jdbcType="VARCHAR" />
+    <result column="seo_description" property="seoDescription" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="update_id" property="updateId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="create_id" property="createId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="club.gsjglob.domain.GsjFolder" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    `id`, `parent_id`, `name`, `key`, `path`, `sort`, `status`, `type`, `jump_url`, `material_type`, 
+    `site_id`, `seo_title`, `seo_keywords`, `seo_description`, `update_time`, `update_id`, 
+    `create_time`, `create_id`
+  </sql>
+  <sql id="Blob_Column_List" >
+    `content`
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="club.gsjglob.domain.GsjFolderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from gsj_folder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="club.gsjglob.domain.GsjFolderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gsj_folder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from gsj_folder
+    where `id` = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gsj_folder
+    where `id` = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="club.gsjglob.domain.GsjFolderExample" >
+    delete from gsj_folder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="club.gsjglob.domain.GsjFolder" >
+    insert into gsj_folder (`id`, `parent_id`, `name`, 
+      `key`, `path`, `sort`, `status`, 
+      `type`, `jump_url`, `material_type`, 
+      `site_id`, `seo_title`, `seo_keywords`, 
+      `seo_description`, `update_time`, `update_id`, 
+      `create_time`, `create_id`, `content`
+      )
+    values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{key,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{jumpUrl,jdbcType=VARCHAR}, #{materialType,jdbcType=INTEGER}, 
+      #{siteId,jdbcType=INTEGER}, #{seoTitle,jdbcType=VARCHAR}, #{seoKeywords,jdbcType=VARCHAR}, 
+      #{seoDescription,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{updateId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="club.gsjglob.domain.GsjFolder" >
+    insert into gsj_folder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        `id`,
+      </if>
+      <if test="parentId != null" >
+        `parent_id`,
+      </if>
+      <if test="name != null" >
+        `name`,
+      </if>
+      <if test="key != null" >
+        `key`,
+      </if>
+      <if test="path != null" >
+        `path`,
+      </if>
+      <if test="sort != null" >
+        `sort`,
+      </if>
+      <if test="status != null" >
+        `status`,
+      </if>
+      <if test="type != null" >
+        `type`,
+      </if>
+      <if test="jumpUrl != null" >
+        `jump_url`,
+      </if>
+      <if test="materialType != null" >
+        `material_type`,
+      </if>
+      <if test="siteId != null" >
+        `site_id`,
+      </if>
+      <if test="seoTitle != null" >
+        `seo_title`,
+      </if>
+      <if test="seoKeywords != null" >
+        `seo_keywords`,
+      </if>
+      <if test="seoDescription != null" >
+        `seo_description`,
+      </if>
+      <if test="updateTime != null" >
+        `update_time`,
+      </if>
+      <if test="updateId != null" >
+        `update_id`,
+      </if>
+      <if test="createTime != null" >
+        `create_time`,
+      </if>
+      <if test="createId != null" >
+        `create_id`,
+      </if>
+      <if test="content != null" >
+        `content`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null" >
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="jumpUrl != null" >
+        #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType != null" >
+        #{materialType,jdbcType=INTEGER},
+      </if>
+      <if test="siteId != null" >
+        #{siteId,jdbcType=INTEGER},
+      </if>
+      <if test="seoTitle != null" >
+        #{seoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seoKeywords != null" >
+        #{seoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="seoDescription != null" >
+        #{seoDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="club.gsjglob.domain.GsjFolderExample" resultType="java.lang.Integer" >
+    select count(*) from gsj_folder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update gsj_folder
+    <set >
+      <if test="record.id != null" >
+        `id` = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentId != null" >
+        `parent_id` = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.key != null" >
+        `key` = #{record.key,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null" >
+        `path` = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        `sort` = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        `type` = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.jumpUrl != null" >
+        `jump_url` = #{record.jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialType != null" >
+        `material_type` = #{record.materialType,jdbcType=INTEGER},
+      </if>
+      <if test="record.siteId != null" >
+        `site_id` = #{record.siteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.seoTitle != null" >
+        `seo_title` = #{record.seoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seoKeywords != null" >
+        `seo_keywords` = #{record.seoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seoDescription != null" >
+        `seo_description` = #{record.seoDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        `update_time` = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateId != null" >
+        `update_id` = #{record.updateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        `create_time` = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createId != null" >
+        `create_id` = #{record.createId,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        `content` = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update gsj_folder
+    set `id` = #{record.id,jdbcType=INTEGER},
+      `parent_id` = #{record.parentId,jdbcType=INTEGER},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      `key` = #{record.key,jdbcType=VARCHAR},
+      `path` = #{record.path,jdbcType=VARCHAR},
+      `sort` = #{record.sort,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=INTEGER},
+      `type` = #{record.type,jdbcType=INTEGER},
+      `jump_url` = #{record.jumpUrl,jdbcType=VARCHAR},
+      `material_type` = #{record.materialType,jdbcType=INTEGER},
+      `site_id` = #{record.siteId,jdbcType=INTEGER},
+      `seo_title` = #{record.seoTitle,jdbcType=VARCHAR},
+      `seo_keywords` = #{record.seoKeywords,jdbcType=VARCHAR},
+      `seo_description` = #{record.seoDescription,jdbcType=VARCHAR},
+      `update_time` = #{record.updateTime,jdbcType=VARCHAR},
+      `update_id` = #{record.updateId,jdbcType=INTEGER},
+      `create_time` = #{record.createTime,jdbcType=VARCHAR},
+      `create_id` = #{record.createId,jdbcType=INTEGER},
+      `content` = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update gsj_folder
+    set `id` = #{record.id,jdbcType=INTEGER},
+      `parent_id` = #{record.parentId,jdbcType=INTEGER},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      `key` = #{record.key,jdbcType=VARCHAR},
+      `path` = #{record.path,jdbcType=VARCHAR},
+      `sort` = #{record.sort,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=INTEGER},
+      `type` = #{record.type,jdbcType=INTEGER},
+      `jump_url` = #{record.jumpUrl,jdbcType=VARCHAR},
+      `material_type` = #{record.materialType,jdbcType=INTEGER},
+      `site_id` = #{record.siteId,jdbcType=INTEGER},
+      `seo_title` = #{record.seoTitle,jdbcType=VARCHAR},
+      `seo_keywords` = #{record.seoKeywords,jdbcType=VARCHAR},
+      `seo_description` = #{record.seoDescription,jdbcType=VARCHAR},
+      `update_time` = #{record.updateTime,jdbcType=VARCHAR},
+      `update_id` = #{record.updateId,jdbcType=INTEGER},
+      `create_time` = #{record.createTime,jdbcType=VARCHAR},
+      `create_id` = #{record.createId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="club.gsjglob.domain.GsjFolder" >
+    update gsj_folder
+    <set >
+      <if test="parentId != null" >
+        `parent_id` = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null" >
+        `key` = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        `path` = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        `sort` = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="jumpUrl != null" >
+        `jump_url` = #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType != null" >
+        `material_type` = #{materialType,jdbcType=INTEGER},
+      </if>
+      <if test="siteId != null" >
+        `site_id` = #{siteId,jdbcType=INTEGER},
+      </if>
+      <if test="seoTitle != null" >
+        `seo_title` = #{seoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seoKeywords != null" >
+        `seo_keywords` = #{seoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="seoDescription != null" >
+        `seo_description` = #{seoDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        `update_time` = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateId != null" >
+        `update_id` = #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        `create_time` = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        `create_id` = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        `content` = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where `id` = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="club.gsjglob.domain.GsjFolder" >
+    update gsj_folder
+    set `parent_id` = #{parentId,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      `key` = #{key,jdbcType=VARCHAR},
+      `path` = #{path,jdbcType=VARCHAR},
+      `sort` = #{sort,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      `type` = #{type,jdbcType=INTEGER},
+      `jump_url` = #{jumpUrl,jdbcType=VARCHAR},
+      `material_type` = #{materialType,jdbcType=INTEGER},
+      `site_id` = #{siteId,jdbcType=INTEGER},
+      `seo_title` = #{seoTitle,jdbcType=VARCHAR},
+      `seo_keywords` = #{seoKeywords,jdbcType=VARCHAR},
+      `seo_description` = #{seoDescription,jdbcType=VARCHAR},
+      `update_time` = #{updateTime,jdbcType=VARCHAR},
+      `update_id` = #{updateId,jdbcType=INTEGER},
+      `create_time` = #{createTime,jdbcType=VARCHAR},
+      `create_id` = #{createId,jdbcType=INTEGER},
+      `content` = #{content,jdbcType=LONGVARCHAR}
+    where `id` = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="club.gsjglob.domain.GsjFolder" >
+    update gsj_folder
+    set `parent_id` = #{parentId,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      `key` = #{key,jdbcType=VARCHAR},
+      `path` = #{path,jdbcType=VARCHAR},
+      `sort` = #{sort,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      `type` = #{type,jdbcType=INTEGER},
+      `jump_url` = #{jumpUrl,jdbcType=VARCHAR},
+      `material_type` = #{materialType,jdbcType=INTEGER},
+      `site_id` = #{siteId,jdbcType=INTEGER},
+      `seo_title` = #{seoTitle,jdbcType=VARCHAR},
+      `seo_keywords` = #{seoKeywords,jdbcType=VARCHAR},
+      `seo_description` = #{seoDescription,jdbcType=VARCHAR},
+      `update_time` = #{updateTime,jdbcType=VARCHAR},
+      `update_id` = #{updateId,jdbcType=INTEGER},
+      `create_time` = #{createTime,jdbcType=VARCHAR},
+      `create_id` = #{createId,jdbcType=INTEGER}
+    where `id` = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

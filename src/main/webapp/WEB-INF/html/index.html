@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -51,23 +50,7 @@
                         <a href="#" class="navbar-brand">GengZi</a>
                     </div>
                     <div class="navbar-collapse collapse" id="navbar">
-                        <ul class="nav navbar-nav">
-                    <!--        <li class="active">
-                                <a aria-expanded="false" role="button" href="index.html"> 返回首页</a>
-                            </li>-->
-                            <li class="dropdown">
-                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> 博客 <span class="caret"></span></a>
-                                <ul role="menu" class="dropdown-menu">
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                </ul>
-                            </li>
+                        <ul class="nav navbar-nav" id="folderlist" >
                           <!--   <li class="dropdown">
                                 <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> 菜单 <span class="caret"></span></a>
                                 <ul role="menu" class="dropdown-menu">
@@ -510,6 +493,30 @@
 
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     <!--统计代码，可删除-->
+    
+    
+    <script type="text/javascript">
+    	/*初始化目录菜单  */
+    	var indexurl = "folder/index";
+    	$.ajax({
+    		  url: indexurl,
+    		  type: "GET",
+			  dataType: "json",
+			  success:function(data){
+			  	//解析
+			  	for (var i = 0; i < data.length; i++) {
+			  		$("#folderlist").append(' <li class="dropdown"><a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">'+data[i].name+'<span class="caret"></span></a><ul id="folder'+i+'" role="menu" class="dropdown-menu"> </ul></li>');
+			  		var subdata = data[i].subsetlist;
+			  		for (var j = 0; j < subdata.length; j++) {
+			  			$("#folder"+i).append('<li><a href="'+i+'">'+subdata[j].name+'</a></li>');
+					}
+				}
+			  }
+			});
+    </script>
+    
+    
+    
 
 </body>
 
