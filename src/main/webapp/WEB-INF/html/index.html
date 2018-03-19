@@ -138,16 +138,15 @@
 		            </div>
 		        </div>
 		    </div>
-		     <!-- 分页按钮 -->
-		    <div  class="row" id="uploadbtn" >
-		    	<div class="col-md-5 col-md-offset-3" style="margin-bottom:15px;">  
-			    		<a id="nextclick"  class="btn btn-primary btn-rounded btn-block">
-			    			<i class="fa fa-info-circle"></i>加载更多...
-			    		</a>
-		    	</div>
+	   		     <!-- 分页按钮 -->
+			    <div  class="row" id="uploadbtn" >
+			    	<div class="col-md-5 col-md-offset-3" style="margin-bottom:15px;">  
+				    		<a id="nextclick"  class="btn btn-primary btn-rounded btn-block">
+				    			<i class="fa fa-info-circle"></i>加载更多...
+				    		</a>
+			    	</div>
+			    </div>
 		    </div>
-		    </div>
-		   
 	  	</div>
   		<div class="col-md-2" style="position:static;"> 
   			<div class="ibox float-e-margins">
@@ -266,24 +265,41 @@
 		  dataType: "json",
 		  success:function(data){
 			 for (var i = 0; i < data.length; i++) {
-				 //danger "'+data[i].name+'"  onclick="blogTypeShow() " 
-				 $("#blogtypelist").append('<li><a  href="javascript:void(0)"> '+
-				 								'<i class="fa fa-inbox "></i> '+data[i].name+'<span class="label label-warning pull-right">'+data[i].blogtypenum+'</span></a></li>');				 
-			}
+				 //danger "'+data[i].name+'"  onclick="blogTypeShow() " href="javascript:void(0)"
+				 $("#blogtypelist").append('<li><a href="javascript:void(0)" onclick="blogTypeShow(\"java\")"  ><i class="fa fa-inbox "></i> '+data[i].name+'<span class="label label-warning pull-right">'+data[i].blogtypenum+'</span></a></li>');				 
+
+			 }
+			 
+			 var lista = $("#blogtypelist a");
+			 for (var i = 0; i < lista.length; i++) {
+				 $(lista[i]).attr("onclick","blogtypeclick(\""+data[i].name+"\")");
+			  }
 		  }
 	
 		});
-	
-	/* //下一页的点击事件
-		var aa= $("#blogtypelist > a");
-		alert(aa);
-		
-		$("#blogtypelist > a").click(function(){
-			var atext = $(this).text();
-			alert(atext)
-			
-		}); */
     </script>
+    
+	 <script type="text/javascript">
+    	/*博客分类的点击事件  */
+    	//下一页的点击事件
+    	blogtypeclick = function(blogtype){
+    		
+       		/*初始化文章 */
+       		var nextindexurl = "article/"+blogtype+"/全部/1/10";
+       		$.ajax({
+         		  url: nextindexurl,
+         		  type: "GET",
+     			  dataType: "json",
+     			  success:function(data){
+     				 $("#articlelist").empty();
+     				  showArictleInfo(data);
+     				  $("#blogtype").val(blogtype);
+     				  $("#tagtype").val("全部");
+     				  
+     			  }
+     			});
+    	}
+    </script> 
     
     <script type="text/javascript">
     	/*初始化目录菜单  */
@@ -315,10 +331,10 @@
     		var nextpage = data.nextPage;
     		if (nextpage>0) {
     			$("#nextpage").val(data.nextPage);	
+    			$("#uploadbtn").show();
 			}else{
 				$("#nextpage").val("-1");
-				$("#uploadbtn").remove();
-				
+				$("#uploadbtn").hide();
 			}
     	   //设置文章内容
     		var articlelist = data.list;
