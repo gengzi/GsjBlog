@@ -9,7 +9,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
  *
  */
 public interface IFolderService {
-	
+	/**
+	 *  加载目录信息
+	 * @param type 
+	 * @return
+	 * @throws JsonProcessingException
+	 */
 	String getFolderInfo(String type) throws JsonProcessingException;
 
 }

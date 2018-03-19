@@ -41,7 +41,19 @@ public class GsjFolder {
 
     private String content;
     
-    //目录下的子集
+    
+    //博客分类下的个数
+    private Integer blogtypenum;
+    
+    public Integer getBlogtypenum() {
+		return blogtypenum;
+	}
+
+	public void setBlogtypenum(Integer blogtypenum) {
+		this.blogtypenum = blogtypenum;
+	}
+
+	//目录下的子集
     private List subsetlist;
     
     

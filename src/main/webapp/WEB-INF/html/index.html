@@ -19,7 +19,7 @@
     		/*height:500px;*/
     	}
     	.navbar-header {
-		    width: 67.5%;
+		    /* width: 60.5%; */
 		}
 		#blog_content{
 			margin-top: 30px;
@@ -31,7 +31,7 @@
 		}
     	#blog_content_padding{
     		padding-right: 10px;
-    		
+    		padding-bottom:10px;
     	}
     </style>
 
@@ -87,20 +87,20 @@
 		        <div class="row">
 		            <div class="col-lg-12" id="articlelist" >
 		            
-		            <!-- 文章 -->
+		           <!--  文章 
 		                <div class="ibox">
 		                    <div class="ibox-content">
 		                        <a href="article.html" class="btn-link">
-		                        <!-- 标题 -->
+		                        标题
 		                            <h2>
 		                                   	 想知道宁泽涛每天游多少圈？送他 Misfit 最新款 Speedo Shine
 		                            </h2>
 		                        </a>
 		                        <div class="small m-b-xs">
-		                        <!-- 作者 -->
+		                        作者
 		                            <strong>高 晨</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 小时前</span>
 		                        </div>
-		                        <!-- 文章内容  -->
+		                        文章内容 
 		                        <p>
 		                           	 就算你敢带着 Apple Watch 下水游泳，它也不能记录你游了多少圈。 夏天刚来时就不停地听到有人提起“有没有在我游泳的时候可以帮忙数圈的设备”，今天 Misfit 终于赶在夏天结束之前推出可追踪游泳运动的新款 Shine。这款新设备是 Misfit 与泳衣品牌 Speedo （速比涛）合作推出，因此被命名为 Speedo Shine。
 		                        </p>
@@ -108,10 +108,10 @@
 		                            <div class="col-md-6">
 		                                <h5>标签：</h5>
 		                                
-		                                <!-- 标签 -->
+		                                标签
 		                                <button class="btn btn-primary btn-xs" type="button">Apple Watch</button>
 		                                <button class="btn btn-white btn-xs" type="button">速比涛</button>
-		                                <!-- 标签 -->
+		                                标签
 		                                
 		                                
 		                                
@@ -120,12 +120,12 @@
 		                                <div class="small text-right">
 		                                    <h5>状态：</h5>
 		                                    
-		                                    <!-- 评论/浏览 -->
+		                                    评论/浏览
 		                                    
 		                                    <div> <i class="fa fa-comments-o"> </i> 56 评论 </div>
 		                                    <i class="fa fa-eye"> </i> 144 浏览
 		                                    
-		                                    <!-- 评论/浏览 -->
+		                                    评论/浏览
 		                                    
 		                                </div>
 		                            </div>
@@ -133,26 +133,35 @@
 		                    </div>
 		                </div>
 		                
-		              <!-- 文章 -->
+		              文章 -->
 		        
 		            </div>
 		        </div>
 		    </div>
+		     <!-- 分页按钮 -->
+		    <div  class="row" id="uploadbtn" >
+		    	<div class="col-md-5 col-md-offset-3" style="margin-bottom:15px;">  
+			    		<a id="nextclick"  class="btn btn-primary btn-rounded btn-block">
+			    			<i class="fa fa-info-circle"></i>加载更多...
+			    		</a>
+		    	</div>
 		    </div>
+		    </div>
+		   
 	  	</div>
   		<div class="col-md-2" style="position:static;"> 
   			<div class="ibox float-e-margins">
                     <div  id="right_col"  class="ibox-content mailbox-content">
                         <div class="file-manager">
-    <!--                        <a class="btn btn-block btn-primary compose-mail" href="mail_compose.html">写信</a>
- -->                        <div class="space-16"></div>
+           				  <div class="space-16"></div>
                             <h5>博客</h5>
-                            <ul class="folder-list m-b-md" style="padding: 0">
+                            <ul class="folder-list m-b-md" style="padding: 0" id="blogtypelist">
+                             <!-- 博客分类 
                                 <li>
                                     <a href="mailbox.html"> <i class="fa fa-inbox "></i> Java<span class="label label-warning pull-right">16</span>
                                     </a>
                                 </li>
-                                <li>
+                              <li>
                                     <a href="mailbox.html"> <i class="fa fa-envelope-o"></i> JS/Html</a>
                                 </li>
                                 <li>
@@ -163,8 +172,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="mailbox.html"> <i class="fa fa-trash-o"></i> 开发软件</a>
-                                </li>
+                                    <a href="mailbox.html"> <i class="fa fa fa-files-o"></i> 开发软件</a>
+                                </li> -->
                             </ul>
                             <h5>分类</h5>
                             <ul class="category-list" style="padding: 0">
@@ -208,6 +217,14 @@
   		</div>
 	  </div>
 	</div>
+	
+	<div>
+		<input type="hidden"  id="blogtype" value="全部" >
+		<input type="hidden"  id="tagtype" value="全部" >
+		<input type="hidden"  id="nextpage" value="1">
+	</div>
+
+
 
 
 
@@ -241,6 +258,34 @@
     
     
     <script type="text/javascript">
+    /*初始化博客分类  */
+	var blogtypeurl = "folder/blogtype";
+	$.ajax({
+		  url: blogtypeurl,
+		  type: "GET",
+		  dataType: "json",
+		  success:function(data){
+			 for (var i = 0; i < data.length; i++) {
+				 //danger "'+data[i].name+'"  onclick="blogTypeShow() " 
+				 $("#blogtypelist").append('<li><a  href="javascript:void(0)"> '+
+				 								'<i class="fa fa-inbox "></i> '+data[i].name+'<span class="label label-warning pull-right">'+data[i].blogtypenum+'</span></a></li>');				 
+			}
+		  }
+	
+		});
+	
+	/* //下一页的点击事件
+		var aa= $("#blogtypelist > a");
+		alert(aa);
+		
+		$("#blogtypelist > a").click(function(){
+			var atext = $(this).text();
+			alert(atext)
+			
+		}); */
+    </script>
+    
+    <script type="text/javascript">
     	/*初始化目录菜单  */
     	var indexurl = "folder/index";
     	$.ajax({
@@ -253,7 +298,7 @@
 			  		$("#folderlist").append(' <li class="dropdown"><a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">'+data[i].name+'<span class="caret"></span></a><ul id="folder'+i+'" role="menu" class="dropdown-menu"> </ul></li>');
 			  		var subdata = data[i].subsetlist;
 			  		for (var j = 0; j < subdata.length; j++) {
-			  			$("#folder"+i).append('<li><a href="'+i+'">'+subdata[j].name+'</a></li>');
+			  			$("#folder"+i).append('<li><a id="'+i+'">'+subdata[j].name+'</a></li>');
 					}
 				}
 			  }
@@ -266,7 +311,16 @@
     
     	//根据数据渲染页面
     	function showArictleInfo(data){
-    		
+    		//设置下一页
+    		var nextpage = data.nextPage;
+    		if (nextpage>0) {
+    			$("#nextpage").val(data.nextPage);	
+			}else{
+				$("#nextpage").val("-1");
+				$("#uploadbtn").remove();
+				
+			}
+    	   //设置文章内容
     		var articlelist = data.list;
     		for (var i = 0; i < articlelist.length; i++) {
     			var content = articlelist[i].content;
@@ -304,8 +358,6 @@
 			}
     	}
     	
-    	
-    	
     	/*初始化文章 */
     	var indexurl = "article/全部/全部/1/10";
     	$.ajax({
@@ -318,75 +370,42 @@
 			});
     </script>
     
+    <script type="text/javascript">
+    	//下一页的点击事件
+    	$("#nextclick").click(function(){
+    		//获取查询条件和下一页的页码
+    		var blogtype = $("#blogtype").val();
+    		var tagtype = $("#tagtype").val();
+    		var nextpage = $("#nextpage").val();
+    		//执行ajax请求
+    		/*初始化文章 */
+    		var nextindexurl = "article/"+blogtype+"/"+tagtype+"/"+nextpage+"/10";
+    		$.ajax({
+      		  url: nextindexurl,
+      		  type: "GET",
+  			  dataType: "json",
+  			  success:function(data){
+  				  showArictleInfo(data);
+  			  }
+  			});
+    	});
+    </script>
     
     
-    
-    
-    
-    <!-- 
-       <div class="ibox">
-		                    <div class="ibox-content">
-		                        <a href="article.html" class="btn-link">
-		                        标题
-		                            <h2>
-		                                   	 想知道宁泽涛每天游多少圈？送他 Misfit 最新款 Speedo Shine
-		                            </h2>
-		                        </a>
-		                        <div class="small m-b-xs">
-		                        作者
-		                            <strong>高 晨</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 小时前</span>
-		                        </div>
-		                        文章内容 
-		                        <p>
-		                           	 就算你敢带着 Apple Watch 下水游泳，它也不能记录你游了多少圈。 夏天刚来时就不停地听到有人提起“有没有在我游泳的时候可以帮忙数圈的设备”，今天 Misfit 终于赶在夏天结束之前推出可追踪游泳运动的新款 Shine。这款新设备是 Misfit 与泳衣品牌 Speedo （速比涛）合作推出，因此被命名为 Speedo Shine。
-		                        </p>
-		                        <div class="row">
-		                            <div class="col-md-6">
-		                                <h5>标签：</h5>
-		                                
-		                                标签
-		                                <button class="btn btn-primary btn-xs" type="button">Apple Watch</button>
-		                                <button class="btn btn-white btn-xs" type="button">速比涛</button>
-		                                标签
-		                                
-		                                
-		                                
-		                            </div>
-		                            <div class="col-md-6">
-		                                <div class="small text-right">
-		                                    <h5>状态：</h5>
-		                                    
-		                                    评论/浏览
-		                                    
-		                                    <div> <i class="fa fa-comments-o"> </i> 56 评论 </div>
-		                                    <i class="fa fa-eye"> </i> 144 浏览
-		                                    
-		                                    评论/浏览
-		                                    
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div> -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    <script type="text/javascript">
+			/* blogTypeShow  = function (this){
+	    		alert($(this).html());
+				var nextindexurl = "article/"+blogname+"/全部/1/10";
+				$.ajax({
+		  		  url: nextindexurl,
+		  		  type: "GET",
+					  dataType: "json",
+					  success:function(data){
+						  showArictleInfo(data);
+					  }
+					});
+	    	} */
+    </script>
     
 
 </body>

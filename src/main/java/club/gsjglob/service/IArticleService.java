@@ -21,5 +21,6 @@ public interface IArticleService {
 	List<GsjArticle> getArticleInfo(String blogtype,String labeltype,String startpage,String pagesize);
 	
 	
+	
 
 }

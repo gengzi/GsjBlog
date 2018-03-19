@@ -10,7 +10,9 @@ import com.alibaba.druid.support.json.JSONUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import club.gsjglob.dao.GsjArticleMapper;
 import club.gsjglob.dao.GsjFolderMapper;
+import club.gsjglob.domain.GsjArticleExample;
 import club.gsjglob.domain.GsjFolder;
 import club.gsjglob.domain.GsjFolderExample;
 import club.gsjglob.domain.GsjFolderExample.Criteria;
@@ -22,7 +24,11 @@ public class FolderServiceImpl implements IFolderService {
 
 	@Autowired
 	private GsjFolderMapper folderdao;
+	//返回的json数据
 	private String folderjson;
+	@Autowired
+	private GsjArticleMapper articledao;
+
 	
 	
 	/**
@@ -31,11 +37,10 @@ public class FolderServiceImpl implements IFolderService {
 	 */
 	@Override
 	public String getFolderInfo(String type) throws JsonProcessingException {
-		
+		GsjFolderExample example;
 		switch (type) {
 		case "index": //主页
-			// 查询key是 index的目录信息
-			GsjFolderExample example = new GsjFolderExample();
+			example = new GsjFolderExample();
 			Criteria criteria = example.createCriteria();
 			criteria.andKeyEqualTo("index");
 			criteria.andParentIdEqualTo(0);
@@ -52,9 +57,25 @@ public class FolderServiceImpl implements IFolderService {
 			}
 			ObjectMapper mapper = new ObjectMapper();
 			folderjson = mapper.writeValueAsString(jsonList);
-			System.out.println(folderjson);
 			break;
 
+		case "blogtype": //主页博客分类
+			// 查询key是 blog的目录信息
+			example = new GsjFolderExample();
+			Criteria blogcriteria = example.createCriteria();
+			blogcriteria.andKeyEqualTo("blog");
+			blogcriteria.andParentIdNotEqualTo(1);
+			List<GsjFolder> blogFolders = folderdao.selectByExample(example);
+			for (GsjFolder gsjFolder : blogFolders) {
+				Integer blogid = gsjFolder.getId();
+				GsjArticleExample gsjarticleexample =  new GsjArticleExample();
+				gsjarticleexample.createCriteria().andFolderIdEqualTo(blogid);
+				int countByExample = articledao.countByExample(gsjarticleexample);
+				gsjFolder.setBlogtypenum(countByExample);
+			}
+			ObjectMapper mapperblog = new ObjectMapper();
+			folderjson = mapperblog.writeValueAsString(blogFolders);
+			break;
 		default:
 			break;
 		}
