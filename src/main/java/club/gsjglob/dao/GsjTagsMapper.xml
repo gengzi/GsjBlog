@@ -213,7 +213,7 @@
   </select> 
   
   <select id="getTagsOnlyByTagname"  resultType="java.lang.String">
-        select tagname,count(tagname) as tagnum from  gsj_tags group by tagname  ORDER BY tagnum desc 
+        select  CONCAT_WS(';',IFNULL(tagname,''),count(tagname)) from  gsj_tags group by tagname  ORDER BY count(tagname) desc 
   </select> 
   
 </mapper>

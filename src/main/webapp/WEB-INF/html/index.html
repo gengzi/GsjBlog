@@ -25,7 +25,7 @@
 			margin-top: 30px;
 		}
 		#right_col{
-			margin-top: 36%;
+			margin-top: 25%;
 			background: white;
 			
 		}
@@ -191,8 +191,8 @@
                             </ul>
 
                             <h5 class="tag-title">标签</h5>
-                            <ul class="tag-list" style="padding: 0">
-                                <li><a href="mail_compose.html"><i class="fa fa-tag"></i> java</a>
+                            <ul class="tag-list" style="padding: 0"  id="tagslist">
+                               <!--    <li><a href="mail_compose.html"><i class="fa fa-tag"></i> java</a>
                                 </li>
                                 <li><a href="mail_compose.html"><i class="fa fa-tag"></i> 数据库</a>
                                 </li>
@@ -207,7 +207,7 @@
                                 <li><a href="mail_compose.html"><i class="fa fa-tag"></i> 图片</a>
                                 </li>
                                 <li><a href="mail_compose.html"><i class="fa fa-tag"></i> python</a>
-                                </li>
+                                </li> -->
                             </ul>
                             <div class="clearfix"></div>
                         </div>
@@ -423,6 +423,53 @@
 					  }
 					});
 	    	} */
+    </script>
+    
+    
+    <script type="text/javascript">
+
+    	
+    	var tagsurl = "tags/only";
+	    $.ajax({
+			  url: tagsurl,
+			  type: "GET",
+			  dataType: "json",
+			  success:function(data){
+				 for (var i = 0; i < data.length; i++) {
+					  $("#tagslist").append('<li><a href="javascript:void(0)" onclick="#" ><i class="fa fa-tag"></i> '+data[i].tagName+'</a></li>');
+				 }
+			      // 由于append出现问题，所以采用这种方式，重新注入 onclick 方法
+				 var listtags = $("#tagslist a");
+				 for (var i = 0; i < listtags.length; i++) {
+					 $(listtags[i]).attr("onclick","tagsType(\""+data[i].tagName+"\")");
+				  }
+			  }
+			});	
+	    
+	    
+	    
+	    // tags a 标签的点击事件
+	    tagsType = function(tagstype){
+
+	    	/*初始化文章 */
+       		var nexttagsurl = "article/全部/"+tagstype+"/1/10";
+       		$.ajax({
+         		  url: nexttagsurl,
+         		  type: "GET",
+     			  dataType: "json",
+     			  success:function(data){
+     				 $("#articlelist").empty();
+     				  showArictleInfo(data);
+     				  // 设置点击下一页的条件
+     				  $("#blogtype").val("全部");
+     				  $("#tagtype").val(tagstype);
+     			  }
+     			});
+	    	
+	    } 
+	    
+	    
+	    
     </script>
     
 

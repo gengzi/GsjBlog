@@ -1,6 +1,9 @@
 package club.gsjglob.service;
 
+import java.util.List;
+
 import club.gsjglob.domain.GsjTags;
+import club.gsjglob.vo.TagsAll;
 
 /**
  *  标签管理的service
@@ -14,6 +17,6 @@ public interface ITagsService {
 	 * @param gsjtype  类型
 	 * @return  GsjTags 
 	 */
-	GsjTags  getTagsInfo(String gsjtype);
+	List<TagsAll>  getTagsInfo(String gsjtype);
 
 }

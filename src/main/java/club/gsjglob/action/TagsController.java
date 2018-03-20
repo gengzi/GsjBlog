@@ -1,5 +1,7 @@
 package club.gsjglob.action;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import club.gsjglob.domain.GsjTags;
 import club.gsjglob.service.ITagsService;
+import club.gsjglob.vo.TagsAll;
 
 /**
  * 标签管理的controller
@@ -30,8 +33,8 @@ public class TagsController {
 	 */
 	@RequestMapping(value = "/tags/{tagsname}")
 	@ResponseBody
-	public GsjTags getTagsInfo(@PathVariable String tagsname) {
-		GsjTags tagsInfo = tagsService.getTagsInfo(tagsname);
+	public List<TagsAll> getTagsInfo(@PathVariable String tagsname) {
+		List<TagsAll> tagsInfo = tagsService.getTagsInfo(tagsname);
 		return tagsInfo;
 	}
 
