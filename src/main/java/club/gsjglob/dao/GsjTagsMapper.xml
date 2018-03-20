@@ -212,4 +212,8 @@
        select article_id from gsj_tags where tagname = #{labeltype} group by article_id
   </select> 
   
+  <select id="getTagsOnlyByTagname"  resultType="java.lang.String">
+        select tagname,count(tagname) as tagnum from  gsj_tags group by tagname  ORDER BY tagnum desc 
+  </select> 
+  
 </mapper>

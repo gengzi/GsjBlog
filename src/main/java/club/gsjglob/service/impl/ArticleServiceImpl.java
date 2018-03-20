@@ -73,7 +73,6 @@ public class ArticleServiceImpl implements IArticleService{
 				data =  articledao.selectByExample(articleExample);
 				// 设置每篇文章的tags
 				setTagInfos(data);
-				
 			//	}
 			}
 		}

@@ -28,5 +28,16 @@ public interface GsjTagsMapper {
 
     int updateByPrimaryKey(GsjTags record);
     
+    /**
+     * 根据tag获取，该标签下的所有文章id
+     * @param labeltype 
+     * @return
+     */
     List<Integer> getArticleIdByTagname(String labeltype);
+    
+    /**
+     *  获取最多出现的 tagname ，前 8 个
+     * @return
+     */
+    List<String> getTagsOnlyByTagname();
 }
