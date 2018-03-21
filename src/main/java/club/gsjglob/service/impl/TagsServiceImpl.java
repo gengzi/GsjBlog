@@ -44,7 +44,6 @@ public class TagsServiceImpl implements ITagsService {
 						tagsAll.setTagNameNum(tagnum);
 						alls.add(tagsAll);
 					}
-					
 				}	
 			}
 			break;
@@ -53,6 +52,13 @@ public class TagsServiceImpl implements ITagsService {
 			break;
 		}
 		return alls;
+	}
+
+	@Override
+	public List<GsjTags> getTagByArticleid(int articleId) {
+		GsjTagsExample example = new GsjTagsExample();
+		example.createCriteria().andArticleIdEqualTo(articleId);
+		return tagsdao.selectByExample(example);
 	}
 
 }

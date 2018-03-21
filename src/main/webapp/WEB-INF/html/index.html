@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>gengzi-个人博客</title>
+    <title>Gengzi-个人博客</title>
 
     <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
@@ -354,7 +354,7 @@
     			
     			$("#articlelist").append('<div class="ibox">'+
     										'<div class="ibox-content">'+
-    											'<a href="article/'+articlelist[i].id+'" class="btn-link"><h2>'+articlelist[i].title+'</h2></a>'+
+    											'<a href="article/'+articlelist[i].id+'" target="_Blank"  class="btn-link"><h2>'+articlelist[i].title+'</h2></a>'+
     												'<div class="small m-b-xs"><strong>'+articlelist[i].publishUser+'</strong>'+
     												'<span class="text-muted"><i class="fa fa-clock-o"></i>'+articlelist[i].publishTime+'</span></div>'+
     												''+content+''+
@@ -427,8 +427,7 @@
     
     
     <script type="text/javascript">
-
-    	
+		//查询常用的标签
     	var tagsurl = "tags/only";
 	    $.ajax({
 			  url: tagsurl,
@@ -450,7 +449,6 @@
 	    
 	    // tags a 标签的点击事件
 	    tagsType = function(tagstype){
-
 	    	/*初始化文章 */
        		var nexttagsurl = "article/全部/"+tagstype+"/1/10";
        		$.ajax({
@@ -465,11 +463,7 @@
      				  $("#tagtype").val(tagstype);
      			  }
      			});
-	    	
 	    } 
-	    
-	    
-	    
     </script>
     
 

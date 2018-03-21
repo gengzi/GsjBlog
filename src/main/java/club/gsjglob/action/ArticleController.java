@@ -6,11 +6,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,7 +24,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import club.gsjglob.domain.GsjArticle;
+import club.gsjglob.domain.GsjTags;
+import club.gsjglob.dto.SaveArticle;
 import club.gsjglob.service.IArticleService;
+import club.gsjglob.service.ITagsService;
+import club.gsjglob.vo.ArticleContent;
 
 /**
  * 博客文章管理
@@ -34,6 +42,9 @@ public class ArticleController {
 
 	@Autowired
 	private IArticleService articleService;
+
+	@Autowired
+	private ITagsService tagsService;
 
 	/**
 	 * 分页显示，根据类别返回文章信息
@@ -61,24 +72,52 @@ public class ArticleController {
 	}
 
 	/**
-	 * 查看文章的详情
+	 * 跳转到文章的详情页面
 	 * 
 	 * @param articleid
 	 *            文章的id
 	 * @return GsjArticle 对象
 	 */
 	@RequestMapping(value = "/article/{articleid}")
-	public String getArticleInfo(@PathVariable String articleid, ModelMap model) {
-
-		try {
-			GsjArticle articleContent = articleService.getArticleContent(Integer.parseInt(articleid));
-			// 转json格式
-			ObjectMapper mapper = new ObjectMapper();
-			String articleContentJson = mapper.writeValueAsString(articleContent);
-			model.put("articlejson", articleContentJson);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+	public String getArticleInfo(@PathVariable String articleid) {
 		return "article";
 	}
+
+	/**
+	 * 查看文章的详情
+	 * 
+	 * @param articleid
+	 *            文章的id
+	 * @return GsjArticle 对象
+	 */
+	@RequestMapping(value = "/article/content/{articleid}")
+	@ResponseBody
+	public ArticleContent getArticleContentInfo(@PathVariable String articleid) {
+		// 返回文章详情
+		GsjArticle articleContent = articleService.getArticleContent(Integer.parseInt(articleid));
+		// 返回文章的标签
+		List<GsjTags> tagByArticleid = tagsService.getTagByArticleid(Integer.parseInt(articleid));
+		ArticleContent articleContentVo = new ArticleContent();
+		articleContentVo.setGsjArticle(articleContent);
+		articleContentVo.setGsjTagslist(tagByArticleid);
+		return articleContentVo;
+	}
+	
+
+	/**
+	 *  保存文章的内容
+	 * @param article  保存的入参对象
+	 * @return
+	 */
+	@RequestMapping(value = "/article/savearticle",method=RequestMethod.POST)
+	@ResponseBody
+	public String saveArticleContent(@RequestParam SaveArticle article) {
+		// 解析post请求的示例
+		String  resultinfo = articleService.saveArticleContent(article);
+		return resultinfo;
+	}
+	
+	
+	
+	
 }

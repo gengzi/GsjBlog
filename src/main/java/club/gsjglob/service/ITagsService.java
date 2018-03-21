@@ -19,4 +19,10 @@ public interface ITagsService {
 	 */
 	List<TagsAll>  getTagsInfo(String gsjtype);
 
+	/**
+	 * 根据文章的id 返回该文章对应的标签
+	 * @param parseInt
+	 */
+	List<GsjTags> getTagByArticleid(int articleid);
+
 }

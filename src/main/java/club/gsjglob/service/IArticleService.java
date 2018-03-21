@@ -3,6 +3,7 @@ package club.gsjglob.service;
 import java.util.List;
 
 import club.gsjglob.domain.GsjArticle;
+import club.gsjglob.dto.SaveArticle;
 
 /**
  *  博客管理的service
@@ -27,6 +28,14 @@ public interface IArticleService {
 	 * @return GsjArticle 对象
 	 */
 	GsjArticle getArticleContent(Integer articleid);
+
+
+	/**
+	 *   发表文章信息
+	 * @param article  保存的文章字段实体
+	 * @return json  success 成功， error 失败
+	 */
+	String saveArticleContent(SaveArticle article);
 	
 	
 

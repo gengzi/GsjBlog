@@ -26,17 +26,20 @@
             <div class="col-lg-10 col-lg-offset-1">
                 <div class="ibox">
                     <div class="ibox-content">
-                        <div class="pull-right">
-                            <button class="btn btn-white btn-xs" type="button">700BIKE</button>
-                            <button class="btn btn-white btn-xs" type="button">BeginOne</button>
-                            <button class="btn btn-white btn-xs" type="button">乐视超级自行车</button>
+                        <div class="pull-right" id="gsjtags" >
+                        <!-- 文章的标签  -->
+                        <!--  <button class="btn btn-white btn-xs" type="button">700BIKE</button>
+                     	     <button class="btn btn-white btn-xs" type="button">BeginOne</button>
+                            <button class="btn btn-white btn-xs" type="button">乐视超级自行车</button> -->
+                        <!-- 文章的标签  -->
                         </div>
                         <div class="text-center article-title">
-                            <h1>
-                                    自行车都智能化了，你可知道它的历史？
-                                </h1>
+                        	<!-- 文章的标题  -->
+                            <h1 id="gsjtitle"  >自行车都智能化了，你可知道它的历史？</h1>
                         </div>
-                        <p>
+                        <!-- 文章内容  -->
+                       <div id="gsjcontent"> 
+                       <!--  <p>
                             在不少旁观者的眼里，智能化几乎成了一种避之唯恐不及的“瘟疫”，开始攀附上大大小小、各式各样的工具和设备，从水杯、灯泡、体重秤这样的小物件，再到冰箱、洗衣机这些生活中的庞然大物。
                         </p>
                         <p>
@@ -108,8 +111,9 @@
                         <p>
                             这时候第一辆真正意义上的自行车诞生了，是由苏格兰铁匠麦克米伦（Kirkpatrik Macmillan）设计的，它还有一个专门的名字——Velocipede。
                         </p>
-                        <hr>
-
+                        <hr> -->
+                    </div>
+						
                         <div class="row">
                             <div class="col-lg-12">
 
@@ -196,7 +200,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- 全局js -->
@@ -211,6 +214,41 @@
 
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     <!--统计代码，可删除-->
+    
+
+    
+    <script type="text/javascript">
+    	//获取当前页的路径
+    	var articleurl	 = window.location.href;
+    	var arrstr = articleurl.split("/");
+    	//拿到文章的id
+    	var articleid = arrstr[arrstr.length-1]; 
+    	//根据文章的id 访问文章的详情 和 标签 和 评论  ， 评论先不写
+    	var articleurlbyid = "content/"+articleid;
+    	$.ajax({
+         		  url: articleurlbyid,
+         		  type: "GET",
+     			  dataType: "json",
+     			  success:function(data){
+     				  //文章内容
+     				 var articleContent  = data.gsjArticle;
+     				  //文章标签
+     				 var tagslist  = data.gsjTagslist;
+     				 //标题
+     				 $("#gsjtitle").text(articleContent.title);
+     				 //内容
+     				 $("#gsjcontent").html(articleContent.content);
+     				 //标签
+     				 for (var i = 0; i < tagslist.length; i++) {
+     					 $("#gsjtags").append('<button class="btn btn-white btn-xs" type="button">'+tagslist[i].tagname+'</button>');
+					 }
+     			  }
+     			});
+    	
+    	
+    
+    </script>
+    
 
 </body>
 

@@ -19,8 +19,15 @@ import club.gsjglob.domain.GsjFolder;
 import club.gsjglob.domain.GsjFolderExample;
 import club.gsjglob.domain.GsjTags;
 import club.gsjglob.domain.GsjTagsExample;
+import club.gsjglob.dto.SaveArticle;
 import club.gsjglob.service.IArticleService;
 
+/**
+ *  博客管理serviceimpl
+ * @author gengzi
+ * @time 2018年3月21日18:06:36
+ *
+ */
 @Service
 public class ArticleServiceImpl implements IArticleService{
 
@@ -99,6 +106,17 @@ public class ArticleServiceImpl implements IArticleService{
 		GsjArticleExample articleExample = new GsjArticleExample();
 		GsjArticle selectByPrimaryKey = articledao.selectByPrimaryKey(articleid);
 		return selectByPrimaryKey;
+	}
+
+	
+	
+	@Override
+	public String saveArticleContent(SaveArticle article) {
+		
+		
+		
+		
+		return null;
 	}
 	
 	
