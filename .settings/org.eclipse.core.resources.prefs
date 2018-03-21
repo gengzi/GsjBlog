@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/resources/conf/db.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/html/index.html=UTF-8
+encoding//src/main/webapp/baiduUE/jsp/config.json=UTF-8
 encoding//src/test/java=UTF-8

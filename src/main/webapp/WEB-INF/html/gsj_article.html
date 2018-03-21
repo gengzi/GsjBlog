@@ -26,7 +26,7 @@
 	</style>
 </head>
 
-<body class="gray-bg top-navigation">
+<body class="gray-bg top-navigation" style="background: white;">
 	
 	 <div id="wrapper">
         <div id="page-wrapper" class="gray-bg">
@@ -101,7 +101,7 @@
                                     								</select>
 							                                	</div>
 							                                	<div class="col-sm-10">
-							                                		<input type="text" name="titlegsj" class="form-control" placeholder="文章标题">
+							                                		<input id="titleid" type="text" name="titlegsj" class="form-control" placeholder="文章标题">
 							                                	</div>
 						                                	</div>
 						                                    
@@ -131,7 +131,7 @@
 						
 						                                <div class="col-sm-5">
 						                           	        
-						                                    <input type="text" name="tagsgsj" class="form-control" placeholder="文章标签,逗号隔开,最多可填写五个">
+						                                    <input  id="tagsid" type="text" name="tagsgsj" class="form-control" placeholder="文章标签,逗号隔开,最多可填写五个">
 						                             
                         
 						                                </div>
@@ -234,9 +234,10 @@
 	    //实例化编辑器
 	    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 	    //前端配置
-	    var ue = UE.getEditor('editor');
-	    //设置 ue 的高度，并关闭自动长高
-	    ue.setHeight(200);
+	    var ue = UE.getEditor('editor',{
+	    	initialFrameHeight:350,//设置编辑器高度
+	    	scaleEnabled:true//设置不自动调整高度
+	    });
 	    
 	</script>
 	
@@ -289,7 +290,7 @@
     	//点击放弃，删除所有文本框的内容
     	$("#discardContent").click(function(){
     		 //询问框
-    	    layer.confirm('是否要放弃编辑这篇博客？', {
+    	    layer.confirm('是否要放弃编辑这篇博客？(您当前输入的内容将被清空)', {
     	      btn: ['确定','取消'] //按钮
     	    }, function(){
     	      layer.msg('稍等', {icon: 1});
@@ -309,8 +310,69 @@
     <script type="text/javascript">
     	//点击发布文章
     	$("#submitgsj").click(function(){
+    		//校验字段值是否都输入
+    		//标题
+    		var titletext = $("input[name='titlegsj']").val();
+    		// 博客类型
+    		var blogtypeone = $("select[name='blogtypegsj']").val();
+    		// 博客分类
+    		var blogtypetwo = $("#globtypegsj_chosen span").text();
+    		// 标签
+    		var tagstext = $("input[name='tagsgsj']").val();
+    		// 文章内容
+    		var content = UE.getEditor('editor').getAllHtml()
+    		var contenttype  = UE.getEditor('editor').hasContents();
     		
+    		var istitle= true;
+    		var isblogtypetwo=true;
+    		var istagstext=true;
+    		var iscontenttype=true;
+    		//alert("111"+titletext+"111")
+    		if(titletext == ""){
+    			istitle =false;
+    			layer.tips('请填写标题', '#titleid',{
+    				tips: [2, '#ed5565'],
+    				tipsMore: true
+    			});
+    			
+    		}
+    		//alert(blogtypetwo)
+    		if(blogtypetwo == null  || blogtypetwo=="请选择博客分类"){
+    			blogtypetwo =false;
+    			layer.tips('请选择文章分类', '#globtypegsj_chosen',{
+    				tips: [2, '#ed5565'],
+    				tipsMore: true
+    			});
+    			
+    		}
+    		if(tagstext == null  || tagstext==""){
+    			istagstext =false;
+    			layer.tips('请填写文章标签', '#tagsid',{
+    				tips: [2, '#ed5565'],
+    				tipsMore: true
+    			});
+    		}
     		
+    		if(contenttype == false){
+    			iscontenttype = false;
+    			layer.tips('文章内容为空！！！', '#ueditor_0',{
+    				tips: [2, '#ed5565'],
+    				tipsMore: true
+    			});
+    		}
+    		
+    		if(istitle && isblogtypetwo && istagstext && iscontenttype){
+    	   		//弹出层提示用户
+        		layer.confirm('是否要发布该篇博客？', {
+        			  btn: ['确定','取消'] //按钮
+        			}, function(){
+        			  layer.msg('正在上传，请稍等', {icon: 1});
+        			  //执行ajax方法
+        			  
+        			}, function(){
+        		
+        			});
+    			} 
     	});
     
     </script>
