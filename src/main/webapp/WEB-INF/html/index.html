@@ -148,9 +148,9 @@
 			    </div>
 		    </div>
 	  	</div>
-  		<div class="col-md-2" style="position:static;"> 
-  			<div class="ibox float-e-margins">
-                    <div  id="right_col"  class="ibox-content mailbox-content">
+  		<div class="col-md-2"> 
+  			<div class="ibox float-e-margins  wrapper wrapper-content " style="padding-top: 23px;padding-left: 1px;padding-right: 1px;">
+                    <div  id="right_col"  class="ibox-content mailbox-content ">
                         <div class="file-manager">
            				  <div class="space-16"></div>
                             <h5>博客</h5>
@@ -354,7 +354,7 @@
     			
     			$("#articlelist").append('<div class="ibox">'+
     										'<div class="ibox-content">'+
-    											'<a href="article.html" class="btn-link"><h2>'+articlelist[i].title+'</h2></a>'+
+    											'<a href="article/'+articlelist[i].id+'" class="btn-link"><h2>'+articlelist[i].title+'</h2></a>'+
     												'<div class="small m-b-xs"><strong>'+articlelist[i].publishUser+'</strong>'+
     												'<span class="text-muted"><i class="fa fa-clock-o"></i>'+articlelist[i].publishTime+'</span></div>'+
     												''+content+''+

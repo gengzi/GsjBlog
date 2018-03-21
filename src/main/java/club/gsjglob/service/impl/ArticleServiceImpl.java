@@ -1,5 +1,6 @@
 package club.gsjglob.service.impl;
 
+import java.awt.geom.Arc2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,6 +92,13 @@ public class ArticleServiceImpl implements IArticleService{
 			List<GsjTags> tags = tagdao.selectByExample(example);
 			gsjArticle.setTags(tags);
 		}
+	}
+
+	@Override
+	public GsjArticle getArticleContent(Integer articleid) {
+		GsjArticleExample articleExample = new GsjArticleExample();
+		GsjArticle selectByPrimaryKey = articledao.selectByPrimaryKey(articleid);
+		return selectByPrimaryKey;
 	}
 	
 	

@@ -20,6 +20,13 @@ public interface IArticleService {
 	 */
 	List<GsjArticle> getArticleInfo(String blogtype,String labeltype,String startpage,String pagesize);
 	
+
+	/**
+	 *  返回文章的内容
+	 * @param articleid 文章的id
+	 * @return GsjArticle 对象
+	 */
+	GsjArticle getArticleContent(Integer articleid);
 	
 	
 
