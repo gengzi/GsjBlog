@@ -37,10 +37,12 @@ public class UserController {
 	public GsjUser login( User user,HttpServletRequest request) {
 		GsjUser gsjuser = null;
 		String isadmin = user.getIsadmin();
+		
 		switch (isadmin) {
 		case "admin":  //管理员
 			gsjuser = userservice.login(user);
 			if (gsjuser.getUserid() != null) {
+				//使用单点登陆，在页面是无法拿到session的
 				HttpSession session = request.getSession();
 				session.setAttribute("gsjuser", gsjuser);
 			}
