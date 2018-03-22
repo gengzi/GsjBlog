@@ -40,15 +40,15 @@
                  <div class="tab-content">
                      <div id="tab-1" class="tab-pane active">
                          <div class="panel-body">
-                             <form class="m-t" role="form" action="index.html">
+                             <form class="m-t" role="form" id="commonform" method="POST" action="user/login">
+                             <input type="hidden" name="isadmin" value="noadmin" />
 				                <div class="form-group">
-				                    <input type="email" class="form-control" placeholder="用户名/手机号" required="">
+				                    <input type="text" name="adminname" class="form-control" placeholder="用户名/手机号" minlength="5" maxlength="13"  required>
 				                </div>
 				                <div class="form-group">
-				                    <input type="password" class="form-control" placeholder="密码" required="">
+				                    <input type="password" name="adminpasswd" class="form-control" placeholder="密码" required>
 				                </div>
-				                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
-				
+				                <button type="submit" id="commonsubmit" class="btn btn-primary block full-width m-b">登 录</button>
 				
 				                <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
 				                </p>
@@ -58,12 +58,13 @@
                       
                       <div id="tab-2" class="tab-pane">
                            <div class="panel-body">
-                               <form class="m-t" role="form">
+                               <form class="m-t" role="form" id="amdinform" method="POST" action="user/login">
+                               		<input type="hidden" name="isadmin" value="admin" />
 					                <div class="form-group">
-					                    <input id="adminname"  type="text" class="form-control" placeholder="管理员ID" required="">
+					                    <input id="adminname" name="adminname"  type="text" class="form-control" placeholder="管理员ID"  minlength="5" maxlength="10"  required>
 					                </div>
 					                <div class="form-group">
-					                    <input id="adminpasswd" type="password" class="form-control" placeholder="密码" required="">
+					                    <input id="adminpasswd" name="adminpasswd" type="password" class="form-control" placeholder="密码" required>
 					                </div>
 					                <button id="adminsubmit" type="submit" class="btn btn-primary block full-width m-b">登 录</button>
 					
@@ -82,35 +83,55 @@
     <script src="js/jquery.min.js?v=2.1.4"></script>
     <script src="js/bootstrap.min.js?v=3.3.6"></script>
     
+    <!-- layer-->
+    <script src="layer/layer.js"></script>
+    
     <!-- jquery-validate 校验表单  -->
     <script src="jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="jquery-validation-1.14.0/lib/jquery.form.js"></script>
     <script src="jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-
+	<script src="jquery-validation-1.14.0/dist/localization/messages_zh.min.js"></script>
+    
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     <!--统计代码，可删除-->
     
     
     <script type="text/javascript">
-    	//用户登陆
+    	//管理员用户登陆
     	$("#adminsubmit").click(function(){
-    		var adminname = $("#adminname").val();
-        	var adminpasswd = $("#adminpasswd").val();
-    
-        	if (adminname == "") {
-        		layer.tips('请填写管理员ID', '#adminname',{
-    				tips: [2, '#ed5565'],
-    				tipsMore: true
-    			});
-    			
-    		}
-    		
-    		
+    		$("#amdinform").validate({
+    		    submitHandler:function(form){
+    		    	layer.msg('正在登陆...');
+    		    	$(form).ajaxSubmit({
+  		    		  dataType:"json",
+		    		  success:function(data){
+		                    if(data.userid != null ){
+		                        //用户登陆成功，跳转界面
+		                    	//信息框-例5
+		                    	layer.msg('正在跳转到管理页面,请稍等', function(){
+		                    		//关闭后的操作
+		                    	});
+		                    }else{
+		                        //用户登陆失败，提示用户重新输入
+		                    	layer.msg('登陆失败,请核对账号或者密码', {icon: 5});
+		                    }
+		                  }
+		                });
+    		    	}
+    	        });    
     	});
+   
     	
-    	
-    	
-    	
-    
+    	//一般用户登陆
+    	$("#commonsubmit").click(function(){
+    		$("#commonform").validate({
+    		    submitHandler:function(form){
+    		    	layer.msg('正在登陆...');
+    		    	$(form).ajaxSubmit();     
+    	        }    
+    		});
+    	});
+
     </script>
     
 
