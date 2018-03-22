@@ -13,5 +13,22 @@ public class MyTest {
 		
 		
 	}
+	
+	double print(byte a , double y){
+		
+		return (short) (a/y*2);
+		
+		
+		
+		
+	}
+	
+	@Test
+	public void fun9(){
+		byte a = 1;
+		double print = print(a, 2.22);
+		System.out.println(print);
+		
+	}
 
 }
