@@ -66,10 +66,14 @@
                             </li>
                          -->
                         </ul>
-                        <ul class="nav navbar-top-links navbar-right">
+                        <!-- 登陆后要替换这一块的内容 -->
+                        <ul class="nav navbar-top-links navbar-right"> 
                             <li>
-                                <a href="login.html">
+                                <a href="login.html"  id="nologin" >
                                     <i class="fa fa-sign-out"></i> 登陆
+                                </a>
+                                <a href="#" id="infologin" style="display: none;">
+                                  
                                 </a>
                             </li>
                         </ul>
@@ -249,6 +253,9 @@
 
     <!-- Peity demo -->
     <script src="js/demo/peity-demo.js"></script>
+    
+    <!-- cookie  -->
+    <script src="js/plugins/cookie/jquery.cookie.js"></script>
 
 
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
@@ -464,6 +471,38 @@
      			  }
      			});
 	    } 
+    </script>
+    
+    
+    <script type="text/javascript">
+    	//  进入此页面就判断是否登陆
+    	//拿到cookie 对应的值
+    	var gsjcookieval  = $.cookie('gsjcookie');
+    	if(gsjcookieval !=null){
+    		//存在cookie,就去请求后台
+    		logined(gsjcookieval);
+    		
+    	}else{
+			//不存在该cookie
+			
+			
+		}
+    	
+    	//获取登陆信息
+    	function logined(gsjcookie_val){
+	    	var cookieurl = "user/logininfo/"+gsjcookie_val;
+	    	$.ajax({
+	         		  url: cookieurl,
+	         		  type: "GET",
+	     			  dataType: "json",
+	     			  success:function(data){
+	     				 //解析data
+	     				 $("#nologin").css({ display:"none"});
+	     				 $("#infologin").css({ display:""});
+	     				 $("#infologin").append(' <i class="fa fa-user"></i> '+data.username+'');
+	     			  }
+	     			});
+    	}
     </script>
     
 

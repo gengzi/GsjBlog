@@ -18,6 +18,12 @@ public interface IUserService {
 	 */
 	GsjUser login(User user);
 	
+	/**
+	 *  根据token，去redis 中查询用户信息
+	 * @return json
+	 */
+	String getLoginInfo(String token);
+	
 	
 
 }

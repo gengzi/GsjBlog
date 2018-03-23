@@ -1,5 +1,7 @@
 package club.gsjglob.action;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -86,5 +89,24 @@ public class UserController {
 		}
 		return gsjuser;
 	}
+	
+	
+	/**
+	 * 用户登陆
+	 * 
+	 * @param user
+	 *            用户入参字段对象
+	 * @return 是否登陆成功
+	 */
+	@RequestMapping(value = "/user/logininfo/{gsjcookie}")
+	@ResponseBody
+	public String getLoginInfo(@PathVariable String gsjcookie) {
+		return userservice.getLoginInfo(gsjcookie);
+	}
+	
+	
+	
+	
+	
 
 }
