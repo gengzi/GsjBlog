@@ -227,7 +227,7 @@
      <!-- layer-->
     <script src="layer/layer.js"></script>
 
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=65495710" charset="UTF-8"></script>
     <!--统计代码，可删除-->
 	
 	<script type="application/javascript">
@@ -368,7 +368,18 @@
         			}, function(){
         			  layer.msg('正在上传，请稍等', {icon: 1});
         			  //执行ajax方法
-        			  
+        			  var articleurl = "article/savearticle";
+        			  var dataparam = JSON.stringify({"title":titletext,"content":encodeURIComponent(content),"type":blogtypeone,"folderId":blogtypetwo,"createId":"","articleTags":tagstext});
+        				$.ajax({
+      	         		  url: articleurl,
+      	         		  type: "POST",
+      	         		  data: dataparam,
+      	     			  dataType: "json",
+      	     			  success:function(data){
+      	     				  
+      	     				  alert("aaa");
+      	     			  }
+      	     			});
         			}, function(){
         		
         			});

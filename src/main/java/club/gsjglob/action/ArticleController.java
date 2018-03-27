@@ -111,10 +111,11 @@ public class ArticleController {
 	 */
 	@RequestMapping(value = "/article/savearticle",method=RequestMethod.POST)
 	@ResponseBody
-	public String saveArticleContent(@RequestParam SaveArticle article) {
+	public String saveArticleContent(String article) {
 		// 解析post请求的示例
-		String  resultinfo = articleService.saveArticleContent(article);
-		return resultinfo;
+	//	String  resultinfo = articleService.saveArticleContent(article);
+		System.out.println(article);
+		return null;
 	}
 	
 	

@@ -106,10 +106,12 @@
   		    		  dataType:"json",
 		    		  success:function(data){
 		                    if(data.userid != null ){
+		                    	//跳转到后台管理界面
+		                    	$(location).attr('href', 'index_admin');
 		                        //用户登陆成功，跳转界面
 		                    	//信息框-例5
 		                    	layer.msg('正在跳转到管理页面,请稍等', function(){
-		                    		//关闭后的操作
+		                    	//关闭后的操作
 		                    	});
 		                    }else{
 		                        //用户登陆失败，提示用户重新输入
