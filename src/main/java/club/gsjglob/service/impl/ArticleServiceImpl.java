@@ -4,6 +4,7 @@ import java.awt.geom.Arc2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hamcrest.core.IsEqual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import club.gsjglob.domain.GsjTags;
 import club.gsjglob.domain.GsjTagsExample;
 import club.gsjglob.dto.SaveArticle;
 import club.gsjglob.service.IArticleService;
+import club.gsjglob.tools.DateUtils;
 
 /**
  *  博客管理serviceimpl
@@ -51,6 +53,7 @@ public class ArticleServiceImpl implements IArticleService{
 		if ("全部".equals(blogtype) && "全部".equals(labeltype)) {
 			PageHelper.startPage(Integer.parseInt(startpage), Integer.parseInt(pagesize)); 
 			articleExample = new GsjArticleExample();
+			articleExample.setOrderByClause("create_time DESC");
 			data = articledao.selectByExample(articleExample);
 			setTagInfos(data);
 		}else if ("全部".equals(labeltype)) { //按照博客类别查询
@@ -66,6 +69,7 @@ public class ArticleServiceImpl implements IArticleService{
 				articleExample  =new GsjArticleExample();
 				Criteria createCriteria = articleExample.createCriteria();
 				createCriteria.andFolderIdEqualTo(selectByExample.get(0).getId());
+				articleExample.setOrderByClause("create_time DESC");
 				data = articledao.selectByExample(articleExample);
 				setTagInfos(data);
 			}
@@ -78,6 +82,7 @@ public class ArticleServiceImpl implements IArticleService{
 				//采用连表查询
 				articleExample = new GsjArticleExample();
 				articleExample.createCriteria().andIdIn(articleIds);
+				articleExample.setOrderByClause("create_time DESC");
 				data =  articledao.selectByExample(articleExample);
 				// 设置每篇文章的tags
 				setTagInfos(data);
@@ -112,11 +117,27 @@ public class ArticleServiceImpl implements IArticleService{
 	
 	@Override
 	public String saveArticleContent(SaveArticle article) {
+		//解析SaveArticle 设置给 GsjArticle
+		GsjArticle gsjArticle = new GsjArticle();
+		gsjArticle.setCreateId(article.getCreateId());  //创建者
+		gsjArticle.setTitle(article.getTitle());  //标题
+		gsjArticle.setContent(article.getContent()); //内容
+		gsjArticle.setFolderId(article.getFolderId()); //目录id
+		gsjArticle.setCreateTime(DateUtils.getStringDate()); //创建时间
+		gsjArticle.setPublishTime(DateUtils.getStringDate()); //发布时间
+		gsjArticle.setPublishUser(article.getPublishUser());
+		gsjArticle.setCountView(0);
+		gsjArticle.setCountComment(0);
+		gsjArticle.setType(1);
+		//解析
 		
-		
-		
-		
-		return null;
+
+		int insertSelective = articledao.insert(gsjArticle);
+		if (insertSelective > 0) {
+			//插入成功
+			return "{\"message\":\"success\"}";
+		}
+		return "{\"message\":\"error\"}";
 	}
 	
 	

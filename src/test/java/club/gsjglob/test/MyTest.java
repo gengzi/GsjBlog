@@ -1,8 +1,11 @@
 package club.gsjglob.test;
 
+import java.util.Date;
+
 import org.junit.Test;
 
 import club.gsjglob.domain.GsjUser;
+import club.gsjglob.tools.DateUtils;
 
 public class MyTest {
 	
@@ -31,4 +34,14 @@ public class MyTest {
 		
 	}
 
+	
+	@Test
+	public void fun03() {
+		String nowDate = DateUtils.getStringDate();
+		System.out.println(nowDate);
+		
+		
+		
+	}
+	
 }

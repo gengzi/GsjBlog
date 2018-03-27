@@ -51,6 +51,8 @@ public class LoginInterceptor implements HandlerInterceptor{
 					if (userjson.getUsertype() != 1) {
 						response.sendRedirect(request.getContextPath()+"/index");  
 						return false;
+					}else {
+						return true;
 					}
 				}
 				response.sendRedirect(request.getContextPath()+"/login");  

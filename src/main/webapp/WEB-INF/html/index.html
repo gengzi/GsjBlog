@@ -273,7 +273,6 @@
 			 for (var i = 0; i < data.length; i++) {
 				 //danger "'+data[i].name+'"  onclick="blogTypeShow() " href="javascript:void(0)"
 				 $("#blogtypelist").append('<li><a href="javascript:void(0)" onclick="blogTypeShow(\"java\")"  ><i class="fa fa-inbox "></i> '+data[i].name+'<span class="label label-warning pull-right">'+data[i].blogtypenum+'</span></a></li>');				 
-
 			 }
 			 // 由于append出现问题，所以采用这种方式，重新注入 onclick 方法
 			 var lista = $("#blogtypelist a");

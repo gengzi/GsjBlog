@@ -11,12 +11,12 @@
     <meta name="keywords" content="Gengzi">
     <meta name="description" content="Gengzi">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
-	<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/stylegsj.css?v=4.1.0" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+	<link href="../css/plugins/iCheck/custom.css" rel="stylesheet">
+	<link href="../css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/stylegsj.css?v=4.1.0" rel="stylesheet">
 
 	<style type="text/css">
 		#blogdiv{
@@ -57,8 +57,12 @@
                         </ul>
                         <ul class="nav navbar-top-links navbar-right">
                             <li>
-                                <a href="login.html">
+                                <a href="login.html" id="nologin" >
                                     <i class="fa fa-sign-out"></i> 登陆
+                                </a>
+                                <a href="#" id="infologin" style="display: none;">
+                                  <input type="hidden" id="userid" value="" />
+                                  <input type="hidden" id="username" value="" />
                                 </a>
                             </li>
                         </ul>
@@ -163,13 +167,13 @@
   
 
     <!-- 全局js -->
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../js/plugins/chosen/chosen.jquery.js"></script>
     
     <script type="text/javascript">
 	    /*初始化博客分类  */
-		var blogtypeurl = "folder/blogtype";
+		var blogtypeurl = "../folder/blogtype";
 		$.ajax({
 			  url: blogtypeurl,
 			  type: "GET",
@@ -185,47 +189,50 @@
     </script>
     
     <!-- 自定义js -->
-    <script src="js/content.js?v=1.0.0"></script>
+    <script src="../js/content.js?v=1.0.0"></script>
     
     <!--百度uejs-->
-    <script type="text/javascript" charset="utf-8" src="baiduUE/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="baiduUE/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="../baiduUE/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../baiduUE/ueditor.all.min.js"> </script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" charset="utf-8" src="baiduUE/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../baiduUE/lang/zh-cn/zh-cn.js"></script>
     
    
 
 	<!-- Flot -->
-    <script src="js/plugins/flot/jquery.flot.js"></script>
-    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="../js/plugins/flot/jquery.flot.js"></script>
+    <script src="../js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="../js/plugins/flot/jquery.flot.resize.js"></script>
     
     <!-- Peity -->
-    <script src="js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="../js/plugins/peity/jquery.peity.min.js"></script>
 
     <!-- Peity demo -->
-    <script src="js/demo/peity-demo.js"></script>
+    <script src="../js/demo/peity-demo.js"></script>
 
     
     <!-- iCheck -->
-    <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <script src="../js/plugins/iCheck/icheck.min.js"></script>
 
     <!-- SUMMERNOTE -->
-    <script src="js/plugins/summernote/summernote.min.js"></script>
-    <script src="js/plugins/summernote/summernote-zh-CN.js"></script>
+    <script src="../js/plugins/summernote/summernote.min.js"></script>
+    <script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
    
     
 	<!-- Image cropper -->
-    <script src="js/plugins/cropper/cropper.min.js"></script>
+    <script src="../js/plugins/cropper/cropper.min.js"></script>
 
-    <script src="js/demo/form-advanced-demo.js"></script>	
+    <script src="../js/demo/form-advanced-demo.js"></script>	
     
     <!-- Input Mask-->
-    <script src="js/plugins/jasny/jasny-bootstrap.min.js"></script>
+    <script src="../js/plugins/jasny/jasny-bootstrap.min.js"></script>
     
      <!-- layer-->
-    <script src="layer/layer.js"></script>
+    <script src="../layer/layer.js"></script>
+    
+     <!-- cookie  -->
+    <script src="../js/plugins/cookie/jquery.cookie.js"></script>
 
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=65495710" charset="UTF-8"></script>
     <!--统计代码，可删除-->
@@ -243,7 +250,7 @@
 	
      <script type="text/javascript">
     	/*初始化目录菜单  */
-    	var indexurl = "folder/index";
+    	var indexurl = "../folder/index";
     	$.ajax({
     		  url: indexurl,
     		  type: "GET",
@@ -322,7 +329,7 @@
     		var tagstext = $("input[name='tagsgsj']").val();
     		// 文章内容
     		var content = UE.getEditor('editor').getContent();
-    		alert(content)
+    		//alert(content)
     		var contenttype  = UE.getEditor('editor').hasContents();
     		
     		var istitle= true;
@@ -340,7 +347,7 @@
     		}
     		//alert(blogtypetwo)
     		if(blogtypetwo == null  || blogtypetwo=="请选择博客分类"){
-    			blogtypetwo =false;
+    			isblogtypetwo =false;
     			layer.tips('请选择文章分类', '#globtypegsj_chosen',{
     				tips: [2, '#ed5565'],
     				tipsMore: true
@@ -372,6 +379,9 @@
 				}else if(blogtypeone == "翻译"){
 					blogtypeone = 3;
 				}
+    		//拿到上传的用户	
+    		var userid  = $("#userid").val();
+    		var username =$("#username").val();
     			
     	   		//弹出层提示用户
         		layer.confirm('是否要发布该篇博客？', {
@@ -379,17 +389,19 @@
         			}, function(){
         			  layer.msg('正在上传，请稍等', {icon: 1});
         			  //执行ajax方法
-        			  var articleurl = "article/savearticle";
+        			  var articleurl = "../article/savearticle";
         			 // var dataparam = JSON.stringify({"title":titletext,"content":encodeURIComponent(content),"type":blogtypeone,"folderId":blogtypetwo,"createId":"","articleTags":tagstext});
-        				var dataparam = {"title":titletext,"content":content,"type":blogtypeone,"folderId":blogtypetwoid,"createId":11,"articleTags":tagstext};	
+        				var dataparam = {"title":titletext,"content":content,"type":blogtypeone,"folderId":blogtypetwoid,"createId":userid,"articleTags":tagstext,"publishUser":username};	
         			 $.ajax({
       	         		  url: articleurl,
       	         		  type: "POST",
       	         		  data: dataparam,
       	     			  dataType: "json",
       	     			  success:function(data){
-      	     				  
-      	     				  alert("aaa");
+      	     				  //
+      	     				//不存在该cookie
+      	     	    		 $(location).attr('href', '../index');
+      	     				 layer.msg('发布成功，正在跳转到主页');
       	     			  }
       	     			});
         			}, function(){
@@ -415,13 +427,19 @@
     	
     	//获取登陆信息
     	function logined(gsjcookie_val){
-	    	var cookieurl = "user/logininfo/"+gsjcookie_val;
+	    	var cookieurl = "../user/logininfo/"+gsjcookie_val;
 	    	$.ajax({
 	         		  url: cookieurl,
 	         		  type: "GET",
 	     			  dataType: "json",
 	     			  success:function(data){
 	     				 //解析data
+	     				 $("#nologin").css({ display:"none"});
+	     				 $("#infologin").css({ display:""});
+	     				 $("#infologin").append(' <i class="fa fa-user"></i> '+data.username+'');
+	     				//设置userid
+	     				$("#userid").val(data.userid);
+	     				$("#username").val(data.username);
 	     				
 	     			  }
 	     			});
