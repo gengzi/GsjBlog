@@ -27,4 +27,18 @@ public class BasicController {
 		System.out.println("跳转到qita页面"+address);
 		 return address;
 	}
+	
+	
+	/**
+	 * 路径跳转处理
+	 * @param address
+	 * @return
+	 */
+	@RequestMapping(value= "/admin/{address}")
+	public String forwordByadmin(@PathVariable String address){
+		System.out.println("跳转到qita页面"+address);
+		 return "admin/"+address;
+	}
+	
+	
 }

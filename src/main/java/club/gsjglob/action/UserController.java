@@ -1,5 +1,6 @@
 package club.gsjglob.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -68,7 +69,7 @@ public class UserController {
 				String userjson = mapperblog.writeValueAsString(gsjuser);
 				// token
 				String tokenkey = "userInfo:" + token;
-				// 设置
+				// 设置,进行编码处理
 				jedisClient.set(tokenkey, userjson);
 				// 设置超时时间
 				jedisClient.expire(tokenkey, GsjParams.SESSION_EXPIRE);
@@ -98,7 +99,7 @@ public class UserController {
 	 *            用户入参字段对象
 	 * @return 是否登陆成功
 	 */
-	@RequestMapping(value = "/user/logininfo/{gsjcookie}")
+	@RequestMapping(value = "/user/logininfo/{gsjcookie}",produces = "application/json;charset=utf-8")  //加上 produces 防止中文乱码
 	@ResponseBody
 	public String getLoginInfo(@PathVariable String gsjcookie) {
 		return userservice.getLoginInfo(gsjcookie);

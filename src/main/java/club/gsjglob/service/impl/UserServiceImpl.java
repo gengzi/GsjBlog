@@ -53,11 +53,6 @@ public class UserServiceImpl implements IUserService {
 		String userinfo = null;
 		if (jedisClient.exists(gsjcookie)) {
 			userinfo = jedisClient.get(gsjcookie);
-			try {
-				userinfo = new String(userinfo.getBytes("ISO-8859-1"),"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
 			//重新设置该token 的ttl
 			// 设置超时时间
 			jedisClient.expire(gsjcookie, GsjParams.SESSION_EXPIRE);

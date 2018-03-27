@@ -86,15 +86,19 @@
     <!-- layer-->
     <script src="layer/layer.js"></script>
     
+
+    
     <!-- jquery-validate 校验表单  -->
     <script src="jquery-validation-1.14.0/lib/jquery.js"></script>
     <script src="jquery-validation-1.14.0/lib/jquery.form.js"></script>
     <script src="jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 	<script src="jquery-validation-1.14.0/dist/localization/messages_zh.min.js"></script>
+	
+	<!-- cookie 需要放在 校验表单的后面 -->
+    <script src="js/plugins/cookie/jquery.cookie.js"></script>
     
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     <!--统计代码，可删除-->
-    
     
     <script type="text/javascript">
     	//管理员用户登陆
@@ -107,7 +111,7 @@
 		    		  success:function(data){
 		                    if(data.userid != null ){
 		                    	//跳转到后台管理界面
-		                    	$(location).attr('href', 'index_admin');
+		                    	$(location).attr('href', 'admin/index_admin');
 		                        //用户登陆成功，跳转界面
 		                    	//信息框-例5
 		                    	layer.msg('正在跳转到管理页面,请稍等', function(){
@@ -129,11 +133,55 @@
     		$("#commonform").validate({
     		    submitHandler:function(form){
     		    	layer.msg('正在登陆...');
-    		    	$(form).ajaxSubmit();     
+    		    	$(form).ajaxSubmit({
+    		    		  dataType:"json",
+    		    		  success:function(data){
+    		                    if(data.userid != null ){
+    		                    	//跳转到后台管理界面
+    		                    	$(location).attr('href', 'index');
+    		                        //用户登陆成功，跳转界面
+    		                    	//信息框-例5
+    		                    	layer.msg('正在跳转到主页,请稍等', function(){
+    		                    	//关闭后的操作
+    		                    	});
+    		                    }else{
+    		                        //用户登陆失败，提示用户重新输入
+    		                    	layer.msg('登陆失败,请核对账号或者密码', {icon: 5});
+    		                    }
+    		                  }
+    		                });     
     	        }    
     		});
     	});
 
+    </script>
+    
+     <script type="text/javascript">
+	    //判断用户是否已经登陆
+	   	//拿到cookie 对应的值
+	  	$(function(){
+	  		var gsjcookieval  = $.cookie('gsjcookie');
+		   	if(gsjcookieval ==null){
+		   		//不存在该cookie
+		   	}else{
+		   		//存在cookie,就去请求后台
+		   		logined(gsjcookieval);
+			}
+	  	});
+	   
+	   	//获取登陆信息
+	   	function logined(gsjcookie_val){
+	    	var cookieurl = "user/logininfo/"+gsjcookie_val;
+	    	$.ajax({
+	         		  url: cookieurl,
+	         		  type: "GET",
+	     			  dataType: "json",
+	     			  success:function(data){
+	     				 $(location).attr('href', 'index');
+	     				 layer.msg('您已经登陆,正在跳转到主页');
+	     			  }
+	     			});
+	   		}
     </script>
     
 
