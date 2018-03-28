@@ -38,7 +38,7 @@ public class TagsServiceImpl implements ITagsService {
 				String[] tagNameAndValue = tagname.split(";");
 				if (tagNameAndValue.length == 2) {
 					int tagnum = Integer.parseInt(tagNameAndValue[1]);
-					if (tagnum > 10) {
+					if (tagnum > 5) { //控制超过几个以上的显示出来
 						TagsAll tagsAll = new TagsAll();
 						tagsAll.setTagName(tagNameAndValue[0]);
 						tagsAll.setTagNameNum(tagnum);

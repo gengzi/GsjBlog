@@ -4,7 +4,6 @@ import java.awt.geom.Arc2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.core.IsEqual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,68 +24,69 @@ import club.gsjglob.service.IArticleService;
 import club.gsjglob.tools.DateUtils;
 
 /**
- *  博客管理serviceimpl
+ * 博客管理serviceimpl
+ * 
  * @author gengzi
  * @time 2018年3月21日18:06:36
  *
  */
 @Service
-public class ArticleServiceImpl implements IArticleService{
+public class ArticleServiceImpl implements IArticleService {
 
 	@Autowired
 	private GsjArticleMapper articledao;
-	
+
 	@Autowired
 	private GsjFolderMapper folderdao;
-	
+
 	@Autowired
-	private GsjTagsMapper  tagdao;
+	private GsjTagsMapper tagdao;
 
 	private List<GsjArticle> data;
 
 	@Override
-	public List<GsjArticle> getArticleInfo(String blogtype, String labeltype,String startpage,String pagesize) {
-		
-		GsjArticleExample articleExample ;
+	public List<GsjArticle> getArticleInfo(String blogtype, String labeltype, String startpage, String pagesize) {
+
+		GsjArticleExample articleExample;
 		data = new ArrayList<GsjArticle>();
-		//查询全部
+		// 查询全部
 		if ("全部".equals(blogtype) && "全部".equals(labeltype)) {
-			PageHelper.startPage(Integer.parseInt(startpage), Integer.parseInt(pagesize)); 
+			PageHelper.startPage(Integer.parseInt(startpage), Integer.parseInt(pagesize));
 			articleExample = new GsjArticleExample();
 			articleExample.setOrderByClause("create_time DESC");
 			data = articledao.selectByExample(articleExample);
 			setTagInfos(data);
-		}else if ("全部".equals(labeltype)) { //按照博客类别查询
-			//先查询目录表中，博客的类别		
+		} else if ("全部".equals(labeltype)) { // 按照博客类别查询
+			// 先查询目录表中，博客的类别
 			GsjFolderExample example = new GsjFolderExample();
 			club.gsjglob.domain.GsjFolderExample.Criteria foldercriteria = example.createCriteria();
 			foldercriteria.andKeyEqualTo("blog");
 			foldercriteria.andNameEqualTo(blogtype.trim());
 			List<GsjFolder> selectByExample = folderdao.selectByExample(example);
 			if (selectByExample.size() > 0) {
-				//根据目录id 查询文章表
-				PageHelper.startPage(Integer.parseInt(startpage), Integer.parseInt(pagesize)); 
-				articleExample  =new GsjArticleExample();
+				// 根据目录id 查询文章表
+				PageHelper.startPage(Integer.parseInt(startpage), Integer.parseInt(pagesize));
+				articleExample = new GsjArticleExample();
 				Criteria createCriteria = articleExample.createCriteria();
 				createCriteria.andFolderIdEqualTo(selectByExample.get(0).getId());
 				articleExample.setOrderByClause("create_time DESC");
 				data = articledao.selectByExample(articleExample);
 				setTagInfos(data);
 			}
-		}else if("全部".equals(blogtype)) {	//按照标签查询
-			//查询标签表中，博客的id
-			List<Integer> articleIds= tagdao.getArticleIdByTagname(labeltype);
+		} else if ("全部".equals(blogtype)) { // 按照标签查询
+			// 查询标签表中，博客的id
+			List<Integer> articleIds = tagdao.getArticleIdByTagname(labeltype);
 			if (articleIds.size() > 0) {
-			//	for (Integer articleId : articleIds) {
-				PageHelper.startPage(Integer.parseInt(startpage), Integer.parseInt(pagesize)); 
-				//采用连表查询
+				// for (Integer articleId : articleIds) {
+				PageHelper.startPage(Integer.parseInt(startpage), Integer.parseInt(pagesize));
+				// 采用连表查询
 				articleExample = new GsjArticleExample();
 				articleExample.createCriteria().andIdIn(articleIds);
 				articleExample.setOrderByClause("create_time DESC");
-				data =  articledao.selectByExample(articleExample);
+				data = articledao.selectByExample(articleExample);
 				// 设置每篇文章的tags
 				setTagInfos(data);
-			//	}
+				// }
 			}
 		}
 		return data;
@@ -113,33 +113,55 @@ public class ArticleServiceImpl implements IArticleService{
 		return selectByPrimaryKey;
 	}
 
-	
-	
 	@Override
 	public String saveArticleContent(SaveArticle article) {
-		//解析SaveArticle 设置给 GsjArticle
+		// 解析SaveArticle 设置给 GsjArticle
 		GsjArticle gsjArticle = new GsjArticle();
-		gsjArticle.setCreateId(article.getCreateId());  //创建者
-		gsjArticle.setTitle(article.getTitle());  //标题
-		gsjArticle.setContent(article.getContent()); //内容
-		gsjArticle.setFolderId(article.getFolderId()); //目录id
-		gsjArticle.setCreateTime(DateUtils.getStringDate()); //创建时间
-		gsjArticle.setPublishTime(DateUtils.getStringDate()); //发布时间
+		gsjArticle.setCreateId(article.getCreateId()); // 创建者
+		gsjArticle.setTitle(article.getTitle()); // 标题
+		gsjArticle.setContent(article.getContent()); // 内容
+		gsjArticle.setFolderId(article.getFolderId()); // 目录id
+		gsjArticle.setCreateTime(DateUtils.getStringDate()); // 创建时间
+		gsjArticle.setPublishTime(DateUtils.getStringDate()); // 发布时间
 		gsjArticle.setPublishUser(article.getPublishUser());
-		gsjArticle.setCountView(0);
-		gsjArticle.setCountComment(0);
-		gsjArticle.setType(1);
-		//解析
-		
-
-		int insertSelective = articledao.insert(gsjArticle);
-		if (insertSelective > 0) {
-			//插入成功
-			return "{\"message\":\"success\"}";
+		gsjArticle.setCountView(0); // 浏览数
+		gsjArticle.setCountComment(0); // 评论数
+		gsjArticle.setType(1); // 正常显示
+		int insertSelective = articledao.insertSelective(gsjArticle);
+		// 保存成功后的id
+		Integer id = gsjArticle.getId();
+		boolean flag = true;
+		// 解析Tags
+		String articleTags = article.getArticleTags();
+		if (articleTags.length() > 0) {
+			// 根据;解析
+			String[] split = articleTags.split(";");
+			// 根据文章id插入
+			for (String tag : split) {
+				GsjTags record = new GsjTags();
+				record.setArticleId(id);
+				record.setTagname(tag);
+				record.setCreateTime(DateUtils.getStringDate());
+				record.setCreateId(article.getCreateId());
+				int insert = tagdao.insertSelective(record);
+				if (insert > 0) {
+					// 成功
+				} else {
+					// 不成功
+					tagdao.deleteByPrimaryKey(record.getId());
+					flag = false;
+				}
+			}
 		}
-		return "{\"message\":\"error\"}";
+		if (insertSelective > 0 && flag) {
+			// 插入成功
+			return "{\"message\":\"success\"}";
+		} else {
+			// 不成功
+			articledao.deleteByPrimaryKey(gsjArticle.getId());
+			return "{\"message\":\"error\"}";
+			
+		}
 	}
-	
-	
 
 }

@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -114,6 +112,7 @@ public class ArticleController {
 	public String saveArticleContent(SaveArticle article) {
 		// 解析post请求的示例
 		return	articleService.saveArticleContent(article);
+		 
 	}
 	
 	

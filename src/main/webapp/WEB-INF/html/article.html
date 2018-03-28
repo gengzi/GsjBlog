@@ -113,89 +113,20 @@
                         </p>
                         <hr> -->
                     </div>
-						
                         <div class="row">
                             <div class="col-lg-12">
-
-                                <h2>评论：</h2>
-                                <div class="social-feed-box">
-                                    <div class="social-avatar">
-                                        <a href="" class="pull-left">
-                                            <img alt="image" src="img/a1.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <a href="#">
-                                                    逆光狂胜蔡舞娘
-                                                </a>
-                                            <small class="text-muted">17 小时前</small>
-                                        </div>
-                                    </div>
-                                    <div class="social-body">
-                                        <p>
-                                            好东西，我朝淘宝准备跟进，1折开卖
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="social-feed-box">
-                                    <div class="social-avatar">
-                                        <a href="" class="pull-left">
-                                            <img alt="image" src="img/a2.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <a href="#">
-                                                    避雷范儿
-                                                </a>
-                                            <small class="text-muted"> 16 小时前</small>
-                                        </div>
-                                    </div>
-                                    <div class="social-body">
-                                        <p>
-                                            第一个真的好美 就是噪音太大了 挺唯美的意境瞬间变成工厂了
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="social-feed-box">
-                                    <div class="social-avatar">
-                                        <a href="" class="pull-left">
-                                            <img alt="image" src="img/a3.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <a href="#">
-                                                    kamppi
-                                                </a>
-                                            <small class="text-muted"> 6 小时前</small>
-                                        </div>
-                                    </div>
-                                    <div class="social-body">
-                                        <p>
-                                            好美的装置艺术，第二个让我想起了海中缓缓游动的鲸鱼。
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="social-feed-box">
-                                    <div class="social-avatar">
-                                        <a href="" class="pull-left">
-                                            <img alt="image" src="img/a5.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <a href="#">
-                                                    kamppi
-                                                </a>
-                                            <small class="text-muted">6 小时前</small>
-                                        </div>
-                                    </div>
-                                    <div class="social-body">
-                                        <p>
-                                            “Flylight 的灯管并不固定，由一套软件控制：每一个灯管都根据与其它灯管的互动进行移动，就像一群真正的鸟群一样。” 好像介绍的描述不对，灯管是固定的，控制的只是点亮和熄灭的时间，模拟成一团亮点移动
-                                        </p>
-                                    </div>
-                                </div>
-
+                            	<!--PC和WAP自适应版-->
+								<div id="SOHUCS" sid="" ></div> 
+								<script type="text/javascript"> 
+									(function(){ 
+									var appid = 'cytxhWI2O'; 
+									var conf = 'prod_a2049652bf5cd6bd777df3505dfb4b26'; 
+									var width = window.innerWidth || document.documentElement.clientWidth; 
+									if (width < 960) { 
+									window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
 
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -224,6 +155,8 @@
     	//拿到文章的id
     	var articleid = arrstr[arrstr.length-1]; 
     	//根据文章的id 访问文章的详情 和 标签 和 评论  ， 评论先不写
+    	//评论
+    	$("#SOHUCS").attr("sid",articleid);
     	var articleurlbyid = "content/"+articleid;
     	$.ajax({
          		  url: articleurlbyid,

@@ -141,6 +141,11 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="club.gsjglob.domain.GsjArticle" >
+  <!--返回主键  -->
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    
     insert into gsj_article
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
