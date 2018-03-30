@@ -2,7 +2,7 @@
 <html>
 
 <head>
-
+	
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,7 +12,9 @@
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/stylegsj.css?v=4.1.0" rel="stylesheet">
-    
+    <script type="text/javascript">
+   		 var _speedMark = new Date();
+	</script>
     
     <style>
     	#wrapper{
@@ -256,7 +258,6 @@
 
 
    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=65495710" charset="UTF-8"></script>
-    <!--统计代码，可删除-->
     
     
     <script type="text/javascript">
@@ -317,7 +318,7 @@
 			  		$("#folderlist").append(' <li class="dropdown"><a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">'+data[i].name+'<span class="caret"></span></a><ul id="folder'+i+'" role="menu" class="dropdown-menu"> </ul></li>');
 			  		var subdata = data[i].subsetlist;
 			  		for (var j = 0; j < subdata.length; j++) {
-			  			$("#folder"+i).append('<li><a id="'+i+'">'+subdata[j].name+'</a></li>');
+			  			$("#folder"+i).append('<li><a href="'+subdata[j].path+'"   id="'+i+'">'+subdata[j].name+'</a></li>');
 					}
 				}
 			  }

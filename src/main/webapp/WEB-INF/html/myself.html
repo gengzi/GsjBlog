@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Gengzi - 个人资料</title>
+    <meta name="keywords" content="gengzi">
+    <meta name="description" content="gengzi">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/stylegsj.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg  top-navigation">
+
+	 <div id="wrapper">
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom white-bg">
+                <nav class="navbar navbar-static-top navbar-fixed-top" role="navigation">
+                    <div class="navbar-header">
+                        <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                            <i class="fa fa-reorder"></i>
+                        </button>
+                        <a href="#" class="navbar-brand">GengZi</a>
+                    </div>
+                    <div class="navbar-collapse collapse" id="navbar">
+                        <ul class="nav navbar-nav" id="folderlist" >
+                          <!--   <li class="dropdown">
+                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> 菜单 <span class="caret"></span></a>
+                                <ul role="menu" class="dropdown-menu">
+                                    <li><a href="">菜单列表</a>
+                                    </li>
+                                    <li><a href="">菜单列表</a>
+                                    </li>
+                                    <li><a href="">菜单列表</a>
+                                    </li>
+                                    <li><a href="">菜单列表</a>
+                                    </li>
+                                </ul>
+                            </li>
+                         -->
+                        </ul>
+                        <ul class="nav navbar-top-links navbar-right">
+                            <li>
+                                <a href="login.html" id="nologin" >
+                                    <i class="fa fa-sign-out"></i> 登陆
+                                </a>
+                                <a href="#" id="infologin" style="display: none;">
+                                  <input type="hidden" id="userid" value="" />
+                                  <input type="hidden" id="username" value="" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="wrapper wrapper-content" style="margin-top: 50px">
+        <div class="row animated fadeInRight">
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>个人资料</h5>
+                    </div>
+                    <div>
+                        <div class="ibox-content no-padding border-left-right">
+                            <img alt="image" class="img-responsive" src="img/myself.jpg"  style="margin-left: 2px">
+                        </div>
+                        <div class="ibox-content profile-content">
+                            <h4><strong>gengzi</strong></h4>
+                            <p><i class="fa fa-map-marker"></i> 北京市沙河于辛庄</p>
+                            <h5>
+                                   	 关于我
+                                </h5>
+                            <p>
+                                	java程序员，热爱生活，热爱互联网，热爱新技术；
+                            </p>
+                            <div class="row m-t-lg">
+                                <div class="col-sm-4">
+                                    <span class="bar">5,3,9,6,5,9,7,3,5,2</span>
+                                    <h5><strong>169</strong> 文章</h5>
+                                </div>
+                                <div class="col-sm-4">
+                                    <span class="line">5,3,9,6,5,9,7,3,5,2</span>
+                                    <h5><strong>28</strong> 浏览量</h5>
+                                </div>
+                                <div class="col-sm-4">
+                                    <span class="bar">5,3,2,-1,-3,-2,2,3,5,2</span>
+                                    <h5><strong>240</strong> 评论数</h5>
+                                </div>
+                            </div>
+                            <div class="user-button">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <button id="sendgsj" type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> 发送消息</button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button id="zanzugsj" type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> 赞助</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+    
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=2148315243&auto=1&height=430"></iframe>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+
+    <!-- Peity -->
+    <script src="js/plugins/peity/jquery.peity.min.js"></script>
+
+    <!-- Peity -->
+    <script src="js/demo/peity-demo.js"></script>
+    
+      <!-- layer-->
+    <script src="layer/layer.js"></script>
+    
+     <!-- cookie  -->
+    <script src="js/plugins/cookie/jquery.cookie.js"></script>
+
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+    <!--统计代码，可删除-->
+    
+    
+    <script type="text/javascript">
+    	/*初始化目录菜单  */
+    	var indexurl = "folder/index";
+    	$.ajax({
+    		  url: indexurl,
+    		  type: "GET",
+			  dataType: "json",
+			  success:function(data){
+			  	//解析
+			  	for (var i = 0; i < data.length; i++) {
+			  		$("#folderlist").append(' <li class="dropdown"><a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">'+data[i].name+'<span class="caret"></span></a><ul id="folder'+i+'" role="menu" class="dropdown-menu"> </ul></li>');
+			  		var subdata = data[i].subsetlist;
+			  		for (var j = 0; j < subdata.length; j++) {
+			  			$("#folder"+i).append('<li><a id="'+i+'">'+subdata[j].name+'</a></li>');
+					}
+				}
+			  }
+			});
+    </script>
+    
+    
+     <script type="text/javascript">
+    	//  进入此页面就判断是否登陆
+    	//拿到cookie 对应的值
+    	var gsjcookieval  = $.cookie('gsjcookie');
+    	if(gsjcookieval !=null){
+    		//存在cookie,就去请求后台
+    		logined(gsjcookieval);
+    	}
+    	
+    	//获取登陆信息
+    	function logined(gsjcookie_val){
+	    	var cookieurl = "user/logininfo/"+gsjcookie_val;
+	    	$.ajax({
+	         		  url: cookieurl,
+	         		  type: "GET",
+	     			  dataType: "json",
+	     			  success:function(data){
+	     				 //解析data
+	     				 $("#nologin").css({ display:"none"});
+	     				 $("#infologin").css({ display:""});
+	     				 $("#infologin").append(' <i class="fa fa-user"></i> '+data.username+'');
+	     				//设置userid
+	     				$("#userid").val(data.userid);
+	     				$("#username").val(data.username);
+	     				
+	     			  }
+	     			});
+    	}
+    </script>
+    
+    <script type="text/javascript">
+    	//发送消息
+    	
+    	$("#sendgsj").click(function(){
+    			  layer.prompt({title: '发送您的留言', formType: 2, maxlength: 140}, function(value, index){
+    				 //将value 值提交回去
+    				 var sendinfourl = "feedback/send";
+    				 var sendinfo = {"content":value};
+    				 $.ajax({
+	         		  url: sendinfourl,
+	         		  type: "POST",
+	     			  dataType: "json",
+	     			  data:sendinfo,
+	     			  success:function(data){
+	     				if (data.message == "success") {
+	     					layer.msg('谢谢您的留言');							
+						}
+	     			  }
+	     			});
+    				  layer.close(index);
+    			  });
+    	});
+    	
+    	$("#zanzugsj").click(function(){
+
+        		//iframe窗
+        	    layer.open({
+        	      type: 2,
+        	      title: '赞助',
+        	      shadeClose: true,
+        	      shade: false,
+        	      maxmin: true, //开启最大化最小化按钮
+        	      area: ['300px', '450px'],
+        	      content: 'zanzhu.html'
+        	    });
+    	});
+    	
+    	
+    	
+    
+    
+    
+    </script>
+    
+
+</body>
+
+</html>
