@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -100,22 +102,77 @@ public class ArticleController {
 		articleContentVo.setGsjTagslist(tagByArticleid);
 		return articleContentVo;
 	}
-	
 
 	/**
-	 *  保存文章的内容
-	 * @param article  保存的入参对象
+	 * 保存文章的内容
+	 * 
+	 * @param article
+	 *            保存的入参对象
 	 * @return
 	 */
-	@RequestMapping(value = "/article/savearticle",method=RequestMethod.POST)
+	@RequestMapping(value = "/article/savearticle", method = RequestMethod.POST)
 	@ResponseBody
 	public String saveArticleContent(SaveArticle article) {
 		// 解析post请求的示例
-		return	articleService.saveArticleContent(article);
-		 
+		return articleService.saveArticleContent(article);
+
+	}
+
+	/**
+	 * 后台管理-文章管理分页查询
+	 * 
+	 * @param blogtype 博客的类型
+	 * @param labeltype 博客的标签类型
+	 * @param startpage 页码
+	 * @param pagesize 每页显示的条数
+	 *           
+	 * @return
+	 */
+	@RequestMapping(value = "/article/admin", method = RequestMethod.GET)
+	@ResponseBody
+	public PageInfo getArticleLimitInfo(String blogtype, String labeltype, String startpage, String pagesize,
+			HttpServletResponse response) {
+		List<GsjArticle> articleInfo = articleService.getArticleInfo(blogtype, labeltype, startpage, pagesize);
+		PageInfo<GsjArticle> pageInfo = new PageInfo<>(articleInfo);
+		return pageInfo;
+	}
+	
+	
+	/**
+	 * 跳转到文章的详情页面
+	 * 
+	 * @param articleid
+	 *            文章的id
+	 * @return GsjArticle 对象
+	 */
+	@RequestMapping(value = "/articleupdate/{articleid}")
+	public String updateArticleInfo(@PathVariable String articleid) {
+		return "gsj_article";
+	}
+	
+	
+	/** 
+	 * 修改文章信息
+	 * @param id 文章的编号
+	 * @return
+	 */
+	@RequestMapping(value = "/article/updatearticle", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateArticleInfo(SaveArticle saveArticle) {
+		 return  articleService.updateArticleById(saveArticle);
 	}
 	
 	
 	
-	
+	/** 
+	 * 根据id删除文章信息
+	 * @param id 文章的编号
+	 * @return
+	 */
+	@RequestMapping(value = "/article/remove/{articleid}", method = RequestMethod.GET)
+	@ResponseBody
+	public String removeArticleInfo(@PathVariable String articleid,ModelAndView model) {
+	    return articleService.remove(Integer.parseInt(articleid));
+	}
+
 }

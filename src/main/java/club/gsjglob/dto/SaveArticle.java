@@ -10,6 +10,7 @@ import java.io.Serializable;
  *
  */
 public class SaveArticle implements Serializable {
+	private Integer id;
 	// 文章标题
 	private String title;
 	// 文章内容
@@ -24,6 +25,14 @@ public class SaveArticle implements Serializable {
 	private String articleTags;
 	// 发布的用户
 	private String publishUser;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getPublishUser() {
 		return publishUser;

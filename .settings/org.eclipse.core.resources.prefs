@@ -4,4 +4,7 @@ encoding//src/main/resources=UTF-8
 encoding//src/main/resources/conf/db.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/html/index.html=UTF-8
 encoding//src/main/webapp/baiduUE/jsp/config.json=UTF-8
+encoding//src/main/webapp/js/demo/bootstrap_table_test.json=UTF-8
+encoding//src/main/webapp/js/demo/bootstrap_table_test3.json=UTF-8
+encoding//src/main/webapp/js/demo/table_base.json=UTF-8
 encoding//src/test/java=UTF-8

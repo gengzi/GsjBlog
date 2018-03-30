@@ -3,234 +3,219 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>Gengzi - 编辑文章</title>
-    <meta name="keywords" content="Gengzi">
-    <meta name="description" content="Gengzi">
+<title>Gengzi - 编辑文章</title>
+<meta name="keywords" content="Gengzi">
+<meta name="description" content="Gengzi">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
-	<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/stylegsj.css?v=4.1.0" rel="stylesheet">
+<link rel="shortcut icon" href="favicon.ico">
+<link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="../css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="../css/plugins/chosen/chosen.css" rel="stylesheet">
+<link href="../css/animate.css" rel="stylesheet">
+<link href="../css/stylegsj.css?v=4.1.0" rel="stylesheet">
 
-	<style type="text/css">
-		#blogdiv{
-			background-color: white;
-		}
-		
-	</style>
+<style type="text/css">
+#blogdiv {
+	background-color: white;
+}
+</style> 
 </head>
 
 <body class="gray-bg top-navigation" style="background: white;">
-	
-	 <div id="wrapper">
-        <div id="page-wrapper" class="gray-bg">
-            <div class="row border-bottom white-bg">
-                <nav class="navbar navbar-static-top navbar-fixed-top" role="navigation">
-                    <div class="navbar-header">
-                        <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                            <i class="fa fa-reorder"></i>
-                        </button>
-                        <a href="#" class="navbar-brand">GengZi</a>
-                    </div>
-                    <div class="navbar-collapse collapse" id="navbar">
-                        <ul class="nav navbar-nav" id="folderlist" >
-                          <!--   <li class="dropdown">
-                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> 菜单 <span class="caret"></span></a>
-                                <ul role="menu" class="dropdown-menu">
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                </ul>
-                            </li>
-                         -->
-                        </ul>
-                        <ul class="nav navbar-top-links navbar-right">
-                            <li>
-                                <a href="login.html">
-                                    <i class="fa fa-sign-out"></i> 登陆
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
-	
-	
-    <div id="blogdiv"  class="wrapper wrapper-content  animated fadeInRight article">
-        <div class="row">
+
+
+	<div id="blogdiv"
+		class="wrapper wrapper-content  animated fadeInRight article">
+		<div class="row">
 			<div class="col-lg-10 col-lg-offset-1">
-			    
-						<div class="col-sm-12">
-							<div class="wrapper wrapper-content">
-						        <div class="row">
-						            <div class="col-sm-12 animated fadeInRight">
-						            <div class="mail-box-header">
-					                    <div class="pull-right tooltip-demo">
-					                        <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="存为草稿"><i class="fa fa-pencil"></i> 存为草稿</a>
-					                        <a href="javascript:void(0)" id="discardContent" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="放弃"><i class="fa fa-times"></i> 放弃</a>
-					                    </div>
-						                    <h2>写博客</h2>
-						                </div>
-						                <div class="mail-box">
-						                	
-						                	<div class="mail-body">
-												<form class="form-horizontal" method="get">
-						                            <div class="form-group">
-						                                <label class="col-sm-2 control-label">文章标题：</label>
-						
-						                                <div class="col-sm-10">
-						                                	<div class="row">
-							                                	<div class="col-sm-2">
-							                                		 <select class="form-control m-b" name="blogtypegsj">
-								                                          <option>原创</option>
-									                                      <option>转载</option>
-									                                      <option>翻译</option>
-                                    								</select>
-							                                	</div>
-							                                	<div class="col-sm-10">
-							                                		<input id="titleid" type="text" name="titlegsj" class="form-control" placeholder="文章标题">
-							                                	</div>
-						                                	</div>
-						                                    
-						                                </div>
-						                                
-						                            </div>
-						                            <div class="form-group" >
-						                                <label class="col-sm-2 control-label">文章分类：</label>
-						
-						                                <div class="col-sm-5">
-														                            
-								                            <div class="input-group">
-								                                <select  id="globtypegsj"  data-placeholder="选择分类..." class="chosen-select" style="width:350px;" tabindex="2">
-								                                    <option value="">请选择博客分类</option>
-								                                    <!-- 博客分类 -->
-								                                  	<!--<option value="110000" hassubinfo="true">北京</option>
+
+				<div class="col-sm-12">
+					<div class="wrapper wrapper-content">
+						<div class="row">
+							<div class="col-sm-12 animated fadeInRight">
+								<div class="mail-box-header">
+									<div class="pull-right tooltip-demo">
+										<a href="javascript:void(0)" id="discardContent"
+											class="btn btn-danger btn-sm" data-toggle="tooltip"
+											data-placement="top" title="" data-original-title="放弃"><i
+											class="fa fa-times"></i> 放弃</a>
+									</div>
+									<h2>编辑博客</h2>
+								</div>
+								<div class="mail-box">
+
+									<div class="mail-body">
+										<form class="form-horizontal" method="get">
+											<div class="form-group">
+												<label class="col-sm-2 control-label">文章标题：</label>
+
+												<div class="col-sm-10">
+													<div class="row">
+														<div class="col-sm-2">
+															<select id="blogtypegsjid" class="form-control m-b"
+																name="blogtypegsj">
+																<option>原创</option>
+																<option>转载</option>
+																<option>翻译</option>
+															</select>
+														</div>
+														<div class="col-sm-10">
+															<input id="titleid" type="text" name="titlegsj"
+																class="form-control" placeholder="文章标题">
+														</div>
+													</div>
+
+												</div>
+
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label">文章分类：</label>
+
+												<div class="col-sm-5">
+
+													<div class="input-group">
+														<select id="globtypegsj" data-placeholder="选择分类..."
+															class="chosen-select" style="width: 350px;" tabindex="2">
+															<option value="">请选择博客分类</option>
+															<!-- 博客分类 -->
+															<!--<option value="110000" hassubinfo="true">北京</option>
 								                                    <option value="120000" hassubinfo="true">天津</option>
 								                                    <option value="130000" hassubinfo="true">河北省</option> -->
-								                                </select>
-								                            </div>
-	
-						                            </div>
-						                            </div>
-						                            
-						                             <div class="form-group" style="margin-top: 15px;">
-						                                <label class="col-sm-2 control-label">文章标签：</label>
-						
-						                                <div class="col-sm-5">
-						                           	        
-						                                    <input  id="tagsid" type="text" name="tagsgsj" class="form-control" placeholder="文章标签,逗号隔开,最多可填写五个">
-						                             
-                        
-						                                </div>
-						                            </div>
-						                        </form>
-						                    </div>
-						
-						                    <div class="mail-text h-200">
-						                    	<!--百度的ue编辑器-->
-						                    	<script id="editor" type="text/plain" style="height:200px;"></script>
+														</select>
+													</div>
 
-						                        
-						                        <div class="clearfix"></div>
-						                    </div>
-						                    <div class="mail-body text-center tooltip-demo">
-						                        <a href="javascript:void(0)" id="submitgsj"  style="font-size: 22px;"   class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="发布文章"><i class="fa fa-reply"></i> 发布</a>
-						                    </div>
-						                    <div class="clearfix"></div>
-						                </div>
-						            </div>
-						        </div>
-						    </div>
-			            </div>
-			       </div>
-			   </div>
-    </div>
-    
-    
-  
+												</div>
+											</div>
 
-    <!-- 全局js -->
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="js/plugins/chosen/chosen.jquery.js"></script>
-    
-    <script type="text/javascript">
-	    /*初始化博客分类  */
-		var blogtypeurl = "folder/blogtype";
+											<div class="form-group" style="margin-top: 15px;">
+												<label class="col-sm-2 control-label">文章标签：</label>
+
+												<div class="col-sm-5">
+
+													<input id="tagsid" type="text" name="tagsgsj"
+														class="form-control" placeholder="文章标签,逗号隔开,最多可填写五个">
+													<input type="hidden" id="userid" value="" />
+													<!--  用户id -->
+													<input type="hidden" id="username" value="" />
+													<!--  用户名-->
+													<!-- 文章id  -->
+													<input type="hidden" id="articleidgsj" value="" />
+
+												</div>
+											</div>
+										</form>
+									</div>
+
+									<div class="mail-text h-200">
+										<!--百度的ue编辑器-->
+										<script id="editor" type="text/plain" style="height: 200px;"></script>
+										<input type="hidden" id="articlecontentgsj" name="articlecontentgsj" value="" />
+
+										<div class="clearfix"></div>
+									</div>
+									<div class="mail-body text-center tooltip-demo">
+										<a href="javascript:void(0)" id="submitgsj"
+											style="font-size: 22px;" class="btn btn-sm btn-primary"
+											data-toggle="tooltip" data-placement="top" title="发布文章"><i
+											class="fa fa-reply"></i> 发布</a>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- 全局js -->
+	<script src="../js/jquery.min.js?v=2.1.4"></script>
+	<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../js/plugins/chosen/chosen.jquery.js"></script>
+
+	<script type="text/javascript">
+		/*初始化博客分类  */
+		var blogtypeurl = "../folder/blogtype";
 		$.ajax({
-			  url: blogtypeurl,
-			  type: "GET",
-			  dataType: "json",
-			  async:"false",
-			  success:function(data){
-				  for (var i = 0; i < data.length; i++) {
-				 	$("#globtypegsj").append('<option value="'+data[i].id+'" hassubinfo="true">'+data[i].name+'</option>');
-			      }
-				  $("#globtypegsj").trigger("chosen:updated");
-			  }
-			});
-    </script>
-    
-    <!-- 自定义js -->
-    <script src="js/content.js?v=1.0.0"></script>
-    
-    <!--百度uejs-->
-    <script type="text/javascript" charset="utf-8" src="baiduUE/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="baiduUE/ueditor.all.min.js"> </script>
-    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
-    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" charset="utf-8" src="baiduUE/lang/zh-cn/zh-cn.js"></script>
-    
-   
+			url : blogtypeurl,
+			type : "GET",
+			dataType : "json",
+			async : "false",
+			success : function(data) {
+				for (var i = 0; i < data.length; i++) {
+					$("#globtypegsj").append(
+							'<option value="'+data[i].id+'" hassubinfo="true">'
+									+ data[i].name + '</option>');
+				}
+				$("#globtypegsj").trigger("chosen:updated");
+			}
+		});
+	</script>
+
+	<!-- 自定义js -->
+	<script src="../js/content.js?v=1.0.0"></script>
+
+	<!--百度uejs-->
+	<script type="text/javascript" charset="utf-8"
+		src="../baiduUE/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8"
+		src="../baiduUE/ueditor.all.min.js">
+		
+	</script>
+	<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+	<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+	<script type="text/javascript" charset="utf-8"
+		src="../baiduUE/lang/zh-cn/zh-cn.js"></script>
 
 	<!-- Flot -->
-    <script src="js/plugins/flot/jquery.flot.js"></script>
-    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
-    
-    <!-- Peity -->
-    <script src="js/plugins/peity/jquery.peity.min.js"></script>
+	<script src="../js/plugins/flot/jquery.flot.js"></script>
+	<script src="../js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+	<script src="../js/plugins/flot/jquery.flot.resize.js"></script>
 
-    <!-- Peity demo -->
-    <script src="js/demo/peity-demo.js"></script>
+	<!-- Peity -->
+	<script src="../js/plugins/peity/jquery.peity.min.js"></script>
 
-    
-    <!-- iCheck -->
-    <script src="js/plugins/iCheck/icheck.min.js"></script>
+	<!-- Peity demo -->
+	<script src="../js/demo/peity-demo.js"></script>
 
-    <!-- SUMMERNOTE -->
-    <script src="js/plugins/summernote/summernote.min.js"></script>
-    <script src="js/plugins/summernote/summernote-zh-CN.js"></script>
-   
-    
+
+	<!-- iCheck -->
+	<script src="../js/plugins/iCheck/icheck.min.js"></script>
+
+	<!-- SUMMERNOTE -->
+	<script src="../js/plugins/summernote/summernote.min.js"></script>
+	<script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
+
+
 	<!-- Image cropper -->
-    <script src="js/plugins/cropper/cropper.min.js"></script>
+	<script src="../js/plugins/cropper/cropper.min.js"></script>
 
-    <script src="js/demo/form-advanced-demo.js"></script>	
-    
-    <!-- Input Mask-->
-    <script src="js/plugins/jasny/jasny-bootstrap.min.js"></script>
-    
-     <!-- layer-->
-    <script src="layer/layer.js"></script>
+	<script src="../js/demo/form-advanced-demo.js"></script>
 
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=65495710" charset="UTF-8"></script>
-    <!--统计代码，可删除-->
+	<!-- Input Mask-->
+	<script src="../js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+	<!-- layer-->
+	<script src="../layer/layer.js"></script>
+
+	<script type="text/javascript"
+		src="http://tajs.qq.com/stats?sId=65495710" charset="UTF-8"></script>
+	<!--统计代码，可删除-->
 	
+	<!-- cookie  -->
+    <script src="../js/plugins/cookie/jquery.cookie.js"></script>
+
 	<script type="application/javascript">
+		
 	    //实例化编辑器
 	    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 	    //前端配置
@@ -238,168 +223,154 @@
 	    	initialFrameHeight:350,//设置编辑器高度
 	    	scaleEnabled:true//设置不自动调整高度
 	    });
-	    
 	</script>
-	
-     <script type="text/javascript">
-    	/*初始化目录菜单  */
-    	var indexurl = "folder/index";
-    	$.ajax({
-    		  url: indexurl,
-    		  type: "GET",
-			  dataType: "json",
-			  success:function(data){
-			  	//解析
-			  	for (var i = 0; i < data.length; i++) {
-			  		$("#folderlist").append(' <li class="dropdown"><a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">'+data[i].name+'<span class="caret"></span></a><ul id="folder'+i+'" role="menu" class="dropdown-menu"> </ul></li>');
-			  		var subdata = data[i].subsetlist;
-			  		for (var j = 0; j < subdata.length; j++) {
-			  			$("#folder"+i).append('<li><a id="'+i+'">'+subdata[j].name+'</a></li>');
-					}
-				}
-			  }
+	<script>
+		$(document).ready(function() {
+			$('.i-checks').iCheck({
+				checkboxClass : 'icheckbox_square-green',
+				radioClass : 'iradio_square-green',
 			});
-    </script>
-    
-     <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
 
+			$('.summernote').summernote({
+				lang : 'zh-CN'
+			});
 
-            $('.summernote').summernote({
-                lang: 'zh-CN'
-            });
+		});
+		var edit = function() {
+			$('.click2edit').summernote({
+				focus : true
+			});
+		};
+		var save = function() {
+			var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+			$('.click2edit').destroy();
+		};
+	</script>
 
-        });
-        var edit = function () {
-            $('.click2edit').summernote({
-                focus: true
-            });
-        };
-        var save = function () {
-            var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
-            $('.click2edit').destroy();
-        };
+	<script type="text/javascript">
+		//点击放弃，删除所有文本框的内容
+		$("#discardContent").click(function() {
+			//询问框
+			layer.confirm('是否要放弃编辑这篇博客？', {
+				btn : [ '确定', '取消' ]
+			//按钮
+			}, function() {
+				layer.msg('稍等', {
+					icon : 1
+				});
+				//刷新当前页面
+				$(location).attr('href', '../index');
+			}, function() {
+				//关闭什么也不做
+			});
+			/* $("input[name='titlegsj']").val("");
+			$("select[name='blogtypegsj']").val("原创");
+			//$("#globtypegsj_chosen span").text();
+			$("#globtypegsj_chosen span").text("请选择博客分类");
+			$("input[name='tagsgsj']").val(""); */
+		});
+	</script>
 
-    </script>
-    
-    <script type="text/javascript">
-    	//点击放弃，删除所有文本框的内容
-    	$("#discardContent").click(function(){
-    		 //询问框
-    	    layer.confirm('是否要放弃编辑这篇博客？(您当前输入的内容将被清空)', {
-    	      btn: ['确定','取消'] //按钮
-    	    }, function(){
-    	      layer.msg('稍等', {icon: 1});
-		   	   //刷新当前页面
-		   	   window.location.reload();
-    	    }, function(){
-    	    	//关闭什么也不做
-    	    });
-    		/* $("input[name='titlegsj']").val("");
-    		$("select[name='blogtypegsj']").val("原创");
-    		//$("#globtypegsj_chosen span").text();
-    		$("#globtypegsj_chosen span").text("请选择博客分类");
-    		$("input[name='tagsgsj']").val(""); */
-    	});
-    </script>
-    
-    <script type="text/javascript">
-    	//点击发布文章
-    	$("#submitgsj").click(function(){
-    		//校验字段值是否都输入
-    		//标题
-    		var titletext = $("input[name='titlegsj']").val();
-    		// 博客类型
-    		var blogtypeone = $("select[name='blogtypegsj']").val();
-    		// 博客分类
-    		var blogtypetwoid = $("#globtypegsj").val();
-    		var blogtypetwo = $("#globtypegsj_chosen span").text();
-    		// 标签
-    		var tagstext = $("input[name='tagsgsj']").val();
-    		// 文章内容
-    		var content = UE.getEditor('editor').getContent();
-    		alert(content)
-    		var contenttype  = UE.getEditor('editor').hasContents();
-    		
-    		var istitle= true;
-    		var isblogtypetwo=true;
-    		var istagstext=true;
-    		var iscontenttype=true;
-    		//alert("111"+titletext+"111")
-    		if(titletext == ""){
-    			istitle =false;
-    			layer.tips('请填写标题', '#titleid',{
-    				tips: [2, '#ed5565'],
-    				tipsMore: true
-    			});
-    			
-    		}
-    		//alert(blogtypetwo)
-    		if(blogtypetwo == null  || blogtypetwo=="请选择博客分类"){
-    			blogtypetwo =false;
-    			layer.tips('请选择文章分类', '#globtypegsj_chosen',{
-    				tips: [2, '#ed5565'],
-    				tipsMore: true
-    			});
-    			
-    		}
-    		if(tagstext == null  || tagstext==""){
-    			istagstext =false;
-    			layer.tips('请填写文章标签', '#tagsid',{
-    				tips: [2, '#ed5565'],
-    				tipsMore: true
-    			});
-    		}
-    		
-    		if(contenttype == false){
-    			iscontenttype = false;
-    			layer.tips('文章内容为空！！！', '#ueditor_0',{
-    				tips: [2, '#ed5565'],
-    				tipsMore: true
-    			});
-    		}
-    		
-    		if(istitle && isblogtypetwo && istagstext && iscontenttype){
-    			//判断博客的类型
-    			if (blogtypeone == "原创") {
-    				blogtypeone = 1;
-				}else if(blogtypeone == "转载"){
+	<script type="text/javascript">
+		//点击发布文章
+		$("#submitgsj").click(function() {
+			//校验字段值是否都输入
+			//标题
+			var titletext = $("input[name='titlegsj']").val();
+			// 博客类型
+			var blogtypeone = $("select[name='blogtypegsj']").val();
+			// 博客分类
+			var blogtypetwoid = $("#globtypegsj").val();
+			var blogtypetwo = $("#globtypegsj_chosen span").text();
+			// 标签
+			var tagstext = $("input[name='tagsgsj']").val();
+			// 文章内容
+			var content = UE.getEditor('editor').getContent();
+
+			var contenttype = UE.getEditor('editor').hasContents();
+
+			var istitle = true;
+			var isblogtypetwo = true;
+			var istagstext = true;
+			var iscontenttype = true;
+			//alert("111"+titletext+"111")
+			if (titletext == "") {
+				istitle = false;
+				layer.tips('请填写标题', '#titleid', {
+					tips : [ 2, '#ed5565' ],
+					tipsMore : true
+				});
+
+			}
+			//alert(blogtypetwo)
+			if (blogtypetwo == null || blogtypetwo == "请选择博客分类") {
+				isblogtypetwo = false;
+				layer.tips('请选择文章分类', '#globtypegsj_chosen', {
+					tips : [ 2, '#ed5565' ],
+					tipsMore : true
+				});
+
+			}
+			if (tagstext == null || tagstext == "") {
+				istagstext = false;
+				layer.tips('请填写文章标签', '#tagsid', {
+					tips : [ 2, '#ed5565' ],
+					tipsMore : true
+				});
+			}
+
+			if (contenttype == false) {
+				iscontenttype = false;
+				layer.tips('文章内容为空！！！', '#ueditor_0', {
+					tips : [ 2, '#ed5565' ],
+					tipsMore : true
+				});
+			}
+
+			if (istitle && isblogtypetwo && istagstext && iscontenttype) {
+				//判断博客的类型
+				if (blogtypeone == "原创") {
+					blogtypeone = 1;
+				} else if (blogtypeone == "转载") {
 					blogtypeone = 2;
-				}else if(blogtypeone == "翻译"){
+				} else if (blogtypeone == "翻译") {
 					blogtypeone = 3;
 				}
-    			
-    	   		//弹出层提示用户
-        		layer.confirm('是否要发布该篇博客？', {
-        			  btn: ['确定','取消'] //按钮
-        			}, function(){
-        			  layer.msg('正在上传，请稍等', {icon: 1});
-        			  //执行ajax方法
-        			  var articleurl = "article/savearticle";
-        			 // var dataparam = JSON.stringify({"title":titletext,"content":encodeURIComponent(content),"type":blogtypeone,"folderId":blogtypetwo,"createId":"","articleTags":tagstext});
-        				var dataparam = {"title":titletext,"content":content,"type":blogtypeone,"folderId":blogtypetwoid,"createId":11,"articleTags":tagstext};	
-        			 $.ajax({
-      	         		  url: articleurl,
-      	         		  type: "POST",
-      	         		  data: dataparam,
-      	     			  dataType: "json",
-      	     			  success:function(data){
-      	     				  
-      	     				  alert("aaa");
-      	     			  }
-      	     			});
-        			}, function(){
-        		
-        			});
-    			} 
-    	});
-    
-    </script>
-    
+				
+				//拿到上传的用户	
+	    		var userid  = $("#userid").val();
+	    		var username =$("#username").val();
+	    		var articleidgsj =$("#articleidgsj").val();
+
+				//弹出层提示用户
+				layer.confirm('是否要发布该篇博客？', {
+					btn : [ '确定', '取消' ]
+				//按钮
+				}, function() {
+					layer.msg('正在上传，请稍等', {
+						icon : 1
+					});
+					//执行ajax方法
+					var articleurl = "../article/updatearticle";
+				
+					var dataparam = {"id":articleidgsj,"title":titletext,"content":content,"type":blogtypeone,"folderId":blogtypetwoid,"createId":userid,"articleTags":tagstext,"publishUser":username};	
+					$.ajax({
+						url : articleurl,
+						type : "POST",
+						data : dataparam,
+						dataType : "json",
+						success : function(data) {
+							$(location).attr('href', '../index');
+							layer.msg('修改成功，正在跳转到主页');
+						}
+					});
+				}, function() {
+
+				});
+			}
+		});
+	</script>
+
     <script type="text/javascript">
     	//  进入此页面就判断是否登陆
     	//拿到cookie 对应的值
@@ -415,22 +386,97 @@
     	
     	//获取登陆信息
     	function logined(gsjcookie_val){
-	    	var cookieurl = "user/logininfo/"+gsjcookie_val;
+	    	var cookieurl = "../user/logininfo/"+gsjcookie_val;
 	    	$.ajax({
 	         		  url: cookieurl,
 	         		  type: "GET",
 	     			  dataType: "json",
 	     			  success:function(data){
 	     				 //解析data
+	     				//设置userid
+	     				$("#userid").val(data.userid);
+	     				$("#username").val(data.username);
 	     				
 	     			  }
 	     			});
     	}
     </script>
-    
-    
 
+
+
+	<script type="text/javascript">
+		//获取当前页的路径
+		var articleurl = window.location.href;
+		var arrstr = articleurl.split("/");
+		//拿到文章的id
+		var articleid = arrstr[arrstr.length - 1];
+		$("#articleidgsj").val(articleid);
+		var articleurlbyid = "../article/content/" + articleid;
+		$.ajax({
+			url : articleurlbyid,
+			type : "GET",
+			dataType : "json",
+			success : function(data) {
+				//文章类型 
+				var type = data.gsjArticle.type;
+				var title = data.gsjArticle.title;
+				//文章内容
+				var articleContent = data.gsjArticle.content;
+				//文章标签
+				var tagslist = data.gsjTagslist;
+				//标签
+				var tag = "";
+				for (var i = 0; i < tagslist.length; i++) {
+					tag += tagslist[i].tagname + ";"
+				}
+				//文章分类
+				var folder = data.gsjArticle.folderId;
+
+				if (type == 1) {
+					type = "原创";
+				} else if (type == 2) {
+					type = "转载";
+				} else if (type == 3) {
+					type = "翻译";
+				} else {
+					type = "原创";
+				}
+				
+				//赋值
+				$("#blogtypegsjid").val(type);
+				$("#titleid").val(title);
+				// $("#globtypegsj_chosen span").text("java");
+				// $("#globtypegsj").trigger("liszt:updated");
+
+				$("#tagsid").val(tag);
+
+				$("#articlecontentgsj").val(articleContent);
+				  setTimeout(function(){//两秒后跳转  
+					  UE.getEditor('editor').execCommand('insertHtml',$("#articlecontentgsj").val());
+                   },2000);  
+			}
+		});
+	</script>
+
+	<script type="text/javascript">
+		/* layer.load();
 	
+		setTimeout(function(){
+		  layer.closeAll('loading');
+		}, 2222); */
+		
+		//加载层-风格4
+
+		layer.msg('疯狂加载中...', {
+		  icon: 16
+		  ,shade: 0.01
+		});
+	</script>
+	
+
+
+
+
 </body>
 
 </html>

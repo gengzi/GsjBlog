@@ -39,6 +39,6 @@ public class BasicController {
 		System.out.println("跳转到qita页面"+address);
 		 return "admin/"+address;
 	}
-	
+		
 	
 }

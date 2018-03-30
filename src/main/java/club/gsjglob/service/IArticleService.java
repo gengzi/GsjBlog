@@ -36,6 +36,21 @@ public interface IArticleService {
 	 * @return json  success 成功， error 失败
 	 */
 	String saveArticleContent(SaveArticle article);
+
+
+	/**
+	 * 根据id删除文章信息
+	 * @param id 文章的id
+	 * @return
+	 */
+	String remove(int id);
+
+	/**
+	 *  根据文章id 更新文章信息
+	 * @param saveArticle
+	 * @return
+	 */
+	String updateArticleById(SaveArticle saveArticle);
 	
 	
 

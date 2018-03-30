@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>H+ 后台主题UI框架 - Bootstrap Table</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+    <title>Gengzi- 文章管理</title>
+    <meta name="keywords" content="gengzi">
+    <meta name="description" content="gengzi">
 
     <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <!-- 引入bootstrap-table样式  -->
     <link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
@@ -22,67 +23,13 @@
 
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Bootstrap table <a href="http://bootstrap-table.wenzhixin.net.cn/zh-cn/" target="_blank">http://bootstrap-table.wenzhixin.net.cn/zh-cn/</a></h5>
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-wrench"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#">选项1</a>
-                        </li>
-                        <li><a href="#">选项2</a>
-                        </li>
-                    </ul>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="ibox-content">
-                <p>Bootstrap table是国人开发的一款基于 Bootstrap 的 jQuery 表格插件，通过简单的设置，就可以拥有强大的单选、多选、排序、分页，以及编辑、导出、过滤（扩展）等等的功能。目前在github上已经有2600多个Star，可见其受欢迎程度。</p>
-                <ul>
-                    <li>支持 Bootstrap 3 和 Bootstrap 2</li>
-                    <li>自适应界面</li>
-                    <li>固定表头</li>
-                    <li>非常丰富的配置参数</li>
-                    <li>直接通过标签使用</li>
-                    <li>显示/隐藏列</li>
-                    <li>显示/隐藏表头</li>
-                    <li>通过 AJAX 获取 JSON 格式的数据</li>
-                    <li>支持排序</li>
-                    <li>格式化表格</li>
-                    <li>支持单选或者多选</li>
-                    <li>强大的分页功能</li>
-                    <li>支持卡片视图</li>
-                    <li>支持多语言</li>
-                    <li>支持插件</li>
-                </ul>
-            </div>
-        </div>
 
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>基本</h5>
+                <h5>文章管理</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-wrench"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#">选项1</a>
-                        </li>
-                        <li><a href="#">选项2</a>
-                        </li>
-                    </ul>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
                     </a>
                 </div>
             </div>
@@ -91,6 +38,10 @@
                     <div class="col-sm-6">
                         <h4 class="example-title">从URL加载</h4>
                         <div class="example">
+                        <!-- 普通的 table 设置 data-toggle="table" 即可使用 bootstrap table 
+                        	可以通过 data-url 来加载数据
+                        
+                        -->
                             <table data-toggle="table" data-url="js/demo/table_base.json" data-height="250" data-mobile-responsive="true">
                                 <thead>
                                     <tr>
@@ -592,6 +543,7 @@
     <!-- Bootstrap table -->
     <script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <!-- 中文  -->
     <script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 
     <!-- Peity -->

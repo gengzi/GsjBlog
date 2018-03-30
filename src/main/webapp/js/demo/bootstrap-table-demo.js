@@ -231,4 +231,5 @@ function buildTable($el, cells, rows) {
         $result.text('Event: search.bs.table');
       });
   })();
+  
 })(document, window, jQuery);

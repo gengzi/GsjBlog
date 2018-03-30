@@ -126,7 +126,7 @@ public class ArticleServiceImpl implements IArticleService {
 		gsjArticle.setPublishUser(article.getPublishUser());
 		gsjArticle.setCountView(0); // 浏览数
 		gsjArticle.setCountComment(0); // 评论数
-		gsjArticle.setType(1); // 正常显示
+		gsjArticle.setType(article.getType()); // 正常显示
 		int insertSelective = articledao.insertSelective(gsjArticle);
 		// 保存成功后的id
 		Integer id = gsjArticle.getId();
@@ -161,6 +161,79 @@ public class ArticleServiceImpl implements IArticleService {
 			articledao.deleteByPrimaryKey(gsjArticle.getId());
 			return "{\"message\":\"error\"}";
 			
+		}
+	}
+
+	@Override
+	public String remove(int id) {
+		
+		int deleteByPrimaryKey = articledao.deleteByPrimaryKey(id);
+		if (deleteByPrimaryKey < 0) {
+			return "{\"message\":\"error\"}";
+		}
+		return "{\"message\":\"success\"}";
+	}
+
+	@Override
+	public String updateArticleById(SaveArticle article) {
+		Integer id = article.getId();
+		if (id != null && id != 0) {
+			// 解析SaveArticle 设置给 GsjArticle
+			GsjArticle gsjArticle = new GsjArticle();
+			gsjArticle.setId(id);
+			gsjArticle.setCreateId(article.getCreateId()); // 创建者
+			gsjArticle.setTitle(article.getTitle()); // 标题
+			gsjArticle.setContent(article.getContent()); // 内容
+			gsjArticle.setFolderId(article.getFolderId()); // 目录id
+			gsjArticle.setCreateTime(DateUtils.getStringDate()); // 创建时间
+			gsjArticle.setPublishTime(DateUtils.getStringDate()); // 发布时间
+			gsjArticle.setPublishUser(article.getPublishUser());
+			gsjArticle.setType(article.getType()); // 类型
+			int insertSelective = articledao.updateByPrimaryKeySelective(gsjArticle);
+			// 保存成功后的id
+			Integer aid = gsjArticle.getId();
+			boolean flag = true;
+			// 解析Tags
+			String articleTags = article.getArticleTags();
+			if (articleTags.length() > 0) {
+				// 根据;解析
+				String[] split = articleTags.split(";");
+				// 根据文章id插入
+				for (String tag : split) {
+					//先删除再插入
+					GsjTagsExample example = new GsjTagsExample();
+					example.createCriteria().andArticleIdEqualTo(id);
+					int deleteByExample = tagdao.deleteByExample(example);
+					if (deleteByExample > 0 ) {
+						GsjTags record = new GsjTags();
+						record.setArticleId(aid);
+						record.setTagname(tag);
+						record.setCreateTime(DateUtils.getStringDate());
+						record.setCreateId(article.getCreateId());
+						int insert = tagdao.insertSelective(record);
+							if (insert > 0) {
+								// 成功
+							} else {
+								// 不成功
+								tagdao.deleteByPrimaryKey(record.getId());
+								flag = false;
+							}
+					}else {
+						flag = false;
+					}
+				}
+			}
+			if (insertSelective > 0 && flag) {
+				// 插入成功
+				return "{\"message\":\"success\"}";
+			} else {
+				// 不成功
+				articledao.deleteByPrimaryKey(gsjArticle.getId());
+				return "{\"message\":\"error\"}";
+			}
+			
+		}else {
+			return "{\"message\":\"error\"}";
 		}
 	}
 
