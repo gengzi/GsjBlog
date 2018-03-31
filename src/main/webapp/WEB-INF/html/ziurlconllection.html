@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Gengzi - 网址收藏</title>
+    <meta name="keywords" content="gengzi">
+    <meta name="description" content="gengzi">
+
+    <link rel="shortcut icon" href="favicon.ico">  <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <!-- 引入bootstrap-table样式  -->
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/stylegsj.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>详细信息</h5>
+                        <div class="ibox-tools">
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="project-list">
+                        	
+                        	<div id="toolbar" class="btn-group">
+							    <button id="add" class="btn btn-warning dropdown-toggle" title="添加">
+							        <i class="glyphicon glyphicon-plus"></i> 添加
+							    </button>
+							</div>	
+							<input type="hidden" id="parentidgsj"  value="" />
+                        
+
+                            <table class="table table-hover" id="urltble">
+                                <tbody>
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- 全局js -->
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+
+
+    <!-- 自定义js -->
+    <script src="../js/content.js?v=1.0.0"></script>
+    
+    
+	<!-- layer-->
+    <script src="../layer/layer.js"></script>
+
+    <!-- Bootstrap table -->
+    <script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <!-- 中文  -->
+    <script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=65495710" charset="UTF-8"></script>
+    
+    <script type="text/javascript">
+	  //获取当前页的路径
+		var articleurl = window.location.href;
+		var arrstr = articleurl.split("/");
+		//拿到文章的id
+		var parentid = arrstr[arrstr.length - 1];
+		$("#parentidgsj").val(parentid);
+    </script>
+    
+    
+    
+     <script type="text/javascript">
+		  $(function(){
+			  var queryurl = "../friendlike/ziinfo";
+			  $('#urltble').bootstrapTable({
+			        url: queryurl,                              //请求后台的URL（*）
+			        method:'get',                               //请求的方式
+			        cache:'false',                              //设置为 false 禁用 AJAX 数据缓存。
+			        search: true,                               //是否启用搜索框。
+			        striped: true,                              //是否显示行间隔色
+			        pagination: true,                           //是否显示分页（*）  设置为 true 会在表格底部显示分页条。
+			        showRefresh: true,                          //是否显示刷新按钮。
+			        sortable: true,                    			//是否启用排序
+			        pageNumber: 1,                      		//初始化加载第一页，默认第一页,并记录
+	                pageList: [10, 25],        		            //可供选择的每页的行数（*）
+	                sortOrder: "asc",                   		//排序方式
+			        showToggle: true,                           //是否显示切换视图（table/card）按钮
+			        showColumns: true,                          //是否显示内容列下拉框
+			        sidePagination: "server",           		//分页方式：client客户端分页，server服务端分页（*）
+			        paginationLoop:true,                        //默认true，分页条无限循环
+			        uniqueId: "id",                              //每一行的唯一标识，一般为主键列
+			        iconSize: 'outline',                         //定义的图标大小：
+			        toolbar: '#toolbar',       					//工具按钮用哪个容器     工具栏
+			      	icons: {                                     //定义工具栏
+			          refresh: 'glyphicon-repeat',
+			          toggle: 'glyphicon-list-alt',
+			          columns: 'glyphicon-list'
+			         },
+			         //得到查询的参数
+		             queryParams : function (params) {
+		                    //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+		                    var parentidparam  = $("#parentidgsj").val();
+		                    
+		                    var temp = {   
+		                    	pagesize: params.limit,                         //页面大小
+		                    	startpage: (params.offset / params.limit) + 1,   //页码
+		                    	parentid: parentidparam,
+		                    };
+		                    return temp;
+		              },
+		              responseHandler: function(res) {    //解析拿到的json
+		                    return {
+		                        "total": res.total,//总页数
+		                        "rows": res.list,   //数据
+		                     };
+		              },
+				     columns: [{
+				          field: 'id',
+				          title: '编号',
+				          width: '5%',
+				      }, {
+				          field: 'name',
+				          title: '网址名称',
+				          width: '35%',
+				          sortable : true,
+				          formatter:urljump,
+				      },{
+				          field: 'remark',
+				          title: '解决的问题',
+				          width: '60%',
+				      }]
+			      
+			      });
+			  
+			  	
+			  	  
+			  	  //当前数目比例 总数定为666
+			  	  function urljump(value,row,index){
+			  		return[
+		    	  		'<a href="'+row.url+'" target="_Blank"  >'+row.name+'</a>',
+		    	  	].join('');
+			  	  }
+			      
+			 		// 操作按钮
+			      function viewBtn(value,row,index){
+			    		var id = row.id;
+			    		
+			    	  	return[
+			    	  		'<a href="#" onclick="showInfo('+id+')" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>&nbsp;&nbsp;',
+			    	  	/* 	'<a href="#" onclick="addInfo('+id+')" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 添加 </a>', */
+			    	  	].join('');
+			      };
+			      
+			      //查看按钮
+			      showInfo = function(id){
+			    	  layer.msg('正在进入，请稍等', {icon: 1});
+			    	  $(location).attr('href', 'ziurlconllection/'+id);
+			    	  
+			    	  
+			    /* 	  var ziurl = "friendlike/parentinfo/"+id;
+			    	  $.ajax({
+		         		  url: ziurl,
+		         		  type: "GET",
+		     			  dataType: "json",
+		     			  success:function(data){
+		     					if (data.message == "success") {
+									//删除成功
+		     						layer.msg('删除成功！');
+		     						$('#exampleTableEvents').bootstrapTable('refresh');  
+								}else{
+									layer.msg('操作失败，请稍后再试。');
+								}
+		     			  }
+		     			}); */
+		     			
+		     			
+		     			
+			      }
+			      
+			      
+			      $("#add").click(function () {
+			    	   layer.open({
+			        	      type: 2,
+			        	      title: '详情',
+			        	      shadeClose: true,
+			        	      shade: false,
+			        	      maxmin: true, //开启最大化最小化按钮
+			        	      area: ['500px', '300px'],
+			        	      content: 'index'
+			        	    });
+			      });
+			      
+			   
+		  });
+    </script>
+    
+    
+
+
+    <script>
+        $(document).ready(function(){
+
+            $('#loading-example-btn').click(function () {
+                btn = $(this);
+                simpleLoad(btn, true)
+
+                // Ajax example
+//                $.ajax().always(function () {
+//                    simpleLoad($(this), false)
+//                });
+
+                simpleLoad(btn, false)
+            });
+        });
+
+        function simpleLoad(btn, state) {
+            if (state) {
+                btn.children().addClass('fa-spin');
+                btn.contents().last().replaceWith(" Loading");
+            } else {
+                setTimeout(function () {
+                    btn.children().removeClass('fa-spin');
+                    btn.contents().last().replaceWith(" Refresh");
+                }, 2000);
+            }
+        }
+    </script>
+
+    </body>
+</html>
