@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Gengzi - 专栏</title>
+    <meta name="keywords" content="gengzi">
+    <meta name="description" content="gengzi">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="row">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="wrapper wrapper-content animated fadeInRight">
+
+                        <div class="ibox-content m-b-sm border-bottom">
+                            <div class="p-xs">
+                                <div class="pull-left m-r-md">
+                                    <i class="fa fa-globe text-navy mid-icon"></i>
+                                </div>
+                                <h2>欢迎来到Java专栏</h2>
+                                <span>你可以自由选择你感兴趣的文章。</span>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content forum-container">
+
+                            <div class="forum-title">
+                                <div class="pull-right forum-desc">
+                                    <samll>总文章数： 20</samll>
+                                </div>
+                                <h3>主要文章</h3>
+                            </div>
+
+                            <div class="forum-item active">
+                                <div class="row" >
+                                 	<div class="col-lg-12" id="articlelist" >
+                                 	
+                                 	
+                                
+                                
+                                
+                                	</div>
+                                   </div>
+                            </div>
+                            
+                              <!-- 分页按钮 -->
+							    <div  class="row" id="uploadbtn" >
+							    	<div class="col-md-5 col-md-offset-3" style="margin-bottom:15px;">  
+								    		<a id="nextclick"  class="btn btn-primary btn-rounded btn-block">
+								    			<i class="fa fa-info-circle"></i>加载更多...
+								    		</a>
+							    	</div>
+							    </div>
+                            
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+		<input type="hidden"  id="blogtype" value="全部" >
+		<input type="hidden"  id="tagtype" value="全部" >
+		<input type="hidden"  id="nextpage" value="1">
+	</div>
+
+    <!-- 全局js -->
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+    <!-- Peity -->
+    <script src="../js/plugins/peity/jquery.peity.min.js"></script>
+
+    <!-- 自定义js -->
+    <script src="../js/content.js?v=1.0.0"></script>
+
+	  <!-- cookie  -->
+    <script src="../js/plugins/cookie/jquery.cookie.js"></script>
+
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+    <!--统计代码，可删除-->
+
+
+	 <script type="text/javascript">
+    	/*博客分类的点击事件  */
+    	//下一页的点击事件
+    	blogtypeclick = function(blogtype){
+    		
+       		/*初始化文章 */
+       		var nextindexurl = "../article/"+blogtype+"/全部/1/10";
+       		$.ajax({
+         		  url: nextindexurl,
+         		  type: "GET",
+     			  dataType: "json",
+     			  success:function(data){
+     				 $("#articlelist").empty();
+     				  showArictleInfo(data);
+     				  // 设置点击下一页的条件
+     				  $("#blogtype").val(blogtype);
+     				  $("#tagtype").val("全部");
+     				  
+     			  }
+     			});
+    	}
+    </script> 
+
+
+	<script type="text/javascript">
+    
+    	//根据数据渲染页面
+    	function showArictleInfo(data){
+    		//设置下一页
+    		var nextpage = data.nextPage;
+    		if (nextpage>0) {
+    			$("#nextpage").val(data.nextPage);	
+    			// 当下一页存在，就显示下一页按钮
+    			$("#uploadbtn").show();
+			}else{
+				$("#nextpage").val("-1");
+				// 当下一页存在，就隐藏下一页按钮
+				$("#uploadbtn").hide();
+			}
+    	   //设置文章内容
+    		var articlelist = data.list;
+    		for (var i = 0; i < articlelist.length; i++) {
+    			var content = articlelist[i].content;
+    			if (content == null ) {
+    				content = articlelist[i].title+"<br><br><br>";
+				}
+				// 将content缩短    			
+    			if(content != null){
+    				// 剔除所有的img标签
+    				content = content.replace(/<\s?img[^>]*>/gi,'');
+    				content = content.substring(0,300)+"...<br>点击查看详情<br>"
+    			} 			
+    			
+    			$("#articlelist").append('<div class="ibox">'+
+    										'<div class="ibox-content">'+
+    											'<a href="article/'+articlelist[i].id+'" target="_Blank"  class="btn-link"><h2>'+articlelist[i].title+'</h2></a>'+
+    												'<div class="small m-b-xs"><strong>'+articlelist[i].publishUser+'</strong>'+
+    												'<span class="text-muted"><i class="fa fa-clock-o"></i>'+articlelist[i].publishTime+'</span></div>'+
+    												''+content+''+
+    												'<div class="row"><div class="col-md-6" id="'+articlelist[i].id+'"><h5>标签：</h5> </div>'+
+    												'<div class="col-md-6"><div class="small text-right"><h5>状态：</h5><div> '+
+    												'<i class="fa fa-comments-o"> </i>'+articlelist[i].countComment+'评论 </div><i class="fa fa-eye"> </i>'+articlelist[i].countView+'浏览</div>'+
+    												' </div></div></div></div></div>'
+    												);			
+    			var tags = articlelist[i].tags;
+	    			for (var j = 0; j < tags.length; j++) {
+	    				$("#"+tags[j].articleId).append('<button class="btn btn-white btn-xs" type="button">'+tags[j].tagname+'</button>');
+					}
+	    		/* 	
+	    			//判断那个div高度小于200 就增加到200
+		    		var parentdiv = $("#"+articlelist[i].id).parent();
+		    		if($(parentdiv).height() <120){
+		    			$(parentdiv).height("150");
+		    		} */
+			}
+    	}
+    	
+    	/*初始化文章 */
+    	var indexurl = "../article/全部/全部/1/10";
+    	$.ajax({
+    		  url: indexurl,
+    		  type: "GET",
+			  dataType: "json",
+			  success:function(data){
+				  showArictleInfo(data);
+			  }
+			});
+    </script>
+    
+    
+     <script type="text/javascript">
+    	//下一页的点击事件
+    	$("#nextclick").click(function(){
+    		//获取查询条件和下一页的页码
+    		var blogtype = $("#blogtype").val();
+    		var tagtype = $("#tagtype").val();
+    		var nextpage = $("#nextpage").val();
+    		//执行ajax请求
+    		/*初始化文章 */
+    		var nextindexurl = "../article/"+blogtype+"/"+tagtype+"/"+nextpage+"/10";
+    		$.ajax({
+      		  url: nextindexurl,
+      		  type: "GET",
+  			  dataType: "json",
+  			  success:function(data){
+  				  showArictleInfo(data);
+  			  }
+  			});
+    	});
+    </script>
+    
+</body>
+
+</html>

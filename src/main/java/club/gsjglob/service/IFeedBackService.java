@@ -17,5 +17,13 @@ public interface IFeedBackService {
 	 */
 	String saveSendInfo(GsjAdviceFeedback adviceFeedback);
 	
+	
+	/**
+	 * 接收用户的意见反馈
+	 * @param adviceFeedback 意见反馈的实体类
+	 * @return
+	 */
+	GsjAdviceFeedback saveSendInfoTwo(GsjAdviceFeedback adviceFeedback);
+	
 
 }

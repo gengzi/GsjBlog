@@ -174,5 +174,17 @@ public class ArticleController {
 	public String removeArticleInfo(@PathVariable String articleid,ModelAndView model) {
 	    return articleService.remove(Integer.parseInt(articleid));
 	}
+	
+	/**
+	 * 跳转到文章的详情页面
+	 * 
+	 * @param articleid
+	 *            文章的id
+	 * @return GsjArticle 对象
+	 */
+	@RequestMapping(value = "/article_zl/{articletype}")
+	public String forwordArticlezl(@PathVariable String articletype) {
+		return "article_zl";
+	}
 
 }

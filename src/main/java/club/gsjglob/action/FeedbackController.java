@@ -43,6 +43,19 @@ public class FeedbackController {
 	}
 	
 	
+	/**
+	 * 接收用户的意见
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "feedback/sendtwo",method=RequestMethod.POST)
+	@ResponseBody
+	public GsjAdviceFeedback sendfeedbackinfo(GsjAdviceFeedback adviceFeedback) {
+		 return feedBackService.saveSendInfoTwo(adviceFeedback);
+	}
+	
+	
+	
 	
 	
 	

@@ -31,4 +31,16 @@ public class FeedBackServiceImpl implements IFeedBackService {
 		return "{\"message\":\"error\"}";
 	}
 
+	@Override
+	public GsjAdviceFeedback saveSendInfoTwo(GsjAdviceFeedback adviceFeedback) {
+		String content = adviceFeedback.getContent();
+		if (!"".equals(content)) {
+			int insertSelective = feedbackdao.insert(adviceFeedback);
+			if (insertSelective >0) {
+				return adviceFeedback;
+			}
+		}
+		return new GsjAdviceFeedback();
+	}
+
 }
