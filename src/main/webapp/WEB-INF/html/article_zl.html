@@ -14,11 +14,57 @@
     <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="../css/animate.css" rel="stylesheet">
-    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="../css/stylegsj.css?v=4.1.0" rel="stylesheet">
 
 </head>
 
-<body class="gray-bg">
+<body class="gray-bg top-navigation">
+
+	 <div id="wrapper">
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom white-bg">
+                <nav class="navbar navbar-static-top navbar-fixed-top" role="navigation">
+                    <div class="navbar-header">
+                        <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                            <i class="fa fa-reorder"></i>
+                        </button>
+                        <a href="#" class="navbar-brand">GengZi</a>
+                    </div>
+                    <div class="navbar-collapse collapse" id="navbar">
+                        <ul class="nav navbar-nav" id="folderlist" >
+                          <!--   <li class="dropdown">
+                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> 菜单 <span class="caret"></span></a>
+                                <ul role="menu" class="dropdown-menu">
+                                    <li><a href="">菜单列表</a>
+                                    </li>
+                                    <li><a href="">菜单列表</a>
+                                    </li>
+                                    <li><a href="">菜单列表</a>
+                                    </li>
+                                    <li><a href="">菜单列表</a>
+                                    </li>
+                                </ul>
+                            </li>
+                         -->
+                        </ul>
+                        <ul class="nav navbar-top-links navbar-right">
+                            <li>
+                                <a href="login.html" id="nologin" >
+                                    <i class="fa fa-sign-out"></i> 登陆
+                                </a>
+                                <a href="#" id="infologin" style="display: none;">
+                                  <input type="hidden" id="userid" value="" />
+                                  <input type="hidden" id="username" value="" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+	
+
     <div class="row">
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
@@ -30,7 +76,7 @@
                                 <div class="pull-left m-r-md">
                                     <i class="fa fa-globe text-navy mid-icon"></i>
                                 </div>
-                                <h2>欢迎来到Java专栏</h2>
+                                <h2>欢迎来到<span id="gsjarticletype"></span>专栏</h2>
                                 <span>你可以自由选择你感兴趣的文章。</span>
                             </div>
                         </div>
@@ -39,7 +85,7 @@
 
                             <div class="forum-title">
                                 <div class="pull-right forum-desc">
-                                    <samll>总文章数： 20</samll>
+                                    <samll>总文章数：<span id="gsjarticletotal"></span></samll>
                                 </div>
                                 <h3>主要文章</h3>
                             </div>
@@ -73,7 +119,7 @@
     </div>
     
     <div>
-		<input type="hidden"  id="blogtype" value="全部" >
+		<input type="hidden"  id="blogtype" value="" >
 		<input type="hidden"  id="tagtype" value="全部" >
 		<input type="hidden"  id="nextpage" value="1">
 	</div>
@@ -93,38 +139,30 @@
 	  <!-- cookie  -->
     <script src="../js/plugins/cookie/jquery.cookie.js"></script>
 
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
-    <!--统计代码，可删除-->
-
-
-	 <script type="text/javascript">
-    	/*博客分类的点击事件  */
-    	//下一页的点击事件
-    	blogtypeclick = function(blogtype){
-    		
-       		/*初始化文章 */
-       		var nextindexurl = "../article/"+blogtype+"/全部/1/10";
-       		$.ajax({
-         		  url: nextindexurl,
-         		  type: "GET",
-     			  dataType: "json",
-     			  success:function(data){
-     				 $("#articlelist").empty();
-     				  showArictleInfo(data);
-     				  // 设置点击下一页的条件
-     				  $("#blogtype").val(blogtype);
-     				  $("#tagtype").val("全部");
-     				  
-     			  }
-     			});
-    	}
-    </script> 
-
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=65495710" charset="UTF-8"></script>
+   
+    
+     <!-- 头部数据加载index -->
+    <script src="../js/index_zl.js"></script>
+    
+    <script type="text/javascript">
+	  //获取当前页的路径
+		var articleurl	 = window.location.href;
+		var arrstr = articleurl.split("/");
+		//拿到文章的id
+		var articletype = arrstr[arrstr.length-1]; 
+		$("#blogtype").val(articletype);
+		$("#gsjarticletype").text(articletype);
+    </script>
 
 	<script type="text/javascript">
-    
     	//根据数据渲染页面
     	function showArictleInfo(data){
+    		//设置文章的总页数
+    		 var articletotal = data.total;
+    		 $("#gsjarticletotal").text(articletotal);
+    		
+    		
     		//设置下一页
     		var nextpage = data.nextPage;
     		if (nextpage>0) {
@@ -152,7 +190,7 @@
     			
     			$("#articlelist").append('<div class="ibox">'+
     										'<div class="ibox-content">'+
-    											'<a href="article/'+articlelist[i].id+'" target="_Blank"  class="btn-link"><h2>'+articlelist[i].title+'</h2></a>'+
+    											'<a href="../article/'+articlelist[i].id+'" target="_Blank"  class="btn-link"><h2>'+articlelist[i].title+'</h2></a>'+
     												'<div class="small m-b-xs"><strong>'+articlelist[i].publishUser+'</strong>'+
     												'<span class="text-muted"><i class="fa fa-clock-o"></i>'+articlelist[i].publishTime+'</span></div>'+
     												''+content+''+
@@ -165,17 +203,13 @@
 	    			for (var j = 0; j < tags.length; j++) {
 	    				$("#"+tags[j].articleId).append('<button class="btn btn-white btn-xs" type="button">'+tags[j].tagname+'</button>');
 					}
-	    		/* 	
-	    			//判断那个div高度小于200 就增加到200
-		    		var parentdiv = $("#"+articlelist[i].id).parent();
-		    		if($(parentdiv).height() <120){
-		    			$(parentdiv).height("150");
-		    		} */
 			}
     	}
     	
+    	var blogtypeinit = $("#blogtype").val();
+    	
     	/*初始化文章 */
-    	var indexurl = "../article/全部/全部/1/10";
+    	var indexurl = "../article/"+blogtypeinit+"/全部/1/10";
     	$.ajax({
     		  url: indexurl,
     		  type: "GET",
@@ -190,12 +224,9 @@
      <script type="text/javascript">
     	//下一页的点击事件
     	$("#nextclick").click(function(){
-    		//获取查询条件和下一页的页码
     		var blogtype = $("#blogtype").val();
     		var tagtype = $("#tagtype").val();
     		var nextpage = $("#nextpage").val();
-    		//执行ajax请求
-    		/*初始化文章 */
     		var nextindexurl = "../article/"+blogtype+"/"+tagtype+"/"+nextpage+"/10";
     		$.ajax({
       		  url: nextindexurl,
@@ -207,6 +238,11 @@
   			});
     	});
     </script>
+    
+    
+    
+    
+    
     
 </body>
 
