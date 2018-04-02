@@ -93,7 +93,7 @@ public class UserController {
 	
 	
 	/**
-	 * 用户登陆
+	 * 获取登陆信息
 	 * 
 	 * @param user
 	 *            用户入参字段对象
@@ -106,8 +106,32 @@ public class UserController {
 	}
 	
 	
+	/**
+	 * 根据用户id更新用户信息
+	 * @param gsjcookie
+	 * @return
+	 */
+	@RequestMapping(value = "/user/updateuser",produces = "application/json;charset=utf-8")  //加上 produces 防止中文乱码
+	@ResponseBody
+	public String updateUserInfo(GsjUser user) {
+		return userservice.updateUserinfo(user);
+	}
 	
 	
+
 	
+	/**
+	 * 更新redis中的用户信息，根据cookie
+	 * 
+	 * @param gsjcookie
+	 * @return
+	 */
+	@RequestMapping(value = "/user/updateredis/{cookie}",produces = "application/json;charset=utf-8")  //加上 produces 防止中文乱码
+	@ResponseBody
+	public GsjUser updateUserInfo(@PathVariable String cookie) {
+		return userservice.updateUserRedis(cookie);
+	}
+	
+
 
 }

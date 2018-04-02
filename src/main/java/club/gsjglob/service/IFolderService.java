@@ -17,4 +17,12 @@ public interface IFolderService {
 	 */
 	String getFolderInfo(String type) throws JsonProcessingException;
 
+	/**
+	 * 根据id修改目录的名称
+	 * @param id 唯一编号
+	 * @param name 目录名称
+	 * @return
+	 */
+	String updateFolderById(String id, String name,String parnetid ,String key);
+
 }

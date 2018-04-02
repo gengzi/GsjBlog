@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import club.gsjglob.domain.GsjFolder;
 import club.gsjglob.service.IFolderService;
 
 /**
@@ -51,6 +53,25 @@ public class FolderController {
 			e.printStackTrace();
 		}
 	
+	}
+	
+	
+	/**
+	 * 查询所有的博客分类
+	 * @param blog
+	 * @return
+	 */
+	@RequestMapping(value = "/articletype/{blog}")
+	public void getBlogTypeInfo(@PathVariable String blog,HttpServletResponse httpResponse) {
+		getIndexFolder("blogtype", httpResponse);
+	}
+	
+	
+	
+	@RequestMapping(value = "/updatefolder",method=RequestMethod.POST)
+	@ResponseBody
+	public String updatefolderInfo(String id,String name,String parentid,String key) {
+	   	 return folderservice.updateFolderById(id,name,parentid,key);
 	}
 	
 

@@ -24,6 +24,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import club.gsjglob.domain.GsjArticle;
+import club.gsjglob.domain.GsjFolder;
 import club.gsjglob.domain.GsjTags;
 import club.gsjglob.dto.SaveArticle;
 import club.gsjglob.service.IArticleService;

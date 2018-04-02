@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Gengzi - 个人信息设置</title>
+    <meta name="keywords" content="gengzi">
+    <meta name="description" content="gengzi">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/stylegsj.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg top-navigation">
+
+    <div class="wrapper wrapper-content animated fadeInRight" style="margin-top: 50px">
+          <div class="row">
+            <div class="col-sm-6    col-sm-offset-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>个人信息修改</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal m-t" id="commentForm" action="../user/updateuser"  method="post">
+                        	<input id="userid" type="hidden" name="userid" value=""/>
+                       	     <div class="form-group">
+                                <label class="col-sm-3 control-label">用户名：</label>
+                                <div class="col-sm-8">
+                                    <input id="username"  minlength="2" type="text" class="form-control" readonly="readonly"  required="" aria-required="true">
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="col-sm-3 control-label">姓名：</label>
+                                <div class="col-sm-8">
+                                    <input id="realname" name="realname" minlength="2" type="text" class="form-control" required="" aria-required="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">email：</label>
+                                <div class="col-sm-8">
+                                    <input id="email" type="email" class="form-control" name="email" required="" aria-required="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">手机号：</label>
+                                <div class="col-sm-8">
+                                    <input id="tel" type="text" class="form-control" name="tel">
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="col-sm-3 control-label">地址：</label>
+                                <div class="col-sm-8">
+                                    <input id="address" name="address" minlength="2" type="text" class="form-control" required="" aria-required="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">说明：</label>
+                                <div class="col-sm-8">
+                                    <textarea id="remark" name="remark" class="form-control" required="" aria-required="true"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-3">
+                                    <button class="btn btn-primary"  type="submit" id="commonsubmit" >提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+          </div>
+    </div>
+    
+    <input type="hidden" id="gsjcookie" value=""  />
+
+
+    <!-- 全局js -->
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="../js/content.js?v=1.0.0"></script>
+
+	<!-- layer-->
+    <script src="../layer/layer.js"></script>
+   
+    
+    <!-- jquery-validate 校验表单  -->
+    <script src="../jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="../jquery-validation-1.14.0/lib/jquery.form.js"></script>
+    <script src="../jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+	<script src="../jquery-validation-1.14.0/dist/localization/messages_zh.min.js"></script>
+	
+	 <!-- cookie  -->
+    <script src="../js/plugins/cookie/jquery.cookie.js"></script>
+
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=65495710" charset="UTF-8"></script>
+    
+
+	<script type="text/javascript">
+    	//进入此页面就判断是否登陆
+    	//拿到cookie 对应的值
+    	var gsjcookieval  = $.cookie('gsjcookie');
+    	if(gsjcookieval !=null){
+    		//存在cookie,就去请求后台
+    		logined(gsjcookieval);
+    	}else{
+			//不存在该cookie,跳转到登陆页面
+			
+		}
+    	
+    	//获取登陆信息
+    	function logined(gsjcookie_val){
+	    	var cookieurl = "../user/logininfo/"+gsjcookie_val;
+	    	$("#gsjcookie").val(gsjcookie_val);
+	    	$.ajax({
+	         		  url: cookieurl,
+	         		  type: "GET",
+	     			  dataType: "json",
+	     			  success:function(data){
+	     				 //解析data
+	     				 $("#userid").val(data.userid);
+	     				 $("#username").val(data.username);
+	     				$("#realname").val(data.realname);
+	     				$("#email").val(data.email);
+	     				$("#tel").val(data.tel);
+	     				$("#address").val(data.address);
+	     				$("#remark").val(data.remark);
+	     			  }
+	     			});
+    		}
+    </script>
+    
+    <script type="text/javascript">
+	//意见提交
+	$("#commonsubmit").click(function(){
+		$("#commentForm").validate({
+		    submitHandler:function(form){
+		    	layer.msg('正在提交...');
+		    	$(form).ajaxSubmit({
+		    		  dataType:"json",
+		    		  success:function(data){
+		                    if(data.message =="success" ){
+		                    	var cookieinfo = $("#gsjcookie").val();
+		                    	var cookieinfourl = "../user/updateredis/"+cookieinfo;
+		                    	$.ajax({
+		      	         		  url: cookieinfourl,
+		      	         		  type: "GET",
+		      	     			  dataType: "json",
+		      	     			  success:function(data){
+		      	     				 //解析data
+		     	     				$("#userid").val(data.userid);
+		     	     				$("#username").val(data.username);
+		     	     				$("#realname").val(data.realname);
+		     	     				$("#email").val(data.email);
+		     	     				$("#tel").val(data.tel);
+		     	     				$("#address").val(data.address);
+		     	     				$("#remark").val(data.remark);
+		      	     			  }
+		      	     			});
+		                    	layer.msg('提交成功,感谢您！');
+		                    	
+		                    }else{
+		                    	layer.msg('服务器异常,稍后再试', {icon: 5});
+		                    }
+		                  }
+		         });     
+	        }    
+		});
+	});
+    
+    
+    </script>
+
+</body>
+
+</html>

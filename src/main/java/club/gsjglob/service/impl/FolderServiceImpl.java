@@ -18,28 +18,26 @@ import club.gsjglob.domain.GsjFolderExample;
 import club.gsjglob.domain.GsjFolderExample.Criteria;
 import club.gsjglob.service.IFolderService;
 
-
 @Service
 public class FolderServiceImpl implements IFolderService {
 
 	@Autowired
 	private GsjFolderMapper folderdao;
-	//返回的json数据
+	// 返回的json数据
 	private String folderjson;
 	@Autowired
 	private GsjArticleMapper articledao;
 
-	
-	
 	/**
 	 * 根据类型返回目录信息
-	 * @throws JsonProcessingException 
+	 * 
+	 * @throws JsonProcessingException
 	 */
 	@Override
 	public String getFolderInfo(String type) throws JsonProcessingException {
 		GsjFolderExample example;
 		switch (type) {
-		case "index": //主页
+		case "index": // 主页
 			example = new GsjFolderExample();
 			Criteria criteria = example.createCriteria();
 			criteria.andKeyEqualTo("index");
@@ -49,7 +47,7 @@ public class FolderServiceImpl implements IFolderService {
 			List<GsjFolder> jsonList = new ArrayList<GsjFolder>();
 			for (GsjFolder gsjFolder : indexFolders) {
 				Integer id = gsjFolder.getId();
-				indexexample = new GsjFolderExample(); 
+				indexexample = new GsjFolderExample();
 				indexexample.createCriteria().andParentIdEqualTo(id);
 				List<GsjFolder> subList = folderdao.selectByExample(indexexample);
 				gsjFolder.setSubsetlist(subList);
@@ -59,7 +57,7 @@ public class FolderServiceImpl implements IFolderService {
 			folderjson = mapper.writeValueAsString(jsonList);
 			break;
 
-		case "blogtype": //主页博客分类
+		case "blogtype": // 主页博客分类
 			// 查询key是 blog的目录信息
 			example = new GsjFolderExample();
 			Criteria blogcriteria = example.createCriteria();
@@ -68,7 +66,7 @@ public class FolderServiceImpl implements IFolderService {
 			List<GsjFolder> blogFolders = folderdao.selectByExample(example);
 			for (GsjFolder gsjFolder : blogFolders) {
 				Integer blogid = gsjFolder.getId();
-				GsjArticleExample gsjarticleexample =  new GsjArticleExample();
+				GsjArticleExample gsjarticleexample = new GsjArticleExample();
 				gsjarticleexample.createCriteria().andFolderIdEqualTo(blogid);
 				int countByExample = articledao.countByExample(gsjarticleexample);
 				gsjFolder.setBlogtypenum(countByExample);
@@ -80,6 +78,21 @@ public class FolderServiceImpl implements IFolderService {
 			break;
 		}
 		return folderjson;
+	}
+
+	@Override
+	public String updateFolderById(String id, String name,String parentid,String key) {
+
+		GsjFolder gsjFolder = new GsjFolder();
+		gsjFolder.setId(Integer.parseInt(id));
+		gsjFolder.setName(name);
+		gsjFolder.setParentId(Integer.parseInt(parentid));
+		gsjFolder.setKey(key);
+		int updateByPrimaryKey = folderdao.updateByPrimaryKey(gsjFolder);
+		if (updateByPrimaryKey > 0) {
+			return "{\"message\":\"success\"}";
+		}
+		return "{\"message\":\"error\"}";
 	}
 
 }

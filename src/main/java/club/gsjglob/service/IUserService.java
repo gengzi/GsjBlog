@@ -23,6 +23,20 @@ public interface IUserService {
 	 * @return json
 	 */
 	String getLoginInfo(String token);
+
+	/**
+	 * 更新用户信息
+	 * @param user user对象
+	 * @return json
+	 */
+	String updateUserinfo(GsjUser user);
+
+	/**
+	 * 根据cookie，更新redis用户信息
+	 * @param cookie
+	 * @return
+	 */
+	GsjUser updateUserRedis(String cookie);
 	
 	
 
