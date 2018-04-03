@@ -1,5 +1,7 @@
 package club.gsjglob.service;
 
+import java.util.List;
+
 import club.gsjglob.domain.GsjAdviceFeedback;
 
 /**
@@ -24,6 +26,20 @@ public interface IFeedBackService {
 	 * @return
 	 */
 	GsjAdviceFeedback saveSendInfoTwo(GsjAdviceFeedback adviceFeedback);
+
+
+	/**
+	 * 查询所有的留言意见信息
+	 * @return List<GsjAdviceFeedback>
+	 */
+	List<GsjAdviceFeedback> getFeedBackInfo();
+
+
+	/**
+	 * 返回留言的条数
+	 * @return
+	 */
+	String getFeedBackNum();
 	
 
 }

@@ -57,6 +57,29 @@ public class FeedbackController {
 	
 	
 	
+	/**
+	 * 接收用户的意见
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "feedback/getfeedback")
+	@ResponseBody
+	public List<GsjAdviceFeedback> getfeedbackinfo() {
+		 return feedBackService.getFeedBackInfo();
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/feedback/getfeedbacknum")
+	@ResponseBody
+	public String getfeedbacknum() {
+		 return feedBackService.getFeedBackNum();
+	}
+	
+	
+	
 	
 	
 	

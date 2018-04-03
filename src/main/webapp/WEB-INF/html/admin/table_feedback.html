@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Gengzi- 分类管理</title>
+    <meta name="keywords" content="gengzi">
+    <meta name="description" content="gengzi">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <!-- 引入bootstrap-table样式  -->
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+    
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>匿名留言和意见查看</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                      <!--   <li><a href="#">选项1</a>
+                        </li>
+                        <li><a href="#">选项2</a>
+                        </li> -->
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <!-- Example Events -->
+                        <div class="example-wrap">
+                            <div class="example">
+               
+                                <!-- Table -->
+                                
+                                <table id="exampleTableEvents" data-height="510" data-mobile-responsive="true">
+                                    <thead>
+                                        <tr>
+                                           <!--  <th data-field="state" data-checkbox="true"></th> -->
+                                        </tr>
+                                    </thead>
+                                </table>
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        <!-- End Example Events -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+
+    <!-- 全局js -->
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="../js/content.js?v=1.0.0"></script>
+
+	<!-- layer-->
+    <script src="../layer/layer.js"></script>
+
+    <!-- Bootstrap table -->
+    <script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../js/plugins/editable/bootstrap-editable.min.js"></script> 
+    <script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <!-- 中文  -->
+    <script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- x-editable -->
+ 	<script src="../js/plugins/editable/bootstrap-table-editable.min.js"></script> 
+
+    <!-- Peity -->
+	<!--     <script src="js/demo/bootstrap-table-demo.js"></script>-->
+	
+   <script type="text/javascript" src="http://tajs.qq.com/stats?sId=65495710" charset="UTF-8"></script>
+    
+    
+    <script type="text/javascript">
+		  $(function(){
+			  var queryurl = "../feedback/getfeedback";
+			  $('#exampleTableEvents').bootstrapTable({
+			        url: queryurl,                              //请求后台的URL（*）
+			        method:'get',                               //请求的方式
+			        cache:'false',                              //设置为 false 禁用 AJAX 数据缓存。
+			        search: true,                               //是否启用搜索框。
+			        striped: true,                              //是否显示行间隔色
+			        pagination: true,                           //是否显示分页（*）  设置为 true 会在表格底部显示分页条。
+			        showRefresh: true,                          //是否显示刷新按钮。
+			        sortable: true,                    			//是否启用排序
+			        pageNumber: 1,                      		//初始化加载第一页，默认第一页,并记录
+	                pageList: [10, 25],        		//可供选择的每页的行数（*）
+	                sortOrder: "asc",                   		//排序方式
+			        showToggle: true,                           //是否显示切换视图（table/card）按钮
+			        showColumns: true,                          //是否显示内容列下拉框
+			        sidePagination: "client",           		//分页方式：client客户端分页，server服务端分页（*）
+			        paginationLoop:true,                        //默认true，分页条无限循环
+			        uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+			        iconSize: 'outline',                         //定义的图标大小：
+			      	icons: {                                     //定义工具栏
+			          refresh: 'glyphicon-repeat',
+			          toggle: 'glyphicon-list-alt',
+			          columns: 'glyphicon-list'
+			         },
+				     columns: [{
+				          field: 'id',
+				          title: '编号',
+				          width: '5%',
+				      }, {
+				          field: 'username',
+				          title: '用户网名',
+				          width: '10%',
+				          formatter:showUsername,
+				          
+				      }, {
+				          field: 'email',
+				          title: '邮箱',
+				       	  width: '5%',
+				      }, {
+				          field: 'content',
+				          title: '意见内容',
+				          width: '20%',
+				          sortable : true,
+				      }, {
+				          field: 'createTime',
+				          title: '时间',
+				          width: '10%',
+				          sortable : true,
+				      }],
+				     
+			      });
+			  
+			  function showUsername(value,row,index){
+	        	  if (value != null) {
+					value= value;
+				}else {
+					value="匿名用户";
+				} 
+	        	  return[
+		    	  		'<div class="text-center">'+value+'</div>',
+		    	  	].join('');
+	        	  
+	          }
+			  
+			  
+		  });
+    </script>
+</body>
+
+</html>
