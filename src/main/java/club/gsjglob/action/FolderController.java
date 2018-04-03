@@ -17,6 +17,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import club.gsjglob.domain.GsjFolder;
 import club.gsjglob.service.IFolderService;
+import club.gsjglob.vo.ArticleChar;
+import club.gsjglob.vo.FolderChar;
 
 /**
  * 项目的目录管理
@@ -83,11 +85,42 @@ public class FolderController {
 	
 	
 
+	/**
+	 * 创建新博客类别
+	 * @param folder GsjFolder
+	 * @return
+	 */
 	@RequestMapping(value = "/folder/createfolder",method=RequestMethod.POST)
 	@ResponseBody
 	public String createfolder(GsjFolder folder) {
 	   	 return folderservice.InsertFolder(folder);
 	}
+	
+	
+
+	/**
+	 * 创建目录个数对应的图数据
+	 * @return
+	 */
+	@RequestMapping(value = "/folder/getfoldereachartu1")
+	@ResponseBody
+	public FolderChar createFolderchartu1() {
+		return folderservice.createFoldertu1();
+	}
+	
+	/**
+	 * 创建月份对应文章数目
+	 * @return
+	 */
+	@RequestMapping(value = "/folder/getfoldereachartu2")
+	@ResponseBody
+	public ArticleChar createFolderchartu2() {
+		return folderservice.createFoldertu2();
+	}
+	
+	
+
+	
 	
 	
 	

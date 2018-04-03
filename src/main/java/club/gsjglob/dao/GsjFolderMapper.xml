@@ -498,4 +498,38 @@
       `create_id` = #{createId,jdbcType=INTEGER}
     where `id` = #{id,jdbcType=INTEGER}
   </update>
+  
+  <resultMap id="chartu2" type="club.gsjglob.vo.ArticleChar" >
+    <result column="yd" property="yd" jdbcType="VARCHAR" />
+    <result column="numyd" property="numyd" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <!-- 统计图表2  -->
+   <select id="getArticleNumCharByTime"  resultMap="chartu2" >
+	   	SELECT
+			t1.yd,
+			COUNT(t1.yd) AS numyd
+		FROM
+			(
+				SELECT
+					date_format(
+						STR_TO_DATE(
+							t.create_time,
+							'%Y-%m-%d %H:%i:%s'
+						),
+						'%Y-%m'
+					) AS yd,
+					t.*
+				FROM
+					gsj_article t
+			) t1
+		WHERE
+			t1.yd  &lt;=  "2018-12"
+		AND t1.yd  &gt;= "2018-01"
+		GROUP BY
+			t1.yd
+  </select>
+  
+  
 </mapper>

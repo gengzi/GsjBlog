@@ -18,6 +18,8 @@ import club.gsjglob.domain.GsjFolderExample;
 import club.gsjglob.domain.GsjFolderExample.Criteria;
 import club.gsjglob.service.IFolderService;
 import club.gsjglob.tools.DateUtils;
+import club.gsjglob.vo.ArticleChar;
+import club.gsjglob.vo.FolderChar;
 
 @Service
 public class FolderServiceImpl implements IFolderService {
@@ -82,7 +84,7 @@ public class FolderServiceImpl implements IFolderService {
 	}
 
 	@Override
-	public String updateFolderById(String id, String name,String parentid,String key) {
+	public String updateFolderById(String id, String name, String parentid, String key) {
 
 		GsjFolder gsjFolder = new GsjFolder();
 		gsjFolder.setId(Integer.parseInt(id));
@@ -100,11 +102,11 @@ public class FolderServiceImpl implements IFolderService {
 
 	@Override
 	public String InsertFolder(GsjFolder folder) {
-		//判断是否存在
-		GsjFolderExample example  = new GsjFolderExample();
+		// 判断是否存在
+		GsjFolderExample example = new GsjFolderExample();
 		example.createCriteria().andNameEqualTo(folder.getName());
 		List<GsjFolder> selectByExample = folderdao.selectByExample(example);
-		if (selectByExample.size() <=0) {
+		if (selectByExample.size() <= 0) {
 			folder.setCreateTime(DateUtils.getStringDate());
 			folder.setCreateId(3);
 			folder.setSort(1);
@@ -116,6 +118,50 @@ public class FolderServiceImpl implements IFolderService {
 			}
 		}
 		return "{\"message\":\"error\"}";
+	}
+
+	@Override
+	public FolderChar createFoldertu1() {
+		GsjFolderExample example = new GsjFolderExample();
+		Criteria blogcriteria = example.createCriteria();
+		blogcriteria.andKeyEqualTo("blog");
+		blogcriteria.andParentIdNotEqualTo(1);
+		List<GsjFolder> blogFolders = folderdao.selectByExample(example);
+		for (GsjFolder gsjFolder : blogFolders) {
+			Integer blogid = gsjFolder.getId();
+			GsjArticleExample gsjarticleexample = new GsjArticleExample();
+			gsjarticleexample.createCriteria().andFolderIdEqualTo(blogid);
+			int countByExample = articledao.countByExample(gsjarticleexample);
+			gsjFolder.setBlogtypenum(countByExample);
+		}
+		FolderChar folderChar = new FolderChar();
+		List folder = folderChar.getFolder();
+		List num = folderChar.getNum();
+		for (GsjFolder gsjFolder : blogFolders) {
+			folder.add(gsjFolder.getName());
+			num.add(gsjFolder.getBlogtypenum());
+		}
+		folderChar.setFolder(folder);
+		folderChar.setNum(num);
+		return folderChar;
+
+	}
+
+	@Override
+	public ArticleChar createFoldertu2() {
+		List<ArticleChar> articleNumCharByTime = folderdao.getArticleNumCharByTime();
+		ArticleChar articleChar2 = new ArticleChar();
+		List ydl = articleChar2.getYdl();
+		List numydl = articleChar2.getNumydl();
+		for (ArticleChar articleChar : articleNumCharByTime) {
+			String yd = articleChar.getYd();
+			String numyd = articleChar.getNumyd();
+			ydl.add(yd);
+			numydl.add(numyd);
+		}
+		articleChar2.setYdl(ydl);
+		articleChar2.setNumydl(numydl);
+		return articleChar2;
 	}
 
 }

@@ -2,6 +2,9 @@ package club.gsjglob.dao;
 
 import club.gsjglob.domain.GsjFolder;
 import club.gsjglob.domain.GsjFolderExample;
+import club.gsjglob.vo.ArticleChar;
+import club.gsjglob.vo.FolderChar;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -33,4 +36,10 @@ public interface GsjFolderMapper {
     int updateByPrimaryKeyWithBLOBs(GsjFolder record);
 
     int updateByPrimaryKey(GsjFolder record);
+    
+    /**
+     * 查询每月对应的文章数
+     * @return
+     */
+    List<ArticleChar> getArticleNumCharByTime();
 }

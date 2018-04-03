@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Gengzi - 博客统计</title>
+    <meta name="keywords" content="gengzi">
+    <meta name="description" content="gengzi">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/stylegsj.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>博客分类</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 图表  -->
+                    <div class="ibox-content">
+                        <div class="echarts" id="article_tu1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>博客数目</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="echarts" id="article_tu2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        </div>
+    <!-- 全局js -->
+    <script src="../js/jquery.min.js?v=2.1.4"></script>
+    <script src="../js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+    <!-- ECharts -->
+    <script src="../js/plugins/echarts/echarts-all.js"></script>
+
+    <!-- 自定义js -->
+    <script src="../js/content.js?v=1.0.0"></script>
+
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=65495710" charset="UTF-8"></script>
+    
+    
+    <script type="text/javascript">
+    	$(function(){
+    		var lineChart = echarts.init(document.getElementById("article_tu1"));
+   
+    	    
+    	    var tu1url = "../folder/getfoldereachartu1";
+    	 // 异步加载数据
+    	    $.get(tu1url).done(function (data) {
+    				  // 填入数据
+    				    lineChart.setOption({
+    				        title : {  
+    		    	            text: '博客分类个数'
+    		    	        },
+    		    	        tooltip : {},
+    		    	        legend: {
+    		    	            	data:['个数']
+    		    	        },
+    		    	        xAxis :{
+    		    	        	 data: data.folder,
+    		    	        	 "axisLabel":{  
+    		    	                 interval: 0  
+    		    	             } 
+    		    	            },
+    		    	        yAxis :{
+    		    	        	type: 'value'
+    		    	        },
+    		    	        series : [{
+	    		    	        	name: '个数',
+	    		    	        	type:"line",
+	    				            data: data.num
+    		    	            }]
+    				    });
+    			});
+    	    
+    	});
+    </script>
+    
+    
+    <script type="text/javascript">
+    	$(function(){
+    		var lineChart1 = echarts.init(document.getElementById("article_tu2"));
+    	    var tu1url2 = "../folder/getfoldereachartu2";
+    	 // 异步加载数据
+    	    $.get(tu1url2).done(function (data) {
+    				  // 填入数据
+    				    lineChart1.setOption({
+    				        title : {  
+    		    	            text: '博客文章个数'
+    		    	        },
+    		    	        tooltip : {},
+    		    	        legend: {
+    		    	            	data:['个数']
+    		    	        },
+    		    	        xAxis :{
+    		    	        	 data: data.ydl,
+    		    	        	 "axisLabel":{  
+    		    	                 interval: 0  
+    		    	             } 
+    		    	            },
+    		    	        yAxis :{
+    		    	        	type: 'value'
+    		    	        },
+    		    	        series : [{
+	    		    	        	name: '个数',
+	    		    	        	type:"bar",
+	    				            data: data.numydl
+    		    	            }]
+    				    });
+    			});
+    	    
+    	});
+    </script>
+    
+
+    
+    
+</body>
+
+</html>

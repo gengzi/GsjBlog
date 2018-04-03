@@ -3,6 +3,8 @@ package club.gsjglob.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import club.gsjglob.domain.GsjFolder;
+import club.gsjglob.vo.ArticleChar;
+import club.gsjglob.vo.FolderChar;
 
 /**
  * 目录管理service
@@ -33,5 +35,17 @@ public interface IFolderService {
 	 * @return
 	 */
 	String InsertFolder(GsjFolder folder);
+
+	/**
+	 * 创建目录的图1
+	 * @return FolderChar
+	 */
+	FolderChar createFoldertu1();
+
+	/**
+	 * 创建统计图2
+	 * @return
+	 */
+	ArticleChar createFoldertu2();
 
 }
