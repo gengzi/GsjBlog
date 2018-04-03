@@ -17,6 +17,7 @@ import club.gsjglob.domain.GsjFolder;
 import club.gsjglob.domain.GsjFolderExample;
 import club.gsjglob.domain.GsjFolderExample.Criteria;
 import club.gsjglob.service.IFolderService;
+import club.gsjglob.tools.DateUtils;
 
 @Service
 public class FolderServiceImpl implements IFolderService {
@@ -88,9 +89,31 @@ public class FolderServiceImpl implements IFolderService {
 		gsjFolder.setName(name);
 		gsjFolder.setParentId(Integer.parseInt(parentid));
 		gsjFolder.setKey(key);
+		gsjFolder.setUpdateTime(DateUtils.getStringDate());
+		gsjFolder.setUpdateId(3);
 		int updateByPrimaryKey = folderdao.updateByPrimaryKey(gsjFolder);
 		if (updateByPrimaryKey > 0) {
 			return "{\"message\":\"success\"}";
+		}
+		return "{\"message\":\"error\"}";
+	}
+
+	@Override
+	public String InsertFolder(GsjFolder folder) {
+		//判断是否存在
+		GsjFolderExample example  = new GsjFolderExample();
+		example.createCriteria().andNameEqualTo(folder.getName());
+		List<GsjFolder> selectByExample = folderdao.selectByExample(example);
+		if (selectByExample.size() <=0) {
+			folder.setCreateTime(DateUtils.getStringDate());
+			folder.setCreateId(3);
+			folder.setSort(1);
+			folder.setStatus(1);
+			folder.setType(1);
+			int insert = folderdao.insert(folder);
+			if (insert > 0) {
+				return "{\"message\":\"success\"}";
+			}
 		}
 		return "{\"message\":\"error\"}";
 	}

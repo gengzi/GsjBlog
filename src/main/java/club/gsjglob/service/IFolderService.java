@@ -2,6 +2,8 @@ package club.gsjglob.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import club.gsjglob.domain.GsjFolder;
+
 /**
  * 目录管理service
  * @author gengzi
@@ -24,5 +26,12 @@ public interface IFolderService {
 	 * @return
 	 */
 	String updateFolderById(String id, String name,String parnetid ,String key);
+
+	/**
+	 * 创建新的博客类别
+	 * @param folder GsjFolder
+	 * @return
+	 */
+	String InsertFolder(GsjFolder folder);
 
 }

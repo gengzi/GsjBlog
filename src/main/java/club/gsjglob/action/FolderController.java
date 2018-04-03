@@ -67,12 +67,30 @@ public class FolderController {
 	}
 	
 	
-	
+	/**
+	 * 更新博客分类的类别名称
+	 * @param id 类别id
+	 * @param name 类别名称
+	 * @param parentid 父编号
+	 * @param key key
+	 * @return
+	 */
 	@RequestMapping(value = "/updatefolder",method=RequestMethod.POST)
 	@ResponseBody
 	public String updatefolderInfo(String id,String name,String parentid,String key) {
 	   	 return folderservice.updateFolderById(id,name,parentid,key);
 	}
+	
+	
+
+	@RequestMapping(value = "/folder/createfolder",method=RequestMethod.POST)
+	@ResponseBody
+	public String createfolder(GsjFolder folder) {
+	   	 return folderservice.InsertFolder(folder);
+	}
+	
+	
+	
 	
 
 
