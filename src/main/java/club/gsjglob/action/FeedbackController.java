@@ -71,7 +71,10 @@ public class FeedbackController {
 	
 	
 	
-	
+	/**
+	 * 返回留言列表
+	 * @return
+	 */
 	@RequestMapping(value = "/feedback/getfeedbacknum")
 	@ResponseBody
 	public String getfeedbacknum() {
