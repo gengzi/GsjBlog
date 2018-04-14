@@ -3,6 +3,8 @@ package club.gsjglob.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.thoughtworks.xstream.XStream;
 
 import club.gsjglob.dto.TextMessage;
@@ -16,6 +18,7 @@ import club.gsjglob.tools.MessageUtils;
  * @time 2018年4月14日23:03:53
  *
  */
+@Service
 public class WeiXinServiceImpl implements IWeiXinService {
 
 	@Override
