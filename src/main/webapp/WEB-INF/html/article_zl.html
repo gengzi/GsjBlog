@@ -28,7 +28,7 @@
                         <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
                             <i class="fa fa-reorder"></i>
                         </button>
-                        <a href="#" class="navbar-brand">GengZi</a>
+                        <a href="../index.html" class="navbar-brand">GengZi</a>
                     </div>
                     <div class="navbar-collapse collapse" id="navbar">
                         <ul class="nav navbar-nav" id="folderlist" >
@@ -52,7 +52,7 @@
                                 <a href="login.html" id="nologin" >
                                     <i class="fa fa-sign-out"></i> 登陆
                                 </a>
-                                <a href="#" id="infologin" style="display: none;">
+                                <a href="../admin/index_admin" id="infologin" style="display: none;">
                                   <input type="hidden" id="userid" value="" />
                                   <input type="hidden" id="username" value="" />
                                 </a>
@@ -145,6 +145,9 @@
      <!-- 头部数据加载index -->
     <script src="../js/index_zl.js"></script>
     
+    <!-- 头部数据加载index -->
+    <script src="../js/index.js"></script>
+    
     <script type="text/javascript">
 	  //获取当前页的路径
 		var articleurl	 = window.location.href;
@@ -195,9 +198,9 @@
     												'<span class="text-muted"><i class="fa fa-clock-o"></i>'+articlelist[i].publishTime+'</span></div>'+
     												''+"请点击查看详情"+''+//content 的位置
     												'<div class="row"><div class="col-md-6" id="'+articlelist[i].id+'"><h5>标签：</h5> </div>'+
-    												'<div class="col-md-6"><div class="small text-right"><h5>状态：</h5><div> '+
+    												'<div class="col-md-6"></div></div></div></div>' /* <div class="small text-right"><h5>状态：</h5><div> '+
     												'<i class="fa fa-comments-o"> </i>'+articlelist[i].countComment+'评论 </div><i class="fa fa-eye"> </i>'+articlelist[i].countView+'浏览</div>'+
-    												' </div></div></div></div></div>'
+    												' </div> */
     												);			
     			var tags = articlelist[i].tags;
 	    			for (var j = 0; j < tags.length; j++) {

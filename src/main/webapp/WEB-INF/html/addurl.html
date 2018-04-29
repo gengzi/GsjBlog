@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>Gengzi - 意见反馈</title>
+    <title>Gengzi - 添加url</title>
     <meta name="keywords" content="gengzi">
     <meta name="description" content="gengzi">
 
@@ -20,57 +20,13 @@
 
 <body class="gray-bg top-navigation">
 
-	 <div id="wrapper">
-        <div id="page-wrapper" class="gray-bg">
-            <div class="row border-bottom white-bg">
-                <nav class="navbar navbar-static-top navbar-fixed-top" role="navigation">
-                    <div class="navbar-header">
-                        <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                            <i class="fa fa-reorder"></i>
-                        </button>
-                        <a href="index.html" class="navbar-brand">GengZi</a>
-                    </div>
-                    <div class="navbar-collapse collapse" id="navbar">
-                        <ul class="nav navbar-nav" id="folderlist" >
-                          <!--   <li class="dropdown">
-                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> 菜单 <span class="caret"></span></a>
-                                <ul role="menu" class="dropdown-menu">
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                    <li><a href="">菜单列表</a>
-                                    </li>
-                                </ul>
-                            </li>
-                         -->
-                        </ul>
-                        <ul class="nav navbar-top-links navbar-right">
-                            <li>
-                                <a href="login.html" id="nologin" >
-                                    <i class="fa fa-sign-out"></i> 登陆
-                                </a>
-                                <a href="admin/index_admin" id="infologin" style="display: none;">
-                                  <input type="hidden" id="userid" value="" />
-                                  <input type="hidden" id="username" value="" />
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
-
 
     <div class="wrapper wrapper-content animated fadeInRight" style="margin-top: 50px">
           <div class="row">
             <div class="col-sm-6    col-sm-offset-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>意见反馈</h5>
+                        <h5>添加url</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -86,29 +42,23 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <form class="form-horizontal m-t" id="commentForm" action="feedback/sendtwo"  method="post">
+                        <form class="form-horizontal m-t" id="commentForm" action="ziinfo/save"  method="post">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">网名：</label>
+                                <label class="col-sm-3 control-label">网址名称：</label>
                                 <div class="col-sm-8">
-                                    <input id="cname" name="username" minlength="2" type="text" class="form-control" required="" aria-required="true">
+                                    <input id="cname" name="name" minlength="2" type="text" class="form-control" required="" aria-required="true">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">E-mail：</label>
+                                <label class="col-sm-3 control-label">网址url：</label>
                                 <div class="col-sm-8">
-                                    <input id="cemail" type="email" class="form-control" name="email" required="" aria-required="true">
+                                    <input id="curl" name="url" minlength="2" type="text" class="form-control" required="" aria-required="true">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">QQ：</label>
+                                <label class="col-sm-3 control-label">解决的问题：</label>
                                 <div class="col-sm-8">
-                                    <input id="cqq" type="text" class="form-control" name="qq">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">建议：</label>
-                                <div class="col-sm-8">
-                                    <textarea id="ccomment" name="content" class="form-control" required="" aria-required="true"></textarea>
+                                    <textarea id="ccomment" name="remark" class="form-control" required="" aria-required="true"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -116,6 +66,7 @@
                                     <button class="btn btn-primary"  type="submit" id="commonsubmit" >提交</button>
                                 </div>
                             </div>
+                            <input type="hidden" id="parentidgsj" name="parentname" value="" />
                         </form>
                     </div>
                 </div>
@@ -134,22 +85,31 @@
 	<!-- layer-->
     <script src="layer/layer.js"></script>
     
-
-
+    <!-- cookie  -->
+    <script src="js/plugins/cookie/jquery.cookie.js"></script>
     
     <!-- jquery-validate 校验表单  -->
     <script src="jquery-validation-1.14.0/lib/jquery.js"></script>
     <script src="jquery-validation-1.14.0/lib/jquery.form.js"></script>
     <script src="jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 	<script src="jquery-validation-1.14.0/dist/localization/messages_zh.min.js"></script>
-	
-	<!-- cookie  -->
-    <script src="js/plugins/cookie/jquery.cookie.js"></script>
 
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=65495710" charset="UTF-8"></script>
     
     <!-- 头部数据加载index -->
     <script src="js/index.js"></script>
+    
+    
+     <script type="text/javascript">
+	  //获取当前页的路径
+		var articleurl = window.location.href;
+		var arrstr = articleurl.split("&");
+		//拿到文章的id
+		var parentid = arrstr[arrstr.length - 1];
+		$("#parentidgsj").val(parentid);
+		alert(parentid)
+    </script>
+    
     
     
     <script type="text/javascript">
@@ -161,9 +121,10 @@
 		    	$(form).ajaxSubmit({
 		    		  dataType:"json",
 		    		  success:function(data){
-		                    if(data.content !=null ){
+		                    if(data.message =='success' ){
 		                    	layer.msg('提交成功,感谢您！');
-		                    	$(location).attr('href', 'index');
+		                    	var id = $("#parentidgsj").val();
+		                    	$(location).attr('href', 'ziurlconllection/'+id);
 		                    	layer.msg('正在跳转到主页,请稍等', function(){
 		                    	});
 		                    }else{

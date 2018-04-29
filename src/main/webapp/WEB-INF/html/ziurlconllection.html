@@ -38,7 +38,7 @@
                         	
                         	<div id="toolbar" class="btn-group">
 							    <button id="add" class="btn btn-warning dropdown-toggle" title="添加">
-							        <i class="glyphicon glyphicon-plus"></i> 添加
+							        <i class="glyphicon glyphicon-plus"></i>添加
 							    </button>
 							</div>	
 							<input type="hidden" id="parentidgsj"  value="" />
@@ -171,7 +171,7 @@
 			      //查看按钮
 			      showInfo = function(id){
 			    	  layer.msg('正在进入，请稍等', {icon: 1});
-			    	  $(location).attr('href', 'ziurlconllection/'+id);
+			    	  $(location).attr('href', 'ziurlconllection/'+id); 
 			    	  
 			    	  
 			    /* 	  var ziurl = "friendlike/parentinfo/"+id;
@@ -196,7 +196,7 @@
 			      
 			      
 			      $("#add").click(function () {
-			    	   layer.open({
+			    	 /*   layer.open({
 			        	      type: 2,
 			        	      title: '详情',
 			        	      shadeClose: true,
@@ -204,7 +204,12 @@
 			        	      maxmin: true, //开启最大化最小化按钮
 			        	      area: ['500px', '300px'],
 			        	      content: 'index'
-			        	    });
+			        	    }); */
+			        	    var parentid = $("#parentidgsj").val();
+			        	    $(location).prop('href', '../addurl.html&'+parentid);
+
+			        	    
+			        	    
 			      });
 			      
 			   

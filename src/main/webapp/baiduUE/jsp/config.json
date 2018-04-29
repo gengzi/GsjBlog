@@ -8,8 +8,10 @@
     "imageCompressEnable": true, /* 是否压缩图片,默认是true */
     "imageCompressBorder": 1600, /* 图片压缩最长边限制 */
     "imageInsertAlign": "none", /* 插入的图片浮动方式 */
-    "imageUrlPrefix": "http://localhost:8080/GsjBlog", /* 图片访问路径前缀 */
-    "imagePathFormat": "/upload/blog_artcile_image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+    "imageUsingVirtualPath": "yes", /* 是否使用虚拟路径映射，设置为yes时开启   by will_awoke */  
+    "imageUrlPrefix": "http://localhost:8088/upload", /* 图片访问路径前缀 */
+    "imagePathFormat": "/media/image/{yyyy}{mm}{dd}/{time}{rand:6}", 
+    "imageRealMappingPath": "D:/tomcat/apache-tomcat-7.0.85-gsj/apache-tomcat-7.0.85/webapps/upload", /* 上传保存路径,可以自定义保存路径和文件名格式 */
                                 /* {filename} 会替换成原文件名,配置这项需要注意中文乱码问题 */
                                 /* {rand:6} 会替换成随机数,后面的数字是随机数的位数 */
                                 /* {time} 会替换成时间戳 */
@@ -42,7 +44,7 @@
     "catcherActionName": "catchimage", /* 执行抓取远程图片的action名称 */
     "catcherFieldName": "source", /* 提交的图片列表表单名称 */
     "catcherPathFormat": "/ueditor/jsp/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
-    "catcherUrlPrefix": "", /* 图片访问路径前缀 */
+    "catcherUrlPrefix": "http://localhost:8088/GsjBlog", /* 图片访问路径前缀 */
     "catcherMaxSize": 2048000, /* 上传大小限制，单位B */
     "catcherAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* 抓取图片格式显示 */
 
@@ -50,7 +52,7 @@
     "videoActionName": "uploadvideo", /* 执行上传视频的action名称 */
     "videoFieldName": "upfile", /* 提交的视频表单名称 */
     "videoPathFormat": "/blog_artcile_video/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
-    "videoUrlPrefix": "http://localhost:8080/GsjBlog", /* 视频访问路径前缀 */
+    "videoUrlPrefix": "http://localhost:8088/GsjBlog", /* 视频访问路径前缀 */
     "videoMaxSize": 102400000, /* 上传大小限制，单位B，默认100MB */
     "videoAllowFiles": [
         ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
@@ -60,7 +62,7 @@
     "fileActionName": "uploadfile", /* controller里,执行上传视频的action名称 */
     "fileFieldName": "upfile", /* 提交的文件表单名称 */
     "filePathFormat": "/upload/blog_artcile_file/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
-    "fileUrlPrefix": "http://localhost:8080/GsjBlog", /* 文件访问路径前缀 */
+    "fileUrlPrefix": "http://localhost:8088/GsjBlog", /* 文件访问路径前缀 */
     "fileMaxSize": 51200000, /* 上传大小限制，单位B，默认50MB */
     "fileAllowFiles": [
         ".png", ".jpg", ".jpeg", ".gif", ".bmp",

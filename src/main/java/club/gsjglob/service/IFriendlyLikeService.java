@@ -24,6 +24,13 @@ public interface IFriendlyLikeService {
 	 * @return
 	 */
 	List<GsjFriendlylink> selectziUrlInfo(String id);
+
+	/**
+	 *  保存子类的url 信息
+	 * @param gsjfriendlylink
+	 * @return 
+	 */
+	String saveziUrlInfo(GsjFriendlylink gsjfriendlylink);
 	
 	
 

@@ -15,6 +15,7 @@ import club.gsjglob.vo.ShowUrlInfo;
 
 /**
  * 友情链接serviceimpl
+ * 
  * @author gengzi
  * @time 2018年3月31日12:48:54
  *
@@ -24,10 +25,10 @@ public class FriendlyLikeServiceImpl implements IFriendlyLikeService {
 
 	@Autowired
 	private GsjFriendlylinkMapper friendlylinkdao;
-	
+
 	@Override
 	public List<ShowUrlInfo> selectParentInfo() {
-		return  friendlylinkdao.selectByParentname();
+		return friendlylinkdao.selectByParentname();
 
 	}
 
@@ -39,6 +40,17 @@ public class FriendlyLikeServiceImpl implements IFriendlyLikeService {
 			return friendlylinkdao.selectByExample(example);
 		}
 		return null;
+	}
+
+	@Override
+	public String saveziUrlInfo(GsjFriendlylink gsjfriendlylink) {
+		if (!"".equals(gsjfriendlylink.getParentname()) && gsjfriendlylink.getParentname() != null) {
+			int insert = friendlylinkdao.insert(gsjfriendlylink);
+			if (insert > 0) {
+				return "{\"message\":\"success\"}";
+			}
+		}
+		return "{\"message\":\"error\"}";
 	}
 
 }

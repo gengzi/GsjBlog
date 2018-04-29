@@ -68,5 +68,17 @@ public class FriendlyLikeController {
 		PageInfo<GsjFriendlylink> pageInfo = new PageInfo<>(selectziUrlInfo);
 		return pageInfo;
 	}
+	
+	
+	/**
+	 * 添加子分类url信息
+	 * 
+	 * @return 
+	 */
+	@RequestMapping(value = "/ziinfo/save")
+	@ResponseBody
+	public String saveziUrlInfo(GsjFriendlylink gsjfriendlylink) {
+ 		return  friendlyLikeService.saveziUrlInfo(gsjfriendlylink);
+	}
 
 }
