@@ -71,6 +71,36 @@ public class ArticleController {
 		PageInfo<GsjArticle> pageInfo = new PageInfo<>(articleInfo);
 		return pageInfo;
 	}
+	
+	
+	
+	/**
+	 * 分页显示，根据类别返回专栏中的文章信息
+	 * 
+	 * @param blogtype
+	 *            博客类别
+	 * @param labeltype
+	 *            标签类别
+	 * @param startpage
+	 *            开始页码
+	 * @param endpage
+	 *            结束页码
+	 * @param iszl
+	 *            是否是专栏
+	 * @param response
+	 *            json数据
+	 */
+	@RequestMapping(value = "/article/{blogtype}/{labeltype}/{startpage}/{pagesize}/{iszl}")
+	@ResponseBody
+	public PageInfo getArticlezlInfo(@PathVariable String blogtype, @PathVariable String labeltype,
+			@PathVariable String startpage, @PathVariable String pagesize,  @PathVariable String iszl,HttpServletResponse response) {
+		if ("zl".equals(iszl)) {
+			List<GsjArticle> articleInfo = articleService.getArticlezlInfo(blogtype, labeltype, startpage, pagesize);
+			PageInfo<GsjArticle> pageInfo = new PageInfo<>(articleInfo);
+			return pageInfo;
+		}
+		return null;
+	}
 
 	/**
 	 * 跳转到文章的详情页面
@@ -187,5 +217,19 @@ public class ArticleController {
 	public String forwordArticlezl(@PathVariable String articletype) {
 		return "article_zl";
 	}
+	
+	
+	
+	/**
+	 * 设置文章的专栏信息
+	 * @return
+	 */
+	@RequestMapping(value = "/updatearticelezl",method=RequestMethod.POST)
+	@ResponseBody
+	public String updatefolderInfo(GsjArticle article) {
+	   	 return articleService.updateArtcilezlById(article);
+	}
+	
+	
 
 }

@@ -51,6 +51,25 @@ public interface IArticleService {
 	 * @return
 	 */
 	String updateArticleById(SaveArticle saveArticle);
+
+
+	/**
+	 * 根据id 更新文章的专栏信息
+	 * @param article 文章对象
+	 * @return
+	 */
+	String updateArtcilezlById(GsjArticle article);
+
+
+	/**
+	 * 获取专栏中的文章
+	 * @param blogtype
+	 * @param labeltype
+	 * @param startpage
+	 * @param pagesize
+	 * @return
+	 */
+	List<GsjArticle> getArticlezlInfo(String blogtype, String labeltype, String startpage, String pagesize);
 	
 	
 

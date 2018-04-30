@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>Gengzi- 分类管理</title>
+    <title>Gengzi- 专栏管理</title>
     <meta name="keywords" content="gengzi">
     <meta name="description" content="gengzi">
 
@@ -23,9 +23,17 @@
 
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeInRight">
+
+          <!-- 普通的 table 设置 data-toggle="table" 即可使用 bootstrap table 
+          	可以通过 data-url 来加载数据
+          
+          -->
+
+
+        <!-- Panel Other -->
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>文章分类管理</h5>
+                <h5>文章管理</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -49,12 +57,27 @@
                     <div class="col-sm-12">
                         <!-- Example Events -->
                         <div class="example-wrap">
+                          <!--   <h4 class="example-title">事件</h4> -->
                             <div class="example">
-                                <div id="toolbar" class="btn-group">
-							    <button id="add" class="btn btn-warning dropdown-toggle" title="添加">
-							        <i class="glyphicon glyphicon-plus"></i> 添加
-							    </button>
-								</div>	
+                            <!--     <div class="alert alert-success" id="examplebtTableEventsResult" role="alert">
+                                  			  事件结果
+                                </div> -->
+                                
+                             <!--   工具栏 
+                                <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
+                                    <button type="button" class="btn btn-outline btn-default">
+                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default">
+                                        <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default">
+                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                                    </button>
+                                </div> -->
+                                
+                                
+                                
                                 <!-- Table -->
                                 
                                 <table id="exampleTableEvents" data-height="510" data-mobile-responsive="true">
@@ -87,7 +110,7 @@
 	<!-- layer-->
     <script src="../layer/layer.js"></script>
 
-    <!-- Bootstrap table -->
+   <!-- Bootstrap table -->
     <script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="../js/plugins/editable/bootstrap-editable.min.js"></script> 
     <script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
@@ -104,7 +127,8 @@
     
     <script type="text/javascript">
 		  $(function(){
-			  var queryurl = "../articletype/blog";
+			  // /article/{blogtype}/{labeltype}/{startpage}/{pagesize}
+			  var queryurl = "../article/admin";
 			  $('#exampleTableEvents').bootstrapTable({
 			        url: queryurl,                              //请求后台的URL（*）
 			        method:'get',                               //请求的方式
@@ -115,30 +139,61 @@
 			        showRefresh: true,                          //是否显示刷新按钮。
 			        sortable: true,                    			//是否启用排序
 			        pageNumber: 1,                      		//初始化加载第一页，默认第一页,并记录
-	                pageList: [10, 25],        		//可供选择的每页的行数（*）
+	                pageList: [10, 25, 50, 100],        		//可供选择的每页的行数（*）
 	                sortOrder: "asc",                   		//排序方式
 			        showToggle: true,                           //是否显示切换视图（table/card）按钮
 			        showColumns: true,                          //是否显示内容列下拉框
-			        sidePagination: "client",           		//分页方式：client客户端分页，server服务端分页（*）
+			        sidePagination: "server",           		//分页方式：client客户端分页，server服务端分页（*）
 			        paginationLoop:true,                        //默认true，分页条无限循环
 			        uniqueId: "id",                     //每一行的唯一标识，一般为主键列
 			        iconSize: 'outline',                         //定义的图标大小：
-			        toolbar: '#toolbar',       					//工具按钮用哪个容器     工具栏
+			        toolbar: '#exampleTableEventsToolbar',       //工具按钮用哪个容器     工具栏
 			      	icons: {                                     //定义工具栏
 			          refresh: 'glyphicon-repeat',
 			          toggle: 'glyphicon-list-alt',
 			          columns: 'glyphicon-list'
 			         },
-				     columns: [{
+			         //得到查询的参数
+		             queryParams : function (params) {
+		                    //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+		                    var temp = {   
+		                    	pagesize: params.limit,                         //页面大小
+		                    	startpage: (params.offset / params.limit) + 1,   //页码
+		                    	blogtype:"全部",
+		                    	labeltype:"全部",
+		                    };
+		                    return temp;
+		                },
+		             responseHandler: function(res) {    //解析拿到的json
+		                    return {
+		                        "total": res.total,//总页数
+		                        "rows": res.list,   //数据
+		                     };
+		                },
+				     columns: [
+				    	  
+				    	  //{
+				    	                //    title: "全选",
+				    	                //    field: "select",
+				    	                //    checkbox: true,
+				    	                //    width: 20,//宽度
+				    	                //    align: "left",//水平
+				    	                //    valign: "middle"//垂直
+				    	                //},
+				    	{
 				          field: 'id',
-				          title: '编号',
+				          title: '文章编号',
 				          width: '5%',
-				      }, {
-				          field: 'name',
-				          title: '类别名称',
-				          width: '20%',
-				          sortable : true,
-				          editable: {
+				          
+				      },{
+				          field: 'title',
+				          title: '文章标题',
+				       	  width: '35%',
+				      },{
+				    	  field: 'status',
+				    	  title: '所属专栏',
+				    	  width: '35%',
+				    	  editable: {
 			                    type: 'text',
 			                    title: '类别名称',
 			                    validate: function (v) {
@@ -146,21 +201,12 @@
 
 			                    }
 			                }
-				      }, {
-				          field: 'key',
-				          title: '标志',
-				       	  width: '5%',
-				      }, {
-				          field: 'parentId',
-				          title: '父编号',
-				          width: '10%',
-				          sortable : true,
 				      }],
 				      onEditableSave: function (field, row, oldValue, $el) {
-				    	  var param = {"id":row.id,"name":row.name,"parentid":row.parentId,"key":row.key};
+				    	  var param = {"id":row.id,"status":row.status};
 			                $.ajax({
 			                    type: "post",
-			                    url: "../updatefolder",
+			                    url: "../updatearticelezl",
 			                    data: param,
 			                    dataType: 'JSON',
 			                    success: function (data, status) {
@@ -178,23 +224,10 @@
 
 			                });
 			            }
+			      
 			      });
+			      
 		  });
-    </script>
-    
-    
-    <script type="text/javascript">
-	    $("#add").click(function () {
-	 	   layer.open({
-	     	      type: 2,
-	     	      title: '创建新的博客类别',
-	     	      shadeClose: true,
-	     	      shade: false,
-	     	      maxmin: true, //开启最大化最小化按钮
-	     	      area: ['60%', '95%'],
-	     	      content: './articletypeupdate.html'
-	     	    });
-	   });
     </script>
     
 

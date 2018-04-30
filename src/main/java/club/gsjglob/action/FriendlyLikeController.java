@@ -17,6 +17,7 @@ import club.gsjglob.domain.GsjArticle;
 import club.gsjglob.domain.GsjFriendlylink;
 import club.gsjglob.domain.GsjFriendlylinkExample;
 import club.gsjglob.service.IFriendlyLikeService;
+import club.gsjglob.tools.DateUtils;
 import club.gsjglob.vo.ShowUrlInfo;
 
 /**
@@ -78,7 +79,27 @@ public class FriendlyLikeController {
 	@RequestMapping(value = "/ziinfo/save")
 	@ResponseBody
 	public String saveziUrlInfo(GsjFriendlylink gsjfriendlylink) {
+		gsjfriendlylink.setCreateTime(DateUtils.getStringDate());
  		return  friendlyLikeService.saveziUrlInfo(gsjfriendlylink);
 	}
+	
+	/**
+	 * 添加子分类url信息
+	 * 
+	 * @return 
+	 */
+	@RequestMapping(value = "/friendlike/save")
+	@ResponseBody
+	public String saveFriendLike(GsjFriendlylink gsjfriendlylink) {
+		gsjfriendlylink.setCreateTime(DateUtils.getStringDate());
+		gsjfriendlylink.setParentname("0");
+ 		return  friendlyLikeService.saveziUrlInfo(gsjfriendlylink);
+	}
+	
+	
+	
 
+	
+	
+	
 }

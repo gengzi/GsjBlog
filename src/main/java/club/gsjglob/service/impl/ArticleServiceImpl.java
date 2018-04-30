@@ -160,13 +160,13 @@ public class ArticleServiceImpl implements IArticleService {
 			// 不成功
 			articledao.deleteByPrimaryKey(gsjArticle.getId());
 			return "{\"message\":\"error\"}";
-			
+
 		}
 	}
 
 	@Override
 	public String remove(int id) {
-		
+
 		int deleteByPrimaryKey = articledao.deleteByPrimaryKey(id);
 		if (deleteByPrimaryKey < 0) {
 			return "{\"message\":\"error\"}";
@@ -200,25 +200,25 @@ public class ArticleServiceImpl implements IArticleService {
 				String[] split = articleTags.split(";");
 				// 根据文章id插入
 				for (String tag : split) {
-					//先删除再插入
+					// 先删除再插入
 					GsjTagsExample example = new GsjTagsExample();
 					example.createCriteria().andArticleIdEqualTo(id);
 					int deleteByExample = tagdao.deleteByExample(example);
-					if (deleteByExample > 0 ) {
+					if (deleteByExample > 0) {
 						GsjTags record = new GsjTags();
 						record.setArticleId(aid);
 						record.setTagname(tag);
 						record.setCreateTime(DateUtils.getStringDate());
 						record.setCreateId(article.getCreateId());
 						int insert = tagdao.insertSelective(record);
-							if (insert > 0) {
-								// 成功
-							} else {
-								// 不成功
-								tagdao.deleteByPrimaryKey(record.getId());
-								flag = false;
-							}
-					}else {
+						if (insert > 0) {
+							// 成功
+						} else {
+							// 不成功
+							tagdao.deleteByPrimaryKey(record.getId());
+							flag = false;
+						}
+					} else {
 						flag = false;
 					}
 				}
@@ -231,10 +231,39 @@ public class ArticleServiceImpl implements IArticleService {
 				articledao.deleteByPrimaryKey(gsjArticle.getId());
 				return "{\"message\":\"error\"}";
 			}
-			
-		}else {
+
+		} else {
 			return "{\"message\":\"error\"}";
 		}
+	}
+
+	@Override
+	public String updateArtcilezlById(GsjArticle article) {
+		if (article.getId() != null) {
+
+			int updateByPrimaryKey = articledao.updateByPrimaryKeySelective(article);
+			if (updateByPrimaryKey > 0) {
+				return "{\"message\":\"success\"}";
+			} else {
+				return "{\"message\":\"error\"}";
+			}
+		}
+		return "{\"message\":\"error\"}";
+	}
+
+	@Override
+	public List<GsjArticle> getArticlezlInfo(String blogtype, String labeltype, String startpage, String pagesize) {
+		GsjArticleExample articleExample;
+		data = new ArrayList<GsjArticle>();
+		// 根据目录id 查询文章表
+		PageHelper.startPage(Integer.parseInt(startpage), Integer.parseInt(pagesize));
+		articleExample = new GsjArticleExample();
+		Criteria createCriteria = articleExample.createCriteria();
+		createCriteria.andStatusEqualTo(blogtype);
+		articleExample.setOrderByClause("create_time DESC");
+		data = articledao.selectByExample(articleExample);
+		setTagInfos(data);
+		return data;
 	}
 
 }

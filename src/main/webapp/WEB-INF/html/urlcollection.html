@@ -92,8 +92,15 @@
                         </div> -->
 
                         <div class="project-list">
+							<div id="toolbar" class="btn-group">
+							    <button id="addfriendlike" class="btn btn-warning dropdown-toggle" title="添加">
+							        <i class="glyphicon glyphicon-plus"></i>添加
+							    </button>
+							</div>
 
+						
                             <table class="table table-hover" id="urltble">
+                            	
                                 <tbody>
                                  <!--    <tr>
                                         <td class="project-status">
@@ -143,14 +150,16 @@
 	<!-- layer-->
     <script src="layer/layer.js"></script>
     
-     <!-- cookie  -->
-    <script src="js/plugins/cookie/jquery.cookie.js"></script>
-
+   
     <!-- Bootstrap table -->
     <script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <!-- 中文  -->
-    <script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>、
+    
+      <!-- cookie  -->
+    <script src="js/plugins/cookie/jquery.cookie.js"></script>
+    
     
     <!-- 头部数据加载index -->
     <script src="js/index.js"></script>
@@ -180,7 +189,8 @@
 			        paginationLoop:true,                        //默认true，分页条无限循环
 			        uniqueId: "id",                              //每一行的唯一标识，一般为主键列
 			        iconSize: 'outline',                         //定义的图标大小：
-			        toolbar: '#exampleTableEventsToolbar',       //工具按钮用哪个容器     工具栏
+			        toolbar: '#toolbar',       					//工具按钮用哪个容器     工具栏
+			      //  toolbar: '#exampleTableEventsToolbar',       //工具按钮用哪个容器     工具栏
 			      	icons: {                                     //定义工具栏
 			          refresh: 'glyphicon-repeat',
 			          toggle: 'glyphicon-list-alt',
@@ -309,6 +319,23 @@
                 }, 2000);
             }
         }
+        
+        // 添加按钮
+        $("#addfriendlike").click(function(){
+        	//alert("1")
+        	 layer.open({
+       	      type: 2,
+       	      title: '详情',
+       	      shadeClose: true,
+       	      shade: false,
+       	      maxmin: true, //开启最大化最小化按钮
+       	      area: ['70%', '70%'],
+       	      content: 'addfriendlike'
+       	    });
+        });
+        
+        
+        
     </script>
 
     </body>

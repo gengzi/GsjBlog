@@ -1,14 +1,17 @@
 package club.gsjglob.action;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.client.protocol.RequestAddCookies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -132,6 +135,52 @@ public class UserController {
 		return userservice.updateUserRedis(cookie);
 	}
 	
+	
+	/**
+	 * 退出登陆，删除redis 中的数据
+	 * 
+	 * @param gsjcookie
+	 * @return
+	 */
+	@RequestMapping(value = "/signout",produces = "application/json;charset=utf-8")  //加上 produces 防止中文乱码
+	public void signout(HttpServletRequest request,HttpServletResponse response) {
+		Map<String, Cookie> cookieMap = ReadCookieMap(request);
+		String name = GsjParams.GSJCOOKIE;
+		  if (cookieMap.containsKey(name)) {
+	            Cookie cookie = (Cookie) cookieMap.get(name);
+	            Long hdel = jedisClient.del(cookie.getValue());
+	            if (hdel > 0) {
+					cookie.setValue(null);  
+                    cookie.setMaxAge(0);// 立即销毁cookie  
+                    cookie.setPath("/");  
+                    response.addCookie(cookie);  
+                    try {
+						response.sendRedirect("index");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+	        }
+		
+	}
+	
+	
+	  /**
+     * 将cookie封装到Map里面
+     * 
+     * @param request
+     * @return
+     */
+    private static Map<String, Cookie> ReadCookieMap(HttpServletRequest request) {
+        Map<String, Cookie> cookieMap = new HashMap<String, Cookie>();
+        Cookie[] cookies = request.getCookies();
+        if (null != cookies) {
+            for (Cookie cookie : cookies) {
+                cookieMap.put(cookie.getName(), cookie);
+            }
+        }
+        return cookieMap;
+    }
 
 
 }
