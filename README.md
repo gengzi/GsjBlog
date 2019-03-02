@@ -1,7 +1,9 @@
 # GsjBlog 个人博客系统
 - 该系统参考了：https://gitee.com/jflyfox/jfinal_cms  感谢
 - 前台页面，参考网上的 [H+ ui](http://yanshi.sucaihuo.com/modals/40/4078/demo/) 感谢
+## 其实该系统做的很简单，但可以做为一个练手项目,毕设等。
 ## 项目预览地址：[耿子blog](http://gsjblog.club/GsjBlog/)
+不要搞破坏，只是作为演示。如果我有在项目中留下一些隐私的内容，请联系我，谢谢。
 ### 项目功能结构：
 ![项目功能结构](https://github.com/gengzi/webshop/blob/master/docandsql/img2/1.png)
 ### 技术栈：
@@ -13,16 +15,20 @@
 - 后端 bean，dao，mapper 使用mybatis 的逆向工程生成。
 - 博文评论，使用畅言组件，分页使用 page-helper，网站监控，使用腾讯分析，博客编辑，使用了百度ue组件。
 - 使用了redis实现了简单的单点登陆。
-其实该系统做的很简单，但可以做为一个练手项目。
 ### 运行环境
 - 软件服务：Tomcat7.0.85，JDK1.7以上
 - 数据库服务：Mysql5.5，Redis 4.0版本
 - 配置： mysql ： db.peoperties
       redis: spring-redis.xml 注意项目中redis，加了认证，请在redisclient 中修改认证的token
+- 数据库文件 ：GsjBlog/src/main/resources/doc/db.sql  运行一下即可
 
 ## 效果预览
 ### 前台：
 ![前台](https://github.com/gengzi/webshop/blob/master/docandsql/img2/public1.png)
 ### 后台：
 ![前台](https://github.com/gengzi/webshop/blob/master/docandsql/img2/admin1.png)
+
+# 如有问题：可加qq：1164014750
+  关注微信公众号：
+      ![耿子blog](http://open.weixin.qq.com/qr/code?username=gh_00fc0ac9f94b)
 
